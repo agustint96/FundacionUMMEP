@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fundación UMMEP - Un mundo mejor es posible</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <nav class="site-nav" aria-label="Navegación principal">
+      <a
+        class="site-nav__logo"
+        href="Principal.html"
+        aria-label="Inicio — Fundación UMMEP"
+      >
+        <img src="img/fundacion-ummep-h (1).png" alt="Fundación UMMEP" />
+      </a>
+      <ul class="site-nav__links" id="nav-links">
+        <li>
+          <a href="Principal.html" data-nav="principal" class="is-active"
+            >Inicio</a
+          >
+        </li>
+        <li>
+          <a href="Nuestro_Trabajo.html" data-nav="nuestro-trabajo"
+            >Nuestro trabajo</a
+          >
+        </li>
+        <li><a href="Novedades.html" data-nav="novedades">Novedades</a></li>
+        <li class="site-nav__sep" role="separator" aria-hidden="true"></li>
+        <li>
+          <a href="Programas_internacionales.html" data-nav="programas"
+            >Programas internacionalistas</a
+          >
+        </li>
+        <li>
+          <a
+            href="Proyectos_de_coooperacion_al_desarrollo.html"
+            data-nav="proyectos"
+            >Proyectos de cooperación</a
+          >
+        </li>
+        <li class="site-nav__sep" role="separator" aria-hidden="true"></li>
+        <li>
+          <a href="Recursos_audiovisuales.html" data-nav="recursos"
+            >Recursos audiovisuales</a
+          >
+        </li>
+        <li>
+          <a href="Radio_la_chispa.html" data-nav="radio">Radio La Chispa</a>
+        </li>
+        <li class="site-nav__sep" role="separator" aria-hidden="true"></li>
+        <li><a href="Contacto.html" data-nav="contacto">Contacto</a></li>
+      </ul>
+      <button
+        class="site-nav__burger"
+        id="nav-burger"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="nav-links"
+      >
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+    <!-- ============ CONTAINER 1 — HERO ============ -->
+    <header class="container--1" id="inicio">
+      <!--
+        FASE 1: grid de 3  (las fotos entran una a una)
+        FASE 2: grupo de 4  (las 4 entran juntas)
+        FASE 3: 4 individuales (entran 1×1)
+        script.js maneja las transiciones entre fases.
+        Agregá tus imágenes reales cambiando los src.
+      -->
+
+      <!-- FASE 1 — 3 columnas -->
+      <div class="hero-phase" id="hero-phase-1">
+        <div class="hero-col">
+          <img src="/img/1/Izq.png" alt="Jornada solidaria" />
+        </div>
+        <div class="hero-col">
+          <img src="/img/1/Medio.jpg" alt="Operación Milagro" />
+        </div>
+        <div class="hero-col">
+          <img src="/img/1/Der.jpg" alt="Voluntaria y familia" />
+        </div>
+      </div>
+
+      <!-- FASE 2 — grupo de 4 -->
+      <div class="hero-phase" id="hero-phase-2">
+        <div class="hero-col">
+          <img
+            src="imagenes/FOTOS FINALES/Pagina 1 - Principal/2/Izq 1.jpg"
+            alt="Foto 2-A"
+          />
+        </div>
+        <div class="hero-col">
+          <img
+            src="imagenes/FOTOS FINALES/Pagina 1 - Principal/2/Izq 2.jpg"
+            alt="Foto 2-A"
+          />
+        </div>
+        <div class="hero-col">
+          <img
+            src="imagenes/FOTOS FINALES/Pagina 1 - Principal/2/Der 2.jpg"
+            alt="Foto 2-A"
+          />
+        </div>
+        <div class="hero-col">
+          <img
+            src="imagenes/FOTOS FINALES/Pagina 1 - Principal/2/Der 1 .jpg"
+            alt="Foto 2-A"
+          />
+        </div>
+      </div>
+
+      <!-- FASE 3 — 4 individuales (pantalla completa de a una) -->
+      <div class="hero-phase hero-phase--solo" id="hero-phase-3">
+        <div class="hero-col">
+          <img
+            src="imagenes/FOTOS FINALES/Pagina 1 - Principal/DSC00774.JPG"
+            alt="Foto 3-A"
+          />
+        </div>
+        <div class="hero-col">
+          <img
+            src="/imagenes/FOTOS FINALES/Pagina 1 - Principal/IMG_20251024_095757.jpg"
+            alt="Foto 3-B"
+          />
+        </div>
+        <div class="hero-col">
+          <img
+            src="imagenes/FOTOS FINALES/Pagina 1 - Principal/IMG_2179.png"
+            alt="Foto 3-C"
+          />
+        </div>
+        <div class="hero-col">
+          <img
+            src="/imagenes/FOTOS FINALES/Pagina 1 - Principal/IMG_2414.JPG"
+            alt="Foto 3-D"
+          />
+        </div>
+      </div>
+
+      <!-- olas decorativas (haikei) — dos capas superpuestas -->
+
+      <!-- ola trasera: tono salmon/rosa, más alta -->
+      <svg
+        class="hero-wave hero-wave--back"
+        viewBox="0 0 900 600"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M0 301L25 310.3C50 319.7 100 338.3 150 336C200 333.7 250 310.3 300 305.3C350 300.3 400 313.7 450 326.8C500 340 550 353 600 378.8C650 404.7 700 443.3 750 447.2C800 451 850 420 875 404.5L900 389L900 601L875 601C850 601 800 601 750 601C700 601 650 601 600 601C550 601 500 601 450 601C400 601 350 601 300 601C250 601 200 601 150 601C100 601 50 601 25 601L0 601Z"
+          fill="#b4777f"
+        />
+      </svg>
+
+      <!-- ola delantera: rojo de la marca, más baja -->
+      <svg
+        class="hero-wave hero-wave--front"
+        viewBox="0 0 900 600"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M0 473L21.5 463.5C43 454 86 435 128.8 432C171.7 429 214.3 442 257.2 442.2C300 442.3 343 429.7 385.8 437.3C428.7 445 471.3 473 514.2 470.3C557 467.7 600 434.3 642.8 432.8C685.7 431.3 728.3 461.7 771.2 473.7C814 485.7 857 479.3 878.5 476.2L900 473L900 601L878.5 601C857 601 814 601 771.2 601C728.3 601 685.7 601 642.8 601C600 601 557 601 514.2 601C471.3 601 428.7 601 385.8 601C343 601 300 601 257.2 601C214.3 601 171.7 601 128.8 601C86 601 43 601 21.5 601L0 601Z"
+          fill="#f8f4ee"
+        />
+      </svg>
+
+      <div class="hero-logo">
+        <img
+          src="/img/fundacion-ummep-h (1).png"
+          alt="Fundación UMMEP — Un mundo mejor es posible"
+        />
+      </div>
+    </header>
+
+    <!-- ============ CONTAINER 2 — PROGRAMAS INTERNACIONALISTAS ============ -->
+    <section class="container--2 section" id="programas">
+      <h2 class="section-title">Programas internacionalistas de Cuba</h2>
+      <p class="section-text">
+        Desde 2003, implementamos en Argentina programas solidarios cubanos
+        enfocados en
+        <strong>salud y educación</strong>. Inicialmente trabajamos con
+        organizaciones sociales, políticas y sindicatos en zonas vulnerables, y
+        desde 2005 también con gobiernos municipales y provinciales.
+        Actualmente, contamos con cientos de voluntarios y el respaldo del
+        gobierno cubano a través de iniciativas como “<strong
+          >Operación Milagro</strong
+        >” y “<strong>Yo Sí Puedo</strong>”.
+      </p>
+
+      <div class="program-cards">
+        <div class="program-card">
+          <img
+            src="/imagenes/FOTOS FINALES/operacion-milagro (1).png"
+            alt="Logo Operación Milagro"
+            class="program-card__logo"
+          />
+
+          <a href="#" class="btn btn--navy">Saber más</a>
+        </div>
+        <div class="program-card">
+          <img
+            src="/imagenes/FOTOS FINALES/Copia de Yo_si_puedo-removebg-preview.png"
+            alt="Logo Yo Sí Puedo"
+            class="program-card__logo"
+          />
+
+          <a href="#" class="btn btn--red">Saber más</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTAINER 3 — BARRA DE IMPACTO ============ -->
+    <section class="container--3" id="impacto" style="min-height: 2vh">
+      <div class="stat">
+        <span
+          class="stat__number"
+          data-count-from="52500"
+          data-count-to="53200"
+          data-count-prefix="&gt;"
+          >&gt;52.500</span
+        >
+        <span class="stat__label">Cirugías realizadas</span>
+      </div>
+      <div class="stat">
+        <span
+          class="stat__number"
+          data-count-from="32400"
+          data-count-to="33100"
+          data-count-prefix="&gt;"
+          >&gt;32.400</span
+        >
+        <span class="stat__label">Personas alfabetizadas</span>
+      </div>
+      <div class="stat">
+        <span class="stat__number" data-count-from="1" data-count-to="3"
+          >1</span
+        >
+        <span class="stat__label">Cursos de gestión comunitaria</span>
+      </div>
+    </section>
+
+    <script>
+      (function () {
+        // Formatea un número con puntos como separador de miles
+        function formatNum(el, val) {
+          const prefix = el.dataset.countPrefix || "";
+          const rounded = Math.round(val);
+          const formatted = rounded
+            .toString()
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+          el.textContent = prefix + formatted;
+        }
+
+        function animateStat(el) {
+          const from = parseFloat(el.dataset.countFrom);
+          const to = parseFloat(el.dataset.countTo);
+          const range = to - from;
+          const isSmall = range <= 10;
+          const STEP = isSmall ? 1 : 50;
+          const delay = isSmall ? 600 : 1500 / Math.round(range / STEP);
+          let current = from;
+
+          formatNum(el, current);
+
+          const interval = setInterval(() => {
+            current += STEP;
+            if (current >= to) {
+              formatNum(el, to);
+              clearInterval(interval);
+            } else {
+              formatNum(el, current);
+            }
+          }, delay);
+        }
+
+        function init() {
+          const stats = document.querySelectorAll(
+            ".stat__number[data-count-to]",
+          );
+          if (!stats.length) return;
+
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  animateStat(entry.target);
+                  observer.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0 },
+          );
+
+          stats.forEach((el) => observer.observe(el));
+        }
+
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", init);
+        } else {
+          init();
+        }
+      })();
+    </script>
+
+    <!-- ============ CONTAINER 4 — PROYECTOS DE COOPERACIÓN ACTIVOS ============ -->
+    <section class="container--4 section" id="proyectos">
+      <h2 class="section-title">Proyectos cooperación activos</h2>
+      <p class="section-text">
+        Durante los últimos años, la Fundación ha constatado, junto a las
+        organizaciones sociales, que éstas enfrentan crecientes dificultades
+        para coordinar <strong>acciones territoriales</strong>, como
+        <strong>movilizar vecinos</strong>,
+        <strong>caracterizar la población</strong>, realizar
+        <strong>seguimiento</strong>,
+        <strong>difusión y trabajar en equipos</strong>. Ante esta realidad, la
+        Fundación desarrolló iniciativas para mejorar la salud y educación de la
+        población vulnerable mediante la
+        <strong>organización popular y comunitaria</strong> como vía para
+        identificar y <strong>resolver conflictos sociales</strong>.
+      </p>
+
+      <div class="program-cards">
+        <div class="program-card">
+          <img
+            src="/imagenes/FOTOS FINALES/Pagina 5 - Proyectos de cooperación/Gemini_Generated_Image_jab6qgjab6qgjab6-removebg-preview.png"
+            alt="Logo Mujeres que Fortalecen Mujeres"
+            class="program-card__logo program-card__logo--circle"
+          />
+
+          <a href="#" class="btn btn--purple">Saber más</a>
+        </div>
+        <div class="program-card">
+          <img
+            src="/imagenes/FOTOS FINALES/Pagina 5 - Proyectos de cooperación/logo_final-removebg-preview.png"
+            alt="Logo Mujeres Empoderadas"
+            class="program-card__logo program-card__logo--circle"
+          />
+
+          <a href="#" class="btn btn--red">Saber más</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTAINER 5 — NOVEDADES ============ -->
+    <section class="container--5" id="novedades">
+      <h2 class="section-title">Novedades</h2>
+      <div class="news-grid">
+        <article class="news-card">
+          <img
+            src="img/Pagina 3 - Novedades/image (1).png"
+            alt="Paciente del centro oftalmológico Che Guevara"
+          />
+          <p class="news-card__quote">
+            “Recuperar la vista para seguir defendiendo el territorio: la
+            experiencia de una paciente jujeña en el centro oftalmológico Che
+            Guevara”
+          </p>
+        </article>
+        <article class="news-card">
+          <img
+            src="img/Pagina 3 - Novedades/image (2).png"
+            alt="Jornada sobre extractivismo en Córdoba"
+          />
+          <p class="news-card__quote">
+            “Manos trabajadoras por el buen vivir”: denuncian en Córdoba el
+            avance del extractivismo y la complicidad del Estado con grandes
+            empresas
+          </p>
+        </article>
+        <article class="news-card">
+          <img
+            src="img/Pagina 3 - Novedades/image (3).png"
+            alt="Presentación de libro en Córdoba"
+          />
+          <p class="news-card__quote">
+            “Periodismo y militancia a pie de calle”: presentaron en Córdoba un
+            libro de conversaciones con Carlos Aznárez
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ CONTAINER 6 — FOOTER ============ -->
+    <footer class="container--6" id="contacto">
+      <div class="footer-grid">
+        <div class="footer-col footer-col--social">
+          <h3>Seguinos en redes</h3>
+          <div class="social-icons">
+            <a href="#" aria-label="Facebook"
+              ><svg viewBox="0 0 24 24">
+                <path
+                  d="M14 9h3V6h-3c-2.2 0-4 1.8-4 4v2H8v3h2v6h3v-6h3l1-3h-4v-2c0-.6.4-1 1-1z"
+                /></svg
+            ></a>
+            <a href="#" aria-label="Instagram"
+              ><svg viewBox="0 0 24 24">
+                <path
+                  d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4zm5 5.5A3.5 3.5 0 1 0 12 15.5 3.5 3.5 0 0 0 12 8.5zM17.2 6.3a.9.9 0 1 0 .9.9.9.9 0 0 0-.9-.9z"
+                /></svg
+            ></a>
+            <a href="#" aria-label="X (Twitter)"
+              ><svg viewBox="0 0 24 24"><path d="M4 4l16 16M20 4 4 20" /></svg
+            ></a>
+            <a href="#" aria-label="YouTube"
+              ><svg viewBox="0 0 24 24">
+                <path
+                  d="M21 7.5s-.2-1.6-.9-2.3c-.8-.9-1.7-.9-2.1-1C15 4 12 4 12 4h0s-3 0-6 .2c-.4 0-1.3.1-2.1 1C3.2 5.9 3 7.5 3 7.5S2.8 9.4 2.8 11.3v1.4C2.8 14.6 3 16.5 3 16.5s.2 1.6.9 2.3c.8.9 1.9.9 2.4 1 1.7.2 7.7.2 7.7.2s3 0 6-.2c.4 0 1.3-.1 2.1-1 .7-.7.9-2.3.9-2.3s.2-1.9.2-3.8v-1.4c0-1.9-.2-3.8-.2-3.8zM10 14.5v-5l4.5 2.5z"
+                /></svg
+            ></a>
+          </div>
+          <div class="footer-logo">
+            <img src="img/fundacion-ummep-h (1).png" alt="" />
+          </div>
+        </div>
+
+        <div class="footer-col footer-col--contact">
+          <h3>Contacto</h3>
+          <address>
+            Tomás Guido 757<br />
+            Córdoba Capital<br />
+            Argentina<br />
+            <a href="mailto:c.o.e.guevara@gmail.com">c.o.e.guevara@gmail.com</a>
+          </address>
+        </div>
+
+        <div class="footer-col footer-col--form">
+          <h3>Dejanos un mensaje</h3>
+          <form class="contact-form" id="contact-form">
+            <div class="form-row">
+              <label
+                >Nombre (*)
+                <input type="text" name="nombre" required />
+              </label>
+              <label
+                >Apellido (*)
+                <input type="text" name="apellido" required />
+              </label>
+            </div>
+            <div class="form-row">
+              <label
+                >E-Mail (*)
+                <input type="email" name="email" required />
+              </label>
+              <label
+                >Teléfono
+                <input type="tel" name="telefono" />
+              </label>
+            </div>
+            <div class="form-row">
+              <label
+                >Ciudad, Provincia y/o País (*)
+                <input type="text" name="ciudad" required />
+              </label>
+              <label
+                >Motivo de la consulta
+                <select name="motivo">
+                  <option value="">— Por favor, elige una opción —</option>
+                  <option>Consulta general</option>
+                  <option>Quiero ser voluntario/a</option>
+                  <option>Propuesta de cooperación</option>
+                  <option>Prensa</option>
+                </select>
+              </label>
+            </div>
+            <label class="form-row form-row--full"
+              >Consulta (*)
+              <textarea name="consulta" required></textarea>
+            </label>
+            <button type="submit" class="btn btn--red">Enviar</button>
+          </form>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,1187 @@
+/* =======================================================
+   Fundación UMMEP — styles.css
+   "Un mundo mejor es posible"
+   ======================================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Mulish:wght@400;500;600;700&display=swap");
+
+/* -------------------------------------------------------
+   1. Tokens
+   ------------------------------------------------------- */
+:root {
+  /* color */
+  --color-navy: #16234a;
+  --color-navy-soft: #2b3a66;
+  --color-salmon: #e3a191;
+  --color-red: #df2c1f;
+  --color-purple: #7c6bab;
+  --color-cream: #f8f4ee;
+  --color-sand: #f1ece2;
+  --color-white: #ffffff;
+  --color-line: rgba(22, 35, 74, 0.12);
+  --color-gold: #e8b14d;
+  --color-muted: rgba(22, 35, 74, 0.55);
+
+  /* type */
+  --font-heading: "Poppins", sans-serif;
+  --font-body: "Mulish", sans-serif;
+
+  /* layout */
+  --section-pad-x: clamp(1.25rem, 6vw, 6rem);
+  --section-pad-y: clamp(2.5rem, 6vh, 4.5rem);
+  --max-content: 1180px;
+
+  /* motion */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* subtle wavy-line texture used behind sections 2 & 4 */
+  --squiggle-bg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='480' height='120' viewBox='0 0 480 120'><path d='M0,60 C40,15 80,105 120,60 C160,15 200,105 240,60 C280,15 320,105 360,60 C400,15 440,105 480,60' fill='none' stroke='%2316234a' stroke-opacity='0.07' stroke-width='2'/><path d='M0,90 C40,45 80,135 120,90 C160,45 200,135 240,90 C280,45 320,135 360,90 C400,45 440,135 480,90' fill='none' stroke='%2316234a' stroke-opacity='0.05' stroke-width='2'/></svg>");
+
+  /* same texture, in white, for use on the navy sections of Recursos audiovisuales */
+  --squiggle-bg-light: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='480' height='120' viewBox='0 0 480 120'><path d='M0,60 C40,15 80,105 120,60 C160,15 200,105 240,60 C280,15 320,105 360,60 C400,15 440,105 480,60' fill='none' stroke='%23ffffff' stroke-opacity='0.09' stroke-width='2'/><path d='M0,90 C40,45 80,135 120,90 C160,45 200,135 240,90 C280,45 320,135 360,90 C400,45 440,135 480,90' fill='none' stroke='%23ffffff' stroke-opacity='0.06' stroke-width='2'/></svg>");
+}
+
+/* -------------------------------------------------------
+   2. Reset / base
+   ------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--color-navy);
+  background: var(--color-white);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: var(--font-body);
+  font-size: 1rem;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-red);
+  outline-offset: 3px;
+}
+
+/* every top-level section: full viewport height, full width */
+.container--1,
+.container--2,
+.container--3,
+.container--4,
+.container--5,
+.container--6 {
+  width: auto;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* shared "eyebrow + title + intro text" pattern (sections 2 & 4) */
+.section {
+  min-height: 100vh;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: clamp(2rem, 5vw, 3.5rem);
+  padding: var(--section-pad-y) var(--section-pad-x);
+  background-color: var(--color-cream);
+  background-image: var(--squiggle-bg);
+  background-size: 480px;
+}
+
+.section-title {
+  font-size: clamp(1.5rem, 1rem + 1.6vw, 2.35rem);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-navy);
+}
+
+.section-text {
+  max-width: 760px;
+  font-size: clamp(1rem, 0.92rem + 0.3vw, 1.15rem);
+  color: var(--color-navy-soft);
+}
+
+.section-text strong {
+  color: var(--color-navy);
+  font-weight: 700;
+}
+
+/* =========================================================
+   3. CONTAINER 1 — Hero
+   ========================================================= */
+.container--1 {
+  height: 100vh;
+  overflow: hidden;
+  background: #f8f4ee;
+  isolation: isolate;
+}
+
+/* ── Hero: fases ────────────────────────────────────────────── */
+
+/* Cada fase ocupa todo el hero y se superpone */
+.hero-phase {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  opacity: 0;
+  pointer-events: none;
+  /* transición de entrada/salida de la fase completa */
+  transition: opacity 1.2s var(--ease);
+}
+
+/* Fase activa */
+.hero-phase.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Cada columna dentro de la fase */
+.hero-col {
+  position: relative;
+  flex: 1 1 0;
+  height: 100%;
+  overflow: hidden;
+  background: #f8f4ee;
+}
+
+/* La imagen ocupa toda la columna */
+.hero-col img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.04);
+  transition:
+    opacity 1s var(--ease),
+    transform 7s var(--ease);
+}
+
+/* Imagen visible dentro de su columna */
+.hero-col img.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ── Fase 3: solo una columna visible a la vez ───────────────── */
+.hero-phase--solo {
+  /* las columnas se apilan y solo una se muestra */
+}
+.hero-phase--solo .hero-col {
+  position: absolute;
+  inset: 0;
+  flex: none;
+  width: 100%;
+  opacity: 0;
+  transition: opacity 1.2s var(--ease);
+}
+.hero-phase--solo .hero-col.is-solo-active {
+  opacity: 1;
+}
+/* la imagen dentro de la fase solo siempre visible (la col maneja la opacidad) */
+.hero-phase--solo .hero-col img {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* decorative waves — dos capas (haikei), ancladas al fondo del hero */
+.hero-wave {
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  /* la altura ocupa el tercio inferior del hero para que las olas sean generosas */
+  height: clamp(180px, 38vh, 340px);
+  pointer-events: none;
+}
+
+/* ola trasera: más alta, detrás */
+.hero-wave--back {
+  z-index: 2;
+  opacity: 0.85;
+  height: clamp(208px, 67vh, 720px);
+}
+
+/* ola delantera: más baja, al frente */
+.hero-wave--front {
+  z-index: 3;
+  height: clamp(208px, 67vh, 616px);
+}
+
+.hero-wave__fill {
+  fill: var(--color-salmon);
+}
+.hero-wave__lines {
+  stroke: var(--color-navy);
+}
+
+.hero-logo {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(8px, 3vh, 28px);
+  transform: translateX(-50%);
+  z-index: 4;
+  width: clamp(130px, 14vw, 200px);
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.25));
+}
+
+/* =========================================================
+   4. CONTAINER 2 — Programas internacionalistas de Cuba
+   ========================================================= */
+.container--2 {
+  /* uses .section */
+}
+
+.program-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(2rem, 6vw, 5rem);
+}
+
+.program-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+  width: clamp(180px, 22vw, 240px);
+}
+
+.program-card__logo {
+  width: clamp(110px, 12vw, 150px);
+  height: clamp(110px, 12vw, 150px);
+  object-fit: contain;
+}
+
+.program-card__name {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--color-navy);
+}
+
+/* buttons */
+.btn {
+  display: inline-block;
+  padding: 0.65rem 1.8rem;
+  border-radius: 999px;
+  border: none;
+  text-decoration: none;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-white);
+  cursor: pointer;
+  transition:
+    transform 0.2s var(--ease),
+    box-shadow 0.2s var(--ease),
+    filter 0.2s var(--ease);
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 22px rgba(22, 35, 74, 0.22);
+  filter: brightness(1.05);
+}
+.btn:active {
+  transform: translateY(-1px);
+}
+
+.btn--navy {
+  background: var(--color-navy);
+}
+.btn--red {
+  background: var(--color-red);
+}
+.btn--purple {
+  background: var(--color-purple);
+}
+.btn--gold {
+  background: var(--color-gold);
+  color: var(--color-navy);
+}
+
+/* =========================================================
+   5. CONTAINER 3 — Barra de impacto
+   ========================================================= */
+.container--3 {
+  background: var(--color-navy);
+  color: var(--color-white);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(2.5rem, 8vw, 7rem);
+  padding: 0.2rem;
+}
+
+.stat {
+  position: relative;
+  text-align: center;
+  padding: 1rem clamp(1rem, 3vw, 2.5rem);
+}
+
+.stat + .stat::before {
+  content: "";
+  position: absolute;
+  left: calc(-1 * clamp(1.25rem, 4vw, 3.5rem));
+  top: 8%;
+  bottom: 8%;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.stat__number {
+  display: block;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(2.4rem, 1.4rem + 1.5vw, 4.6rem);
+  line-height: 1;
+}
+
+.stat__label {
+  display: block;
+  margin-top: 0.65rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: clamp(0.82rem, 0.7rem + 0.4vw, 1rem);
+  max-width: 14ch;
+  margin-inline: auto;
+}
+
+/* =========================================================
+   6. CONTAINER 4 — Proyectos de cooperación activos
+   ========================================================= */
+.container--4 {
+  /* uses .section */
+}
+
+.program-card__logo--circle {
+  border-radius: 50%;
+}
+
+/* =========================================================
+   7. CONTAINER 5 — Novedades
+   ========================================================= */
+.container--5 {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(2rem, 5vw, 3.5rem);
+  padding: var(--section-pad-y) var(--section-pad-x);
+  background: var(--color-sand);
+}
+
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  width: 100%;
+  max-width: var(--max-content);
+}
+
+.news-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.news-card img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border: 8px solid var(--color-white);
+  box-shadow: 0 14px 30px rgba(22, 35, 74, 0.12);
+}
+
+.news-card__quote {
+  font-style: italic;
+  text-align: center;
+  font-size: 0.98rem;
+  color: var(--color-navy-soft);
+}
+
+/* =========================================================
+   8. CONTAINER 6 — Footer
+   ========================================================= */
+.container--6 {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(2.5rem, 5vw, 3.5rem);
+  padding: var(--section-pad-y) var(--section-pad-x)
+    calc(var(--section-pad-y) * 0.6);
+  background: var(--color-white);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.5fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  width: 100%;
+  max-width: var(--max-content);
+  margin-inline: auto;
+}
+
+.footer-col h3 {
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 1.1rem;
+}
+
+.social-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.social-icons a {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-navy);
+  color: var(--color-white);
+  transition:
+    background 0.2s var(--ease),
+    transform 0.2s var(--ease);
+}
+
+.social-icons a:hover {
+  background: var(--color-red);
+  transform: translateY(-2px);
+}
+
+.social-icons svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.footer-col address {
+  font-style: normal;
+  line-height: 1.8;
+}
+
+.footer-col address a {
+  text-decoration: underline;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-row--full {
+  grid-template-columns: 1fr;
+}
+
+.contact-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-navy-soft);
+}
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  border: none;
+  border-bottom: 1px solid var(--color-line);
+  background: transparent;
+  padding: 0.4rem 0.1rem;
+  color: var(--color-navy);
+}
+
+.contact-form textarea {
+  resize: vertical;
+  min-height: 70px;
+}
+
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+  border-bottom-color: var(--color-navy);
+}
+
+.contact-form .btn {
+  align-self: flex-start;
+  border: none;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  width: 100%;
+  max-width: var(--max-content);
+  margin-inline: auto;
+  padding-top: 1.5rem;
+}
+
+.footer-logo img {
+  width: 200px;
+  height: 9cqi8;
+}
+
+.footer-logo span {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--color-navy);
+}
+
+/* =========================================================
+   9. Página — Recursos audiovisuales
+   ========================================================= */
+
+/* --- 9.1 Título --- */
+.RecursosAudiovisuales-container--1 {
+  background: var(--color-navy);
+  background-image: var(--squiggle-bg-light);
+  background-size: 480px;
+  min-height: clamp(200px, 26vh, 300px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--section-pad-y) var(--section-pad-x);
+}
+
+.ra-page-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: clamp(1.6rem, 1rem + 2.2vw, 2.75rem);
+  color: var(--color-white);
+}
+
+/* --- 9.2 Secciones de video (entrevistas / documentales / charlas) --- */
+.ra-video-section {
+  position: relative;
+  min-height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(2rem, 5vw, 3rem);
+  padding: var(--section-pad-y) var(--section-pad-x);
+  background: var(--color-white);
+  background-image: var(--squiggle-bg);
+  background-size: 480px;
+  overflow: hidden;
+}
+
+.ra-video-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  width: 100%;
+  max-width: var(--max-content);
+}
+
+.ra-video-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  text-align: left;
+}
+
+.ra-video-card__thumb {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 6px;
+  background: var(--color-navy-soft);
+  box-shadow: 0 10px 22px rgba(22, 35, 74, 0.16);
+  transition:
+    transform 0.2s var(--ease),
+    box-shadow 0.2s var(--ease);
+}
+
+.ra-video-card__thumb:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 28px rgba(22, 35, 74, 0.22);
+}
+
+.ra-video-card__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ra-video-card__duration {
+  position: absolute;
+  right: 0.5rem;
+  bottom: 0.5rem;
+  background: rgba(0, 0, 0, 0.75);
+  color: var(--color-white);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 0.1rem 0.4rem;
+  border-radius: 3px;
+}
+
+.ra-video-card__progress {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 35%;
+  background: var(--color-red);
+}
+
+.ra-video-card__body {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.ra-video-card__title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.98rem;
+  color: var(--color-navy);
+  line-height: 1.35;
+}
+
+.ra-video-card__menu {
+  flex: 0 0 auto;
+  background: none;
+  border: none;
+  color: var(--color-navy);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.1rem 0.2rem;
+  transition: color 0.2s var(--ease);
+}
+
+.ra-video-card__menu:hover {
+  color: var(--color-red);
+}
+
+.ra-video-card__meta {
+  font-size: 0.82rem;
+  color: var(--color-muted);
+}
+
+.ra-watermark {
+  position: absolute;
+  left: var(--section-pad-x);
+  bottom: 1rem;
+  width: clamp(90px, 10vw, 130px);
+  opacity: 0.14;
+  pointer-events: none;
+}
+
+/* --- 9.3 Podcast --- */
+.ra-podcast-section {
+  min-height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(2rem, 5vw, 3rem);
+  padding: var(--section-pad-y) var(--section-pad-x);
+  background: var(--color-sand);
+}
+
+.ra-podcast-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+  width: 100%;
+  max-width: var(--max-content);
+}
+
+.ra-podcast-card {
+  position: relative;
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+  background: var(--color-navy);
+  border-radius: 14px;
+  padding: 1rem 3.6rem 1rem 1rem;
+  color: var(--color-white);
+}
+
+.ra-podcast-card__thumb {
+  flex: 0 0 56px;
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--color-navy-soft);
+}
+
+.ra-podcast-card__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ra-podcast-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.ra-podcast-card__title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.9rem;
+  line-height: 1.3;
+}
+
+.ra-podcast-card__title span {
+  display: block;
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+.ra-podcast-card__source {
+  font-size: 0.76rem;
+  color: var(--color-salmon);
+}
+
+.ra-podcast-card__desc {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.45;
+}
+
+.ra-podcast-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.ra-podcast-card__date {
+  font-size: 0.74rem;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.ra-podcast-card__actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.ra-podcast-card__actions button {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.95rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.1rem;
+  transition: color 0.2s var(--ease);
+}
+
+.ra-podcast-card__actions button:hover {
+  color: var(--color-white);
+}
+
+.ra-podcast-card__play {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: none;
+  background: var(--color-white);
+  color: var(--color-navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition:
+    transform 0.2s var(--ease),
+    background 0.2s var(--ease);
+}
+
+.ra-podcast-card__play:hover {
+  transform: translateY(-50%) scale(1.08);
+  background: var(--color-salmon);
+}
+
+/* --- 9.4 Colaboración / Donación --- */
+.ra-donate-banner {
+  position: relative;
+  min-height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: clamp(1.75rem, 4vw, 2.75rem) var(--section-pad-x);
+  background: var(--color-navy);
+  background-image: var(--squiggle-bg-light);
+  background-size: 600px;
+  overflow: hidden;
+}
+
+.ra-donate-banner__text {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(1.15rem, 0.9rem + 1vw, 1.7rem);
+  color: var(--color-white);
+  max-width: 32ch;
+}
+
+.ra-donate-banner__btn {
+  flex: 0 0 auto;
+}
+
+/* =========================================================
+   10. Responsive
+   ========================================================= */
+@media (max-width: 900px) {
+  .hero-slideshow {
+    flex-wrap: nowrap;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .news-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ra-video-grid,
+  .ra-podcast-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stat + .stat::before {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  /* en mobile la fase 1 muestra solo 2 columnas */
+  .hero-phase:not(.hero-phase--solo) .hero-col:nth-child(3),
+  .hero-phase:not(.hero-phase--solo) .hero-col:nth-child(4) {
+    display: none;
+  }
+
+  .section,
+  .container--3,
+  .container--5,
+  .container--6 {
+    min-height: auto;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+  .container--1 {
+    height: 100vh;
+  }
+
+  .ra-podcast-card {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .ra-podcast-card__play {
+    position: static;
+    transform: none;
+    margin-top: 0.5rem;
+  }
+
+  .ra-donate-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
+/* =========================================================
+   11. Motion preference
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hero-col img,
+  .hero-phase,
+  .hero-col {
+    transition: opacity 0.3s linear !important;
+    transform: none !important;
+  }
+  .btn,
+  .social-icons a {
+    transition: none;
+  }
+}
+
+/* =========================================================
+   12. Navegación principal
+   ========================================================= */
+
+/* Altura del nav — usada para compensar el sticky en el hero */
+:root {
+  --nav-h: 64px;
+}
+
+.site-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--section-pad-x);
+  background: var(--color-white);
+  border-bottom: 1px solid rgba(22, 35, 74, 0.08);
+  transition:
+    transform 0.35s var(--ease),
+    box-shadow 0.3s var(--ease);
+}
+
+/* Sombra sutil una vez que se scrolleó la página */
+.site-nav.is-scrolled {
+  box-shadow: 0 4px 18px rgba(22, 35, 74, 0.1);
+}
+
+/* Se esconde deslizándose hacia arriba al scrollear hacia abajo */
+.site-nav.site-nav--hidden {
+  transform: translateY(-100%);
+}
+
+/* Zona invisible pegada arriba de todo: al hacer hover ahí (con
+   delay) vuelve a aparecer el nav aunque esté escondido. */
+.site-nav__hover-zone {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 14px;
+  z-index: 101;
+}
+
+/* Logo */
+.site-nav__logo {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  margin-right: 2rem;
+}
+
+.site-nav__logo img {
+  height: 38px;
+  width: auto;
+}
+
+/* Links */
+.site-nav__links {
+  display: flex;
+  align-items: center;
+  gap: 0.05rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+}
+
+.site-nav__links li {
+  flex-shrink: 0;
+}
+
+.site-nav__links a {
+  display: block;
+  padding: 0.4rem 0.6rem;
+  font-family: var(--font-heading);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-navy-soft);
+  text-decoration: none;
+  border-radius: 4px;
+  white-space: nowrap;
+  transition:
+    color 0.2s var(--ease),
+    background 0.2s var(--ease);
+}
+
+.site-nav__links a:hover {
+  color: var(--color-navy);
+  background: rgba(22, 35, 74, 0.06);
+}
+
+.site-nav__links a.is-active {
+  color: var(--color-white);
+  background: var(--color-navy);
+}
+
+/* Separadores decorativos entre grupos */
+.site-nav__sep {
+  width: 1px;
+  height: 18px;
+  background: rgba(22, 35, 74, 0.15);
+  margin: 0 0.3rem;
+  flex-shrink: 0;
+}
+
+/* Burger (mobile) */
+.site-nav__burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  margin-left: auto;
+}
+
+.site-nav__burger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--color-navy);
+  border-radius: 2px;
+  transition:
+    transform 0.3s var(--ease),
+    opacity 0.3s var(--ease);
+}
+
+/* El nav es flotante (aparece/desaparece sobre el contenido), así que
+   el body no necesita reservarle espacio fijo arriba. */
+.container--1 {
+  min-height: 100vh;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1320px) {
+  .site-nav__burger {
+    display: flex;
+  }
+
+  .site-nav__links {
+    position: fixed;
+    top: var(--nav-h);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 0;
+    overflow-y: auto;
+    background: var(--color-navy);
+    padding: 1.25rem var(--section-pad-x) 2rem;
+    transform: translateX(100%);
+    transition: transform 0.35s var(--ease);
+  }
+
+  .site-nav__links.is-open {
+    transform: translateX(0);
+  }
+
+  .site-nav__links a {
+    font-size: 1rem;
+    padding: 0.85rem 0.5rem;
+    color: rgba(255, 255, 255, 0.85);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 0;
+  }
+
+  .site-nav__links a:hover,
+  .site-nav__links a.is-active {
+    color: var(--color-white);
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  .site-nav__sep {
+    width: 100%;
+    height: 1px;
+    margin: 0.25rem 0;
+  }
+}
+
+/* Burger animado cuando está abierto */
+.site-nav__burger.is-open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.site-nav__burger.is-open span:nth-child(2) {
+  opacity: 0;
+}
+.site-nav__burger.is-open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}

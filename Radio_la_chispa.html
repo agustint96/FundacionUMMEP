@@ -1,0 +1,768 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Radio La Chispa</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      /* ── Radio La Chispa – page-specific overrides ── */
+
+      /* Header banner */
+      .chispa-header {
+        background: var(--color-navy);
+        background-image: var(--squiggle-bg-light);
+        background-size: 480px;
+        padding: clamp(1.5rem, 4vw, 2.5rem) var(--section-pad-x);
+        text-align: center;
+      }
+
+      .chispa-header__title {
+        font-family: var(--font-heading);
+        font-size: clamp(1.6rem, 1rem + 2.2vw, 2.6rem);
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--color-white);
+        margin: 0;
+      }
+
+      /* ── Sección Quiénes somos ── */
+      .chispa-about {
+        padding: var(--section-pad-y) var(--section-pad-x);
+        background: var(--color-white);
+      }
+
+      .chispa-about__inner {
+        display: grid;
+        grid-template-columns: 260px 1fr;
+        gap: clamp(2rem, 5vw, 4rem);
+        max-width: var(--max-content);
+        margin-inline: auto;
+        align-items: start;
+      }
+
+      .chispa-about__sidebar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+      }
+
+      .chispa-about__logo {
+        width: 200px;
+      }
+
+      .chispa-about__socials {
+        display: flex;
+        gap: 0.6rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .chispa-about__socials a {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        transition:
+          transform 0.2s var(--ease),
+          filter 0.2s var(--ease);
+      }
+
+      .chispa-about__socials a:hover {
+        transform: translateY(-3px);
+        filter: brightness(1.15);
+      }
+
+      .chispa-about__socials svg {
+        width: 22px;
+        height: 22px;
+        fill: white;
+      }
+
+      .social-yt {
+        background: #ff0000;
+      }
+      .social-ig {
+        background: radial-gradient(
+          circle at 30% 107%,
+          #fdf497 0%,
+          #fdf497 5%,
+          #fd5949 45%,
+          #d6249f 60%,
+          #285aeb 90%
+        );
+      }
+      .social-wa {
+        background: #25d366;
+      }
+      .social-fb {
+        background: #1877f2;
+      }
+      .social-sp {
+        background: #1db954;
+      }
+
+      .chispa-about__text {
+        font-size: clamp(0.95rem, 0.88rem + 0.3vw, 1.08rem);
+        line-height: 1.75;
+        color: var(--color-navy-soft);
+        text-align: justify;
+      }
+
+      .chispa-about__text strong {
+        color: var(--color-navy);
+        font-weight: 700;
+      }
+
+      /* ── Escuchanos en vivo ── */
+      .chispa-live {
+        background: var(--color-cream);
+        background-image: var(--squiggle-bg);
+        background-size: 480px;
+        padding: var(--section-pad-y) var(--section-pad-x);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        text-align: center;
+      }
+
+      .chispa-live__player {
+        background: var(--color-white);
+        border: 1px solid var(--color-line);
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(22, 35, 74, 0.1);
+        padding: 1.5rem 2.5rem;
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        max-width: 480px;
+        width: 100%;
+      }
+
+      .chispa-live__player-logo {
+        width: 80px;
+        flex-shrink: 0;
+      }
+
+      .chispa-live__player-info {
+        text-align: left;
+      }
+
+      .chispa-live__player-name {
+        font-family: var(--font-heading);
+        font-weight: 700;
+        font-size: 1.05rem;
+        color: var(--color-navy);
+      }
+
+      .chispa-live__player-location {
+        font-size: 0.88rem;
+        color: var(--color-muted);
+        margin-top: 0.2rem;
+      }
+
+      .chispa-live__player-url {
+        font-size: 0.82rem;
+        color: var(--color-muted);
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+        margin-top: 0.35rem;
+        text-decoration: none;
+      }
+
+      .chispa-live__player-url:hover {
+        color: var(--color-navy);
+      }
+
+      /* ── Últimos programas ── */
+      .chispa-programs {
+        padding: var(--section-pad-y) var(--section-pad-x);
+        background: var(--color-white);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+      }
+
+      .chispa-programs__grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: clamp(1.5rem, 3vw, 2.5rem);
+        width: 100%;
+        max-width: var(--max-content);
+      }
+
+      /* ── Banner de participación ── */
+      .chispa-cta {
+        background: var(--color-navy);
+        background-image: var(--squiggle-bg-light);
+        background-size: 600px;
+        padding: clamp(1.75rem, 4vw, 2.75rem) var(--section-pad-x);
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.5rem;
+      }
+
+      .chispa-cta__text {
+        font-family: var(--font-heading);
+        font-weight: 700;
+        font-size: clamp(1.1rem, 0.9rem + 1vw, 1.6rem);
+        color: var(--color-white);
+        max-width: 38ch;
+      }
+
+      .btn--whatsapp {
+        background: #25d366;
+        color: var(--color-white);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-align: center;
+        line-height: 1.3;
+      }
+
+      /* ── Footer ── */
+      @media (max-width: 760px) {
+        .chispa-about__inner {
+          grid-template-columns: 1fr;
+        }
+
+        .chispa-about__sidebar {
+          flex-direction: row;
+          flex-wrap: wrap;
+        }
+
+        .chispa-programs__grid {
+          grid-template-columns: 1fr;
+        }
+
+        .chispa-cta {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="site-nav" aria-label="Navegación principal">
+      <a
+        class="site-nav__logo"
+        href="Principal.html"
+        aria-label="Inicio — Fundación UMMEP"
+      >
+        <img src="img/fundacion-ummep-h (1).png" alt="Fundación UMMEP" />
+      </a>
+      <ul class="site-nav__links" id="nav-links">
+        <li><a href="Principal.html" data-nav="principal">Inicio</a></li>
+        <li>
+          <a href="Nuestro_Trabajo.html" data-nav="nuestro-trabajo"
+            >Nuestro trabajo</a
+          >
+        </li>
+        <li><a href="Novedades.html" data-nav="novedades">Novedades</a></li>
+        <li class="site-nav__sep" role="separator" aria-hidden="true"></li>
+        <li>
+          <a href="Programas_internacionales.html" data-nav="programas"
+            >Programas internacionalistas</a
+          >
+        </li>
+        <li>
+          <a
+            href="Proyectos_de_coooperacion_al_desarrollo.html"
+            data-nav="proyectos"
+            >Proyectos de cooperación</a
+          >
+        </li>
+        <li class="site-nav__sep" role="separator" aria-hidden="true"></li>
+        <li>
+          <a href="Recursos_audiovisuales.html" data-nav="recursos"
+            >Recursos audiovisuales</a
+          >
+        </li>
+        <li>
+          <a href="Radio_la_chispa.html" data-nav="radio">Radio La Chispa</a>
+        </li>
+        <li class="site-nav__sep" role="separator" aria-hidden="true"></li>
+        <li><a href="Contacto.html" data-nav="contacto">Contacto</a></li>
+      </ul>
+      <button
+        class="site-nav__burger"
+        id="nav-burger"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="nav-links"
+      >
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+
+    <!-- ══════════════════════════════════════════
+       HEADER
+  ══════════════════════════════════════════ -->
+    <header class="chispa-header">
+      <h1 class="chispa-header__title">Radio La Chispa</h1>
+    </header>
+
+    <!-- ══════════════════════════════════════════
+       QUIÉNES SOMOS
+  ══════════════════════════════════════════ -->
+    <section class="chispa-about">
+      <div class="chispa-about__inner">
+        <aside class="chispa-about__sidebar">
+          <!-- Logo -->
+          <img
+            class="chispa-about__logo"
+            src="Pagina_7_-_Radio_la_chispa.png"
+            alt="Logo Radio La Chispa"
+          />
+
+          <!-- Redes sociales -->
+          <div class="chispa-about__socials">
+            <!-- YouTube -->
+            <a href="#" class="social-yt" aria-label="YouTube" title="YouTube">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.5 15.6V8.4l6.3 3.6-6.3 3.6z"
+                />
+              </svg>
+            </a>
+            <!-- Instagram -->
+            <a
+              href="#"
+              class="social-ig"
+              aria-label="Instagram"
+              title="Instagram"
+            >
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+                />
+              </svg>
+            </a>
+            <!-- WhatsApp -->
+            <a
+              href="#"
+              class="social-wa"
+              aria-label="WhatsApp"
+              title="WhatsApp"
+            >
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+                />
+              </svg>
+            </a>
+            <!-- Facebook -->
+            <a
+              href="#"
+              class="social-fb"
+              aria-label="Facebook"
+              title="Facebook"
+            >
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+                />
+              </svg>
+            </a>
+            <!-- Spotify -->
+            <a href="#" class="social-sp" aria-label="Spotify" title="Spotify">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"
+                />
+              </svg>
+            </a>
+          </div>
+        </aside>
+
+        <div class="chispa-about__text">
+          <p>
+            <strong>Radio La Chispa</strong> es un proyecto de comunicación
+            comunitaria y popular ubicado en el primer piso del Centro
+            Oftalmológico Dr. Ernesto Che Guevara, en el Barrio San Martín de la
+            ciudad de Córdoba. Concebida como una herramienta de fortalecimiento
+            comunitario, la radio se diferencia ideológica y prácticamente de
+            los medios masivos tradicionales, apostando a la participación
+            activa de actores sociales del barrio y sus territorios cercanos.
+            Sus contenidos se construyen desde las problemáticas cotidianas de
+            los sectores populares, promoviendo redes de participación,
+            organización comunitaria y el diálogo entre los equipos de las
+            Misiones Cubanas en Argentina y su labor solidaria. Alineada con los
+            valores y principios de la cooperación internacional cubana, la
+            radio busca ser un espacio colectivo de reflexión y disputa contra
+            los sentidos hegemónicos, sin adherir a polarizaciones políticas
+            locales, y con la convicción de que un mundo mejor es posible. Sus
+            objetivos iniciales son establecer redes de participación popular,
+            construir un espacio de comunicación colectiva entre pares, y
+            fortalecer la organización comunitaria como base del poder popular.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+       ESCUCHANOS EN VIVO
+  ══════════════════════════════════════════ -->
+    <section class="chispa-live">
+      <h2 class="section-title">Escuchanos en vivo</h2>
+
+      <div class="chispa-live__player">
+        <img
+          class="chispa-live__player-logo"
+          src="Pagina_7_-_Radio_la_chispa.png"
+          alt="Logo Radio La Chispa"
+        />
+        <div class="chispa-live__player-info">
+          <p class="chispa-live__player-name">
+            .:&nbsp;Radio La Chispa&nbsp;:.
+          </p>
+          <p class="chispa-live__player-location">
+            .:&nbsp;Córdoba - Argentina&nbsp;:.
+          </p>
+          <a
+            class="chispa-live__player-url"
+            href="https://radiolachispa.com.ar"
+            target="_blank"
+            rel="noopener"
+          >
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+              <path
+                d="M12 2a10 10 0 100 20A10 10 0 0012 2zm0 2c1.3 0 2.6.6 3.8 2H8.2C9.4 4.6 10.7 4 12 4zm-7.8 4h15.6c.7 1.2 1.1 2.6 1.2 4H3c.1-1.4.5-2.8 1.2-4zm1.2 10c-.7-1.2-1.1-2.6-1.2-4h17.6c-.1 1.4-.5 2.8-1.2 4H5.4zm2.8 2c1.2 1.4 2.5 2 3.8 2s2.6-.6 3.8-2H8.2z"
+              />
+            </svg>
+            radiolachispa.com.ar
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+       ÚLTIMOS PROGRAMAS
+  ══════════════════════════════════════════ -->
+    <section class="chispa-programs">
+      <h2 class="section-title">Últimos programas</h2>
+
+      <div class="chispa-programs__grid">
+        <!-- Card 1 -->
+        <div class="ra-video-card">
+          <a class="ra-video-card__thumb" href="#" aria-label="La Fragua #144">
+            <img
+              src="https://img.youtube.com/vi/placeholder/hqdefault.jpg"
+              onerror="
+                this.style.display = 'none';
+                this.parentElement.style.background = 'var(--color-navy)';
+              "
+              alt="La Fragua #144 thumbnail"
+            />
+            <!-- Placeholder title overlay -->
+            <div
+              style="
+                position: absolute;
+                inset: 0;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                padding: 1rem;
+                background: linear-gradient(
+                  135deg,
+                  rgba(22, 35, 74, 0.85) 0%,
+                  rgba(180, 100, 40, 0.7) 100%
+                );
+              "
+            >
+              <div>
+                <div
+                  style="
+                    font-family: var(--font-heading);
+                    font-weight: 900;
+                    font-size: 1.5rem;
+                    color: #e63946;
+                    letter-spacing: 0.02em;
+                    line-height: 1;
+                  "
+                >
+                  LA<br /><span style="font-size: 2.2rem; color: white"
+                    >FRAGUA</span
+                  >
+                </div>
+                <div
+                  style="
+                    font-family: var(--font-heading);
+                    font-weight: 900;
+                    font-size: 1.5rem;
+                    color: white;
+                  "
+                >
+                  #144
+                </div>
+              </div>
+            </div>
+            <span class="ra-video-card__duration">1:53:20</span>
+            <div class="ra-video-card__progress"></div>
+          </a>
+          <div class="ra-video-card__body">
+            <p class="ra-video-card__title">
+              La Fragua #144 - Miradas sobre la salud mental
+            </p>
+            <button class="ra-video-card__menu" aria-label="Más opciones">
+              ⋮
+            </button>
+          </div>
+          <p class="ra-video-card__meta">
+            34 visualizaciones · Emitido hace 4 días
+          </p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="ra-video-card">
+          <a class="ra-video-card__thumb" href="#" aria-label="La Fragua #143">
+            <div
+              style="
+                position: absolute;
+                inset: 0;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                padding: 1rem;
+                background: linear-gradient(
+                  135deg,
+                  rgba(180, 120, 30, 0.88) 0%,
+                  rgba(120, 80, 20, 0.75) 100%
+                );
+              "
+            >
+              <div>
+                <div
+                  style="
+                    font-family: var(--font-heading);
+                    font-weight: 900;
+                    font-size: 1.5rem;
+                    color: #e63946;
+                    letter-spacing: 0.02em;
+                    line-height: 1;
+                  "
+                >
+                  LA<br /><span style="font-size: 2.2rem; color: white"
+                    >FRAGUA</span
+                  >
+                </div>
+                <div
+                  style="
+                    font-family: var(--font-heading);
+                    font-weight: 900;
+                    font-size: 1.5rem;
+                    color: white;
+                  "
+                >
+                  #143
+                </div>
+              </div>
+            </div>
+            <span class="ra-video-card__duration">2:05:35</span>
+            <div class="ra-video-card__progress" style="width: 22%"></div>
+          </a>
+          <div class="ra-video-card__body">
+            <p class="ra-video-card__title">
+              La Fragua #143 - Rebelión en Bolivia
+            </p>
+            <button class="ra-video-card__menu" aria-label="Más opciones">
+              ⋮
+            </button>
+          </div>
+          <p class="ra-video-card__meta">
+            126 visualizaciones · Emitido hace 1 semana
+          </p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="ra-video-card">
+          <a class="ra-video-card__thumb" href="#" aria-label="La Fragua #142">
+            <div
+              style="
+                position: absolute;
+                inset: 0;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                padding: 1rem;
+                background: linear-gradient(
+                  135deg,
+                  rgba(22, 35, 74, 0.85) 0%,
+                  rgba(100, 40, 130, 0.7) 100%
+                );
+              "
+            >
+              <div>
+                <div
+                  style="
+                    font-family: var(--font-heading);
+                    font-weight: 900;
+                    font-size: 1.5rem;
+                    color: #e63946;
+                    letter-spacing: 0.02em;
+                    line-height: 1;
+                  "
+                >
+                  LA<br /><span style="font-size: 2.2rem; color: white"
+                    >FRAGUA</span
+                  >
+                </div>
+                <div
+                  style="
+                    font-family: var(--font-heading);
+                    font-weight: 900;
+                    font-size: 1.5rem;
+                    color: white;
+                  "
+                >
+                  #142
+                </div>
+              </div>
+            </div>
+            <span class="ra-video-card__duration">1:56:47</span>
+            <div class="ra-video-card__progress" style="width: 55%"></div>
+          </a>
+          <div class="ra-video-card__body">
+            <p class="ra-video-card__title">
+              La Fragua #142 - Construir entre todes: gestión…
+            </p>
+            <button class="ra-video-card__menu" aria-label="Más opciones">
+              ⋮
+            </button>
+          </div>
+          <p class="ra-video-card__meta">
+            155 visualizaciones · Emitido hace 2 semanas
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+       BANNER CTA — Participar
+  ══════════════════════════════════════════ -->
+    <div class="chispa-cta ra-donate-banner">
+      <p class="chispa-cta__text ra-donate-banner__text">
+        ¿Te interesa participar en la radio?
+      </p>
+      <a
+        href="https://wa.me/543510000000"
+        target="_blank"
+        rel="noopener"
+        class="btn btn--whatsapp ra-donate-banner__btn"
+      >
+        <svg width="18" height="18" fill="white" viewBox="0 0 24 24">
+          <path
+            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+          />
+        </svg>
+        Escribinos al WhatsApp!
+      </a>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════ -->
+    <footer class="container--6" id="contacto">
+      <div class="footer-grid">
+        <div class="footer-col footer-col--social">
+          <h3>Seguinos en redes</h3>
+          <div class="social-icons">
+            <a href="#" aria-label="Facebook"
+              ><svg viewBox="0 0 24 24">
+                <path
+                  d="M14 9h3V6h-3c-2.2 0-4 1.8-4 4v2H8v3h2v6h3v-6h3l1-3h-4v-2c0-.6.4-1 1-1z"
+                /></svg
+            ></a>
+            <a href="#" aria-label="Instagram"
+              ><svg viewBox="0 0 24 24">
+                <path
+                  d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4zm5 5.5A3.5 3.5 0 1 0 12 15.5 3.5 3.5 0 0 0 12 8.5zM17.2 6.3a.9.9 0 1 0 .9.9.9.9 0 0 0-.9-.9z"
+                /></svg
+            ></a>
+            <a href="#" aria-label="X (Twitter)"
+              ><svg viewBox="0 0 24 24"><path d="M4 4l16 16M20 4 4 20" /></svg
+            ></a>
+            <a href="#" aria-label="YouTube"
+              ><svg viewBox="0 0 24 24">
+                <path
+                  d="M21 7.5s-.2-1.6-.9-2.3c-.8-.9-1.7-.9-2.1-1C15 4 12 4 12 4h0s-3 0-6 .2c-.4 0-1.3.1-2.1 1C3.2 5.9 3 7.5 3 7.5S2.8 9.4 2.8 11.3v1.4C2.8 14.6 3 16.5 3 16.5s.2 1.6.9 2.3c.8.9 1.9.9 2.4 1 1.7.2 7.7.2 7.7.2s3 0 6-.2c.4 0 1.3-.1 2.1-1 .7-.7.9-2.3.9-2.3s.2-1.9.2-3.8v-1.4c0-1.9-.2-3.8-.2-3.8zM10 14.5v-5l4.5 2.5z"
+                /></svg
+            ></a>
+          </div>
+          <div class="footer-logo">
+            <img src="img/fundacion-ummep-h (1).png" alt="" />
+          </div>
+        </div>
+
+        <div class="footer-col footer-col--contact">
+          <h3>Contacto</h3>
+          <address>
+            Tomás Guido 757<br />
+            Córdoba Capital<br />
+            Argentina<br />
+            <a href="mailto:c.o.e.guevara@gmail.com">c.o.e.guevara@gmail.com</a>
+          </address>
+        </div>
+
+        <div class="footer-col footer-col--form">
+          <h3>Dejanos un mensaje</h3>
+          <form class="contact-form" id="contact-form">
+            <div class="form-row">
+              <label
+                >Nombre (*)
+                <input type="text" name="nombre" required />
+              </label>
+              <label
+                >Apellido (*)
+                <input type="text" name="apellido" required />
+              </label>
+            </div>
+            <div class="form-row">
+              <label
+                >E-Mail (*)
+                <input type="email" name="email" required />
+              </label>
+              <label
+                >Teléfono
+                <input type="tel" name="telefono" />
+              </label>
+            </div>
+            <div class="form-row">
+              <label
+                >Ciudad, Provincia y/o País (*)
+                <input type="text" name="ciudad" required />
+              </label>
+              <label
+                >Motivo de la consulta
+                <select name="motivo">
+                  <option value="">— Por favor, elige una opción —</option>
+                  <option>Consulta general</option>
+                  <option>Quiero ser voluntario/a</option>
+                  <option>Propuesta de cooperación</option>
+                  <option>Prensa</option>
+                </select>
+              </label>
+            </div>
+            <label class="form-row form-row--full"
+              >Consulta (*)
+              <textarea name="consulta" required></textarea>
+            </label>
+            <button type="submit" class="btn btn--red">Enviar</button>
+          </form>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

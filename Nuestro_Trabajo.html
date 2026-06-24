@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nuestro Trabajo — Fundación UMMEP</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      /* =========================================================
+         PÁGINA 2 — "Nuestro Trabajo"
+         Estilos específicos que extienden styles.css
+         ========================================================= */
+
+      /* ----------------------------------------------------------
+         Container 1 — Split: foto izquierda + texto derecha
+         ---------------------------------------------------------- */
+      .Pagina7-Container--1 {
+        display: grid;
+        grid-template-columns: 38% 1fr;
+        min-height: 100vh;
+        width: 100%;
+      }
+
+      .nt-photo {
+        position: relative;
+        overflow: hidden;
+        background: var(--color-navy-soft);
+      }
+
+      .nt-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .nt-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: clamp(2.5rem, 6vw, 5rem) clamp(2rem, 5vw, 4.5rem);
+        background: var(--color-white);
+        gap: 1.5rem;
+      }
+
+      .nt-logo {
+        width: clamp(80px, 10vw, 120px);
+        margin-bottom: 0.25rem;
+      }
+
+      .nt-eyebrow {
+        font-family: var(--font-heading);
+        font-weight: 700;
+        font-size: clamp(1.3rem, 1rem + 1.4vw, 2rem);
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--color-navy);
+      }
+
+      .nt-body {
+        font-family: var(--font-body);
+        font-size: clamp(0.92rem, 0.85rem + 0.3vw, 1.05rem);
+        color: var(--color-navy-soft);
+        line-height: 1.75;
+        max-width: 600px;
+      }
+
+      .nt-body strong {
+        color: var(--color-navy);
+        font-weight: 700;
+      }
+
+      /* ----------------------------------------------------------
+         Container 2 — Banner donación
+         ---------------------------------------------------------- */
+      .Pagina7-Container--2 {
+        background: var(--color-navy);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+        padding: clamp(2rem, 4vh, 3rem) clamp(2rem, 6vw, 5rem);
+        position: relative;
+        overflow: hidden;
+        min-height: 140px;
+      }
+
+      /* decorative squiggle right side */
+      .Pagina7-Container--2::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 220px;
+        background-image: var(--squiggle-bg);
+        background-size: 480px;
+        opacity: 0.18;
+        pointer-events: none;
+      }
+
+      .banner-text {
+        font-family: var(--font-heading);
+        font-weight: 700;
+        font-size: clamp(1.15rem, 0.9rem + 1.5vw, 1.75rem);
+        color: var(--color-white);
+        max-width: 640px;
+        line-height: 1.3;
+      }
+
+      .banner-btn {
+        flex-shrink: 0;
+        display: inline-block;
+        background: transparent;
+        border: 2.5px solid var(--color-white);
+        color: var(--color-white);
+        font-family: var(--font-heading);
+        font-weight: 700;
+        font-size: 0.82rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 0.65rem 2rem;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background 0.2s var(--ease), color 0.2s var(--ease);
+        z-index: 1;
+      }
+
+      .banner-btn:hover {
+        background: var(--color-white);
+        color: var(--color-navy);
+      }
+
+      /* ----------------------------------------------------------
+         Container 3 — Equipo de trabajo
+         ---------------------------------------------------------- */
+      .Pagina7-Container--3 {
+        background: var(--color-white);
+        padding: clamp(3rem, 7vh, 5.5rem) clamp(2rem, 6vw, 5rem);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: clamp(2.5rem, 5vw, 4rem);
+      }
+
+      .equipo-title {
+        font-family: var(--font-heading);
+        font-weight: 700;
+        font-size: clamp(1.3rem, 1rem + 1.4vw, 2rem);
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--color-navy);
+        text-align: center;
+      }
+
+      .equipo-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(2rem, 4vw, 3.5rem) clamp(3rem, 8vw, 7rem);
+        width: 100%;
+        max-width: 900px;
+      }
+
+      .equipo-grupo h3 {
+        font-family: var(--font-heading);
+        font-weight: 700;
+        font-size: 1rem;
+        color: var(--color-navy);
+        margin-bottom: 0.85rem;
+        padding-bottom: 0;
+      }
+
+      .equipo-grupo ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+
+      .equipo-grupo ul li {
+        font-family: var(--font-body);
+        font-size: clamp(0.88rem, 0.82rem + 0.25vw, 1rem);
+        color: var(--color-navy-soft);
+        line-height: 1.55;
+      }
+
+      .equipo-grupo--full {
+        grid-column: 1 / -1;
+      }
+
+      /* ----------------------------------------------------------
+         Container 4 — Footer (reuse from styles.css)
+         ---------------------------------------------------------- */
+      .Pagina7--4 {
+        min-height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: clamp(2.5rem, 5vw, 3.5rem);
+        padding: clamp(2.5rem, 5vh, 4rem) clamp(2rem, 6vw, 5rem);
+        background: var(--color-white);
+        border-top: 1px solid var(--color-line);
+      }
+
+      /* ----------------------------------------------------------
+         Responsive
+         ---------------------------------------------------------- */
+      @media (max-width: 768px) {
+        .Pagina7-Container--1 {
+          grid-template-columns: 1fr;
+        }
+        .nt-photo {
+          height: 52vw;
+          min-height: 240px;
+        }
+        .Pagina7-Container--2 {
+          flex-direction: column;
+          text-align: center;
+        }
+        .equipo-grid {
+          grid-template-columns: 1fr;
+        }
+        .equipo-grupo--full {
+          grid-column: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+<nav class="site-nav" aria-label="Navegación principal">
+  <a class="site-nav__logo" href="Principal.html" aria-label="Inicio — Fundación UMMEP">
+    <img src="img/fundacion-ummep-h (1).png" alt="Fundación UMMEP" />
+  </a>
+  <ul class="site-nav__links" id="nav-links">
+    <li><a href="Principal.html" data-nav="principal">Inicio</a></li>
+    <li><a href="Nuestro_Trabajo.html" data-nav="nuestro-trabajo">Nuestro trabajo</a></li>
+    <li><a href="Novedades.html" data-nav="novedades">Novedades</a></li>
+    <li class="site-nav__sep" role="separator" aria-hidden="true"></li>
+    <li><a href="Programas_internacionales.html" data-nav="programas">Programas internacionalistas</a></li>
+    <li><a href="Proyectos_de_coooperacion_al_desarrollo.html" data-nav="proyectos">Proyectos de cooperación</a></li>
+    <li class="site-nav__sep" role="separator" aria-hidden="true"></li>
+    <li><a href="Recursos_audiovisuales.html" data-nav="recursos">Recursos audiovisuales</a></li>
+    <li><a href="Radio_la_chispa.html" data-nav="radio">Radio La Chispa</a></li>
+    <li class="site-nav__sep" role="separator" aria-hidden="true"></li>
+    <li><a href="Contacto.html" data-nav="contacto">Contacto</a></li>
+  </ul>
+  <button class="site-nav__burger" id="nav-burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-links">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+
+    <!-- ======================================================
+         CONTAINER 1 — Foto + Texto "Nuestro Trabajo"
+         ====================================================== -->
+    <div class="Pagina7-Container--1">
+
+      <!-- Columna izquierda: fotografía -->
+      <div class="nt-photo">
+        <!--
+          Reemplazá el src por la ruta real de tu foto.
+          Ejemplo: src="img/centro-oftalmologico.jpg"
+        -->
+        <img
+          src="/img/2/nuestro-trabajo.jpg"
+          alt="Centro Oftalmológico Dr. Ernesto "Che" Guevara — fachada"
+        />
+      </div>
+
+      <!-- Columna derecha: contenido -->
+      <div class="nt-content">
+
+        <!-- Logo UMMEP arriba del título -->
+        <img
+          class="nt-logo"
+          src="img/fundacion-ummep-h (1).png"
+          alt="Fundación UMMEP"
+        />
+
+        <h2 class="nt-eyebrow">Nuestro Trabajo</h2>
+
+        <p class="nt-body">
+          Trabajamos desde el año 2003 en la implementación de
+          <strong>programas solidarios nacidos en Cuba</strong> cuyos ejes son la
+          <strong>salud</strong> y la <strong>educación</strong>. En nuestros inicios
+          coordinamos su implementación con organizaciones sociales y/o políticas,
+          como así también con sindicatos con inserción social en los territorios
+          donde habitan los sectores más vulnerados. A partir del año 2005,
+          comenzamos a realizar trabajos cooparticipativas con gobiernos municipales y
+          provinciales de nuestro país. Actualmente, venimos profundizando nuestra
+          labor transformadora con el apoyo de cientos de voluntarios que aportan y
+          fortalecen los fundamentos de nuestra organización. En esta tarea contamos
+          con la iniciativa y el apoyo del gobierno cubano por medio de dos programas
+          de solidaridad internacional: <strong>Operación Milagro</strong> y
+          <strong>Yo Sí Puedo</strong>
+        </p>
+
+      </div>
+    </div>
+    <!-- Fin container--1 -->
+
+
+    <!-- ======================================================
+         CONTAINER 2 — Banner donación
+         ====================================================== -->
+    <div class="Pagina7-Container--2">
+      <p class="banner-text">
+        Te parece importante el trabajo que hacemos?
+      </p>
+      <a href="#donaciones" class="banner-btn">Doná acá</a>
+    </div>
+    <!-- Fin container--2 -->
+
+
+    <!-- ======================================================
+         CONTAINER 3 — Equipo de trabajo
+         ====================================================== -->
+    <div class="Pagina7-Container--3">
+
+      <h2 class="equipo-title">Equipo de Trabajo</h2>
+
+      <div class="equipo-grid">
+
+        <!-- Consejo de administración -->
+        <div class="equipo-grupo">
+          <h3>Consejo de administración</h3>
+          <ul>
+            <li>Claudia Camba – Presidenta</li>
+            <li>Ana María Álvarez – Secretaria</li>
+            <li>María Agustina Mancilla – Tesorera</li>
+          </ul>
+        </div>
+
+        <!-- Dirección del Centro Oftalmológico -->
+        <div class="equipo-grupo">
+          <h3>Dirección del Centro Oftalmológico</h3>
+          <ul>
+            <li>Dr. Eduardo Maturano</li>
+          </ul>
+        </div>
+
+        <!-- Coordinación cubana — ocupa el ancho completo -->
+        <div class="equipo-grupo equipo-grupo--full">
+          <h3>Coordinación cubana</h3>
+          <ul>
+            <li>
+              Lic. Isabel Cristina Fernandez – Coordinadora y responsable del
+              Programa "Yo Sí Puedo" por parte del Ministerio de Educación de la
+              República de Cuba
+            </li>
+            <li>
+              Dra. Daylin Cárdenas Chacón – Coordinadora y responsable del
+              Programa "Operación Milagro", por parte del Ministerio de Salud de la
+              República de Cuba.
+            </li>
+            <li>
+              Dra. Lídice Vázquez Castañeda – Coordinadora del área de medicina
+              familiar en el Centro Oftalmológico, coordinadora del equipo de salud
+              en los proyectos de Cooperación al desarrollo.
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+    <!-- Fin container--3 -->
+
+
+    <!-- ======================================================
+         CONTAINER 4 — Footer
+         ====================================================== -->
+    <footer class="container--6" id="contacto">
+      <div class="footer-grid">
+        <div class="footer-col footer-col--social">
+          <h3>Seguinos en redes</h3>
+          <div class="social-icons">
+            <a href="#" aria-label="Facebook"
+              ><svg viewBox="0 0 24 24">
+                <path
+                  d="M14 9h3V6h-3c-2.2 0-4 1.8-4 4v2H8v3h2v6h3v-6h3l1-3h-4v-2c0-.6.4-1 1-1z"
+                /></svg
+            ></a>
+            <a href="#" aria-label="Instagram"
+              ><svg viewBox="0 0 24 24">
+                <path
+                  d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4zm5 5.5A3.5 3.5 0 1 0 12 15.5 3.5 3.5 0 0 0 12 8.5zM17.2 6.3a.9.9 0 1 0 .9.9.9.9 0 0 0-.9-.9z"
+                /></svg
+            ></a>
+            <a href="#" aria-label="X (Twitter)"
+              ><svg viewBox="0 0 24 24"><path d="M4 4l16 16M20 4 4 20" /></svg
+            ></a>
+            <a href="#" aria-label="YouTube"
+              ><svg viewBox="0 0 24 24">
+                <path
+                  d="M21 7.5s-.2-1.6-.9-2.3c-.8-.9-1.7-.9-2.1-1C15 4 12 4 12 4h0s-3 0-6 .2c-.4 0-1.3.1-2.1 1C3.2 5.9 3 7.5 3 7.5S2.8 9.4 2.8 11.3v1.4C2.8 14.6 3 16.5 3 16.5s.2 1.6.9 2.3c.8.9 1.9.9 2.4 1 1.7.2 7.7.2 7.7.2s3 0 6-.2c.4 0 1.3-.1 2.1-1 .7-.7.9-2.3.9-2.3s.2-1.9.2-3.8v-1.4c0-1.9-.2-3.8-.2-3.8zM10 14.5v-5l4.5 2.5z"
+                /></svg
+            ></a>
+          </div>
+          <div class="footer-logo">
+            <img src="img/fundacion-ummep-h (1).png" alt="" />
+          </div>
+        </div>
+
+        <div class="footer-col footer-col--contact">
+          <h3>Contacto</h3>
+          <address>
+            Tomás Guido 757<br />
+            Córdoba Capital<br />
+            Argentina<br />
+            <a href="mailto:c.o.e.guevara@gmail.com">c.o.e.guevara@gmail.com</a>
+          </address>
+        </div>
+
+        <div class="footer-col footer-col--form">
+          <h3>Dejanos un mensaje</h3>
+          <form class="contact-form" id="contact-form">
+            <div class="form-row">
+              <label
+                >Nombre (*)
+                <input type="text" name="nombre" required />
+              </label>
+              <label
+                >Apellido (*)
+                <input type="text" name="apellido" required />
+              </label>
+            </div>
+            <div class="form-row">
+              <label
+                >E-Mail (*)
+                <input type="email" name="email" required />
+              </label>
+              <label
+                >Teléfono
+                <input type="tel" name="telefono" />
+              </label>
+            </div>
+            <div class="form-row">
+              <label
+                >Ciudad, Provincia y/o País (*)
+                <input type="text" name="ciudad" required />
+              </label>
+              <label
+                >Motivo de la consulta
+                <select name="motivo">
+                  <option value="">— Por favor, elige una opción —</option>
+                  <option>Consulta general</option>
+                  <option>Quiero ser voluntario/a</option>
+                  <option>Propuesta de cooperación</option>
+                  <option>Prensa</option>
+                </select>
+              </label>
+            </div>
+            <label class="form-row form-row--full"
+              >Consulta (*)
+              <textarea name="consulta" required></textarea>
+            </label>
+            <button type="submit" class="btn btn--red">Enviar</button>
+          </form>
+        </div>
+      </div>
+    </footer>
+
+
+    <script src="script.js"></script>
+  </body>
+</html>

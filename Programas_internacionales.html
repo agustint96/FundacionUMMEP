@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Programas Internacionalistas — Fundación UMMEP</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      /* =========================================================
+         PÁGINA 4 — Programas Internacionalistas
+         ========================================================= */
+
+      /* ----------------------------------------------------------
+         Header — Título rojo (igual a Novedades)
+         ---------------------------------------------------------- */
+      .pi-header {
+        background: var(--color-red);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: clamp(1.5rem, 4vh, 2.5rem) var(--section-pad-x);
+        min-height: 100px;
+      }
+
+      .pi-header h1 {
+        font-family: var(--font-heading);
+        font-weight: 800;
+        font-size: clamp(1.4rem, 1rem + 2vw, 2.4rem);
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--color-white);
+        text-align: center;
+        margin: 0;
+      }
+
+      /* ----------------------------------------------------------
+         Shared programa section base
+         ---------------------------------------------------------- */
+      .programa-section {
+        padding: clamp(3rem, 7vh, 5rem) clamp(2rem, 6vw, 5rem);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: clamp(2rem, 4vw, 3rem);
+      }
+
+      .programa-logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .programa-logo img {
+        height: clamp(60px, 8vw, 100px);
+        width: auto;
+        object-fit: contain;
+      }
+
+      /* Operación Milagro logo — inline SVG fallback text */
+      .logo-operacion-milagro {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+      }
+
+      .logo-operacion-milagro .logo-icon {
+        width: clamp(50px, 6vw, 72px);
+      }
+
+      .logo-operacion-milagro .logo-text {
+        display: flex;
+        flex-direction: column;
+        line-height: 1;
+      }
+
+      .logo-operacion-milagro .logo-text .word-operacion {
+        font-family: var(--font-heading);
+        font-weight: 600;
+        font-size: clamp(0.9rem, 0.7rem + 1vw, 1.3rem);
+        color: var(--color-navy);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .logo-operacion-milagro .logo-text .word-milagro {
+        font-family: var(--font-heading);
+        font-weight: 900;
+        font-size: clamp(1.4rem, 1rem + 1.8vw, 2.1rem);
+        color: var(--color-red);
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      /* Yo Sí Puedo logo text */
+      .logo-yosipuedo {
+        display: flex;
+        align-items: flex-end;
+        gap: 0.4rem;
+      }
+
+      .logo-yosipuedo .yo {
+        font-family: var(--font-heading);
+        font-weight: 900;
+        font-size: clamp(2rem, 1.2rem + 3vw, 3.5rem);
+        color: var(--color-red);
+        line-height: 1;
+        text-transform: uppercase;
+      }
+
+      .logo-yosipuedo .sipuedo {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.1;
+        padding-bottom: 0.25rem;
+      }
+
+      .logo-yosipuedo .sipuedo span {
+        font-family: var(--font-heading);
+        font-weight: 900;
+        font-size: clamp(1rem, 0.6rem + 1.5vw, 1.6rem);
+        color: var(--color-red);
+        text-transform: uppercase;
+      }
+
+      .logo-yosipuedo .lapiz {
+        font-size: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+        line-height: 1;
+        padding-bottom: 0.1rem;
+      }
+
+      /* Split layout: texto + foto */
+      .programa-split {
+        display: grid;
+        gap: clamp(2rem, 4vw, 3.5rem);
+        width: 100%;
+        max-width: var(--max-content);
+        align-items: start;
+      }
+
+      .programa-split--text-left {
+        grid-template-columns: 1fr 42%;
+      }
+
+      .programa-split--text-right {
+        grid-template-columns: 42% 1fr;
+      }
+
+      .programa-split__text {
+        font-family: var(--font-body);
+        font-size: clamp(0.9rem, 0.84rem + 0.25vw, 1rem);
+        color: var(--color-navy-soft);
+        line-height: 1.8;
+        text-align: justify;
+      }
+
+      .programa-split__text p + p {
+        margin-top: 0.85rem;
+      }
+
+      .programa-split__foto {
+        overflow: hidden;
+      }
+
+      .programa-split__foto img {
+        width: 500px;
+        height: 500px;
+        object-fit: cover;
+        display: block;
+      }
+
+      /* ----------------------------------------------------------
+         Container 1 — Operación Milagro (fondo blanco)
+         ---------------------------------------------------------- */
+      .ProgramasInternacionales-container--1 {
+        background: var(--color-white);
+      }
+
+      /* ----------------------------------------------------------
+         Container 2 — Yo Sí Puedo (fondo crema)
+         ---------------------------------------------------------- */
+      .ProgramasInternacionales-container--2 {
+        background: var(--color-cream);
+        background-image: var(--squiggle-bg);
+        background-size: 480px;
+      }
+
+      /* ----------------------------------------------------------
+         Container 3 — Banner donación
+         ---------------------------------------------------------- */
+      .PrgogramasInternacionales-container--3 {
+        background: var(--color-navy);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+        padding: clamp(2rem, 4vh, 3rem) clamp(2rem, 6vw, 5rem);
+        position: relative;
+        overflow: hidden;
+        min-height: 140px;
+      }
+
+      .PrgogramasInternacionales-container--3::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 220px;
+        background-image: var(--squiggle-bg);
+        background-size: 480px;
+        opacity: 0.18;
+        pointer-events: none;
+      }
+
+      .banner-text {
+        font-family: var(--font-heading);
+        font-weight: 700;
+        font-size: clamp(1.15rem, 0.9rem + 1.5vw, 1.75rem);
+        color: var(--color-white);
+        max-width: 640px;
+        line-height: 1.3;
+        margin: 0;
+      }
+
+      .banner-btn {
+        flex-shrink: 0;
+        display: inline-block;
+        background: transparent;
+        border: 2.5px solid var(--color-white);
+        color: var(--color-white);
+        font-family: var(--font-heading);
+        font-weight: 700;
+        font-size: 0.82rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 0.65rem 2rem;
+        border-radius: 4px;
+        cursor: pointer;
+        z-index: 1;
+        transition:
+          background 0.2s var(--ease),
+          color 0.2s var(--ease);
+      }
+
+      .banner-btn:hover {
+        background: var(--color-white);
+        color: var(--color-navy);
+      }
+
+      /* ----------------------------------------------------------
+         Container 4 — Footer
+         ---------------------------------------------------------- */
+      .ProgramasInternacionales-container--4 {
+        display: flex;
+        flex-direction: column;
+        gap: clamp(2.5rem, 5vw, 3.5rem);
+        padding: clamp(2.5rem, 5vh, 4rem) clamp(2rem, 6vw, 5rem);
+        background: var(--color-white);
+        border-top: 1px solid var(--color-line);
+      }
+
+      /* ----------------------------------------------------------
+         Responsive
+         ---------------------------------------------------------- */
+      @media (max-width: 768px) {
+        .programa-split--text-left,
+        .programa-split--text-right {
+          grid-template-columns: 1fr;
+        }
+
+        /* en mobile la foto va arriba del texto */
+        .programa-split--text-right .programa-split__foto {
+          order: -1;
+        }
+
+        .PrgogramasInternacionales-container--3 {
+          flex-direction: column;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="site-nav" aria-label="Navegación principal">
+      <a
+        class="site-nav__logo"
+        href="Principal.html"
+        aria-label="Inicio — Fundación UMMEP"
+      >
+        <img src="img/fundacion-ummep-h (1).png" alt="Fundación UMMEP" />
+      </a>
+      <ul class="site-nav__links" id="nav-links">
+        <li><a href="Principal.html" data-nav="principal">Inicio</a></li>
+        <li>
+          <a href="Nuestro_Trabajo.html" data-nav="nuestro-trabajo"
+            >Nuestro trabajo</a
+          >
+        </li>
+        <li><a href="Novedades.html" data-nav="novedades">Novedades</a></li>
+        <li class="site-nav__sep" role="separator" aria-hidden="true"></li>
+        <li>
+          <a href="Programas_internacionales.html" data-nav="programas"
+            >Programas internacionalistas</a
+          >
+        </li>
+        <li>
+          <a
+            href="Proyectos_de_coooperacion_al_desarrollo.html"
+            data-nav="proyectos"
+            >Proyectos de cooperación</a
+          >
+        </li>
+        <li class="site-nav__sep" role="separator" aria-hidden="true"></li>
+        <li>
+          <a href="Recursos_audiovisuales.html" data-nav="recursos"
+            >Recursos audiovisuales</a
+          >
+        </li>
+        <li>
+          <a href="Radio_la_chispa.html" data-nav="radio">Radio La Chispa</a>
+        </li>
+        <li class="site-nav__sep" role="separator" aria-hidden="true"></li>
+        <li><a href="Contacto.html" data-nav="contacto">Contacto</a></li>
+      </ul>
+      <button
+        class="site-nav__burger"
+        id="nav-burger"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="nav-links"
+      >
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+
+    <!-- ======================================================
+         HEADER — Título rojo
+         ====================================================== -->
+    <div class="pi-header">
+      <h1>Programas Internacionalistas</h1>
+    </div>
+
+    <!-- ======================================================
+         CONTAINER 1 — Operación Milagro
+         ====================================================== -->
+    <div class="ProgramasInternacionales-container--1 programa-section">
+      <!-- Logo centrado -->
+      <div class="programa-logo">
+        <!--
+          Si tenés el logo real, reemplazá con:
+          <img src="img/logo-operacion-milagro.png" alt="Operación Milagro" />
+        -->
+        <div class="logo-operacion-milagro">
+          <!-- Ojo SVG simple como placeholder del ícono -->
+          <img src="imagenes/FOTOS FINALES/operacion-milagro (1).png" alt="" />
+          <div class="logo-text"></div>
+        </div>
+      </div>
+
+      <!-- Split: texto izquierda, foto derecha -->
+      <div class="programa-split programa-split--text-left">
+        <div class="programa-split__text">
+          <p>
+            La Organización Mundial de la Salud (OMS) reconoce la existencia de
+            161 millones de personas con discapacidades visuales en todo el
+            mundo. Cincuenta millones de ellos son ciegos y esta cifra aumenta
+            gravemente en dos millones y medio de personas ciegas más por año.
+          </p>
+          <p>
+            Ante estas estadísticas alarmantes, Cuba y Venezuela lanzaron en
+            Julio del 2004 un programa de salud visual destinado a erradicar de
+            América Latina la ceguera prevenible ocasionada por cataratas y
+            pterigium. El programa que fue bautizado como "Operación Milagro",
+            se ha asentado en más de 15 países América Latina y el Caribe, a
+            través de la instalación de decenas de centros oftalmológicos, en
+            donde se han operado, a más de dos millones de personas.
+          </p>
+          <p>
+            Después de 12 años en el país, sumamos mas de 50.000 personas
+            operadas de forma satisfactoria.
+          </p>
+        </div>
+
+        <div class="programa-split__foto">
+          <!--
+            Reemplazá el src por la foto real.
+            Ejemplo: src="img/operacion-milagro-paciente.jpg"
+          -->
+          <img
+            src="imagenes/FOTOS FINALES/Pagina 4 - Programas internacionalistas/WhatsApp Image 2026-03-09 at 10.05.25.jpg"
+            alt="Paciente post operación oftalmológica sosteniendo cartel #SolidaridadNoEsTerrorismo"
+          />
+        </div>
+      </div>
+    </div>
+    <!-- fin container 1 -->
+
+    <!-- ======================================================
+         CONTAINER 2 — Yo Sí Puedo
+         ====================================================== -->
+    <div class="ProgramasInternacionales-container--2 programa-section">
+      <!-- Logo centrado -->
+      <div class="programa-logo">
+        <!--
+          Si tenés el logo real, reemplazá con:
+          <img src="img/logo-yo-si-puedo.png" alt="Yo Sí Puedo" />
+        -->
+        <div class="logo-yosipuedo">
+          <img
+            src="/imagenes/FOTOS FINALES/Copia de Yo_si_puedo-removebg-preview.png"
+            alt=""
+          />
+        </div>
+      </div>
+
+      <!-- Split: foto izquierda, texto derecha -->
+      <div class="programa-split programa-split--text-right">
+        <div class="programa-split__foto">
+          <!--
+            Reemplazá el src por la foto real.
+            Ejemplo: src="img/yo-si-puedo-clase.jpg"
+          -->
+          <img
+            src="imagenes/FOTOS FINALES/Pagina 4 - Programas internacionalistas/780fd985-436e-4acc-9399-095826d8f556.jpg"
+            alt="Participantes del programa Yo Sí Puedo en clase de alfabetización"
+          />
+        </div>
+
+        <div class="programa-split__text">
+          <p>
+            Es un programa de alfabetización que utiliza el medio audiovisual
+            como herramienta de implementación. En 65 teleclases y con el apoyo
+            de un alfabetizador/a voluntario/a cualquier persona iletrada, mayor
+            de quince años, entra al mundo de la lecto-escritura. Además, las
+            clases tienen contenidos que contribuyen al conocimiento general de
+            los participantes. El tiempo de duración del proceso puede ser de
+            tres meses y medio dependiendo de la frecuencia semanal de la clase.
+          </p>
+          <p>
+            Desde su nacimiento en el año 2003 hasta la fecha, se han
+            alfabetizado más de 8.000.000 de personas y se han declarado a 4
+            países de nuestra región libres de analfabetismo: Venezuela,
+            Bolivia, Nicaragua y Ecuador. En Argentina, la implementación del
+            programa se logró a través de nuestra fundación con el apoyo de
+            distintas organizaciones sociales, sindicatos, Municipios y
+            Ministerios de Educación provinciales, junto a las acciones
+            solidarias de centenares de voluntarios.
+          </p>
+          <p>
+            Se han alfabetizado a más de 33.000 argentinos y argentinas, de
+            ellos y ellas el 50% ha continuado sus estudios de nivel primario en
+            escuelas del sistema educativo formal.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- fin container 2 -->
+
+    <!-- ======================================================
+         CONTAINER 3 — Banner donación
+         ====================================================== -->
+    <div class="PrgogramasInternacionales-container--3">
+      <p class="banner-text">Te parece importante el trabajo que hacemos?</p>
+      <a href="#donaciones" class="banner-btn">Doná acá</a>
+    </div>
+    <!-- fin container colaboracion -->
+
+    <!-- ======================================================
+         CONTAINER 4 — Footer
+         ====================================================== -->
+    <footer class="container--6" id="contacto">
+      <div class="footer-grid">
+        <div class="footer-col footer-col--social">
+          <h3>Seguinos en redes</h3>
+          <div class="social-icons">
+            <a href="#" aria-label="Facebook"
+              ><svg viewBox="0 0 24 24">
+                <path
+                  d="M14 9h3V6h-3c-2.2 0-4 1.8-4 4v2H8v3h2v6h3v-6h3l1-3h-4v-2c0-.6.4-1 1-1z"
+                /></svg
+            ></a>
+            <a href="#" aria-label="Instagram"
+              ><svg viewBox="0 0 24 24">
+                <path
+                  d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4zm5 5.5A3.5 3.5 0 1 0 12 15.5 3.5 3.5 0 0 0 12 8.5zM17.2 6.3a.9.9 0 1 0 .9.9.9.9 0 0 0-.9-.9z"
+                /></svg
+            ></a>
+            <a href="#" aria-label="X (Twitter)"
+              ><svg viewBox="0 0 24 24"><path d="M4 4l16 16M20 4 4 20" /></svg
+            ></a>
+            <a href="#" aria-label="YouTube"
+              ><svg viewBox="0 0 24 24">
+                <path
+                  d="M21 7.5s-.2-1.6-.9-2.3c-.8-.9-1.7-.9-2.1-1C15 4 12 4 12 4h0s-3 0-6 .2c-.4 0-1.3.1-2.1 1C3.2 5.9 3 7.5 3 7.5S2.8 9.4 2.8 11.3v1.4C2.8 14.6 3 16.5 3 16.5s.2 1.6.9 2.3c.8.9 1.9.9 2.4 1 1.7.2 7.7.2 7.7.2s3 0 6-.2c.4 0 1.3-.1 2.1-1 .7-.7.9-2.3.9-2.3s.2-1.9.2-3.8v-1.4c0-1.9-.2-3.8-.2-3.8zM10 14.5v-5l4.5 2.5z"
+                /></svg
+            ></a>
+          </div>
+          <div class="footer-logo">
+            <img src="img/fundacion-ummep-h (1).png" alt="" />
+          </div>
+        </div>
+
+        <div class="footer-col footer-col--contact">
+          <h3>Contacto</h3>
+          <address>
+            Tomás Guido 757<br />
+            Córdoba Capital<br />
+            Argentina<br />
+            <a href="mailto:c.o.e.guevara@gmail.com">c.o.e.guevara@gmail.com</a>
+          </address>
+        </div>
+
+        <div class="footer-col footer-col--form">
+          <h3>Dejanos un mensaje</h3>
+          <form class="contact-form" id="contact-form">
+            <div class="form-row">
+              <label
+                >Nombre (*)
+                <input type="text" name="nombre" required />
+              </label>
+              <label
+                >Apellido (*)
+                <input type="text" name="apellido" required />
+              </label>
+            </div>
+            <div class="form-row">
+              <label
+                >E-Mail (*)
+                <input type="email" name="email" required />
+              </label>
+              <label
+                >Teléfono
+                <input type="tel" name="telefono" />
+              </label>
+            </div>
+            <div class="form-row">
+              <label
+                >Ciudad, Provincia y/o País (*)
+                <input type="text" name="ciudad" required />
+              </label>
+              <label
+                >Motivo de la consulta
+                <select name="motivo">
+                  <option value="">— Por favor, elige una opción —</option>
+                  <option>Consulta general</option>
+                  <option>Quiero ser voluntario/a</option>
+                  <option>Propuesta de cooperación</option>
+                  <option>Prensa</option>
+                </select>
+              </label>
+            </div>
+            <label class="form-row form-row--full"
+              >Consulta (*)
+              <textarea name="consulta" required></textarea>
+            </label>
+            <button type="submit" class="btn btn--red">Enviar</button>
+          </form>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
