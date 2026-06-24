@@ -139,12 +139,14 @@
         width: auto;
         max-width: 160px;
         object-fit: contain;
-        filter: grayscale(0%);
+        filter: opacity(50%);
+        filter: grayscale(70%);
         transition: filter 0.2s var(--ease);
       }
 
       .institucion-item img:hover {
-        filter: grayscale(20%);
+        filter: grayscale(0%);
+        opacity: 100%;
       }
 
       /* ----------------------------------------------------------
