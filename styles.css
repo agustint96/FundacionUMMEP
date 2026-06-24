@@ -233,6 +233,13 @@ textarea {
   pointer-events: none;
 }
 
+/* ola más lejana: navy semitransparente, la más alta y más atrás */
+.hero-wave--far {
+  z-index: 1;
+  height: clamp(240px, 70vh, 820px);
+  opacity: 0.65;
+}
+
 /* ola trasera: más alta, detrás */
 .hero-wave--back {
   z-index: 2;
