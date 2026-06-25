@@ -101,10 +101,14 @@ textarea {
 .container--2,
 .container--3,
 .container--4,
-.container--5,
-.container--6 {
+.container--5 {
   width: auto;
   min-height: 100vh;
+  position: relative;
+}
+
+.container--6 {
+  width: auto;
   position: relative;
 }
 
@@ -441,8 +445,15 @@ textarea {
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
-  border: 8px solid var(--color-white);
+  opacity: 50%;
   box-shadow: 0 14px 30px rgba(22, 35, 74, 0.12);
+  filter: grayscale(100%);
+  transition: 0.3s ease;
+}
+
+.news-card img:hover {
+  filter: grayscale(0);
+  opacity: 100%;
 }
 
 .news-card__quote {
@@ -456,20 +467,19 @@ textarea {
    8. CONTAINER 6 — Footer
    ========================================================= */
 .container--6 {
-  min-height: 100vh;
+  min-height: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: clamp(2.5rem, 5vw, 3.5rem);
-  padding: var(--section-pad-y) var(--section-pad-x)
-    calc(var(--section-pad-y) * 0.6);
+  gap: clamp(0.75rem, 1.5vw, 1.25rem);
+  padding: clamp(1rem, 2vw, 1.5rem) var(--section-pad-x);
   background: var(--color-white);
 }
 
 .footer-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1.5fr;
-  gap: clamp(2rem, 5vw, 4rem);
+  gap: clamp(1rem, 2.5vw, 2rem);
   width: 100%;
   max-width: var(--max-content);
   margin-inline: auto;
@@ -480,7 +490,7 @@ textarea {
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  margin-bottom: 1.1rem;
+  margin-bottom: 0.5rem;
 }
 
 .social-icons {
@@ -526,7 +536,7 @@ textarea {
 .contact-form {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.5rem;
 }
 
 .form-row {
@@ -581,7 +591,7 @@ textarea {
   width: 100%;
   max-width: var(--max-content);
   margin-inline: auto;
-  padding-top: 1.5rem;
+  padding-top: 0.5rem;
 }
 
 .footer-logo img {
@@ -933,68 +943,411 @@ textarea {
 }
 
 /* =========================================================
-   10. Responsive
+   10. Responsive — sistema de breakpoints
+   
+   Breakpoints:
+     1200px  → desktop grande → tablet landscape
+      900px  → tablet portrait
+      640px  → mobile grande
+      400px  → mobile chico
    ========================================================= */
-@media (max-width: 900px) {
-  .hero-slideshow {
-    flex-wrap: nowrap;
+
+/* ── 1200px: desktop grande → tablet landscape ── */
+@media (max-width: 1200px) {
+  /* Grilla de noticias: 3 → 2 columnas */
+  .news-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
+  /* Grilla de videos: 3 → 2 columnas */
+  .ra-video-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Podcasts: 3 → 2 columnas */
+  .ra-podcast-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Footer: 3 → 2 columnas (social+contacto / formulario) */
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .footer-col--form {
+    grid-column: 1 / -1;
+  }
+
+  /* Programas: imagen más pequeña */
+  .programa-split__foto img {
+    width: 100%;
+    height: auto;
+    max-height: 420px;
+  }
+
+  /* Proyectos: grilla lado a lado se ajusta */
+  .proyecto-split {
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+}
+
+/* ── 900px: tablet portrait ── */
+@media (max-width: 900px) {
+  /* Stats: quitar separadores verticales */
+  .stat + .stat::before {
+    display: none;
+  }
+
+  /* Container 3 (stats bar): wrap en filas */
+  .container--3 {
+    gap: clamp(1.5rem, 4vw, 3rem);
+    padding: 2rem var(--section-pad-x);
+  }
+
+  /* Footer: todo en una columna */
   .footer-grid {
     grid-template-columns: 1fr;
   }
+  .footer-col--form {
+    grid-column: auto;
+  }
+
+  /* Formulario de contacto: inputs en 1 columna */
   .form-row {
     grid-template-columns: 1fr;
   }
 
+  /* Noticias: 1 columna */
   .news-grid {
     grid-template-columns: 1fr;
+    max-width: 560px;
   }
 
-  .ra-video-grid,
+  /* Videos: 1 columna */
+  .ra-video-grid {
+    grid-template-columns: 1fr;
+    max-width: 580px;
+  }
+
+  /* Podcasts: 1 columna */
   .ra-podcast-grid {
     grid-template-columns: 1fr;
+    max-width: 580px;
   }
 
-  .stat + .stat::before {
+  /* Programas internacionales: split → columna única */
+  .programa-split--text-left,
+  .programa-split--text-right {
+    grid-template-columns: 1fr;
+  }
+  .programa-split--text-right .programa-split__foto {
+    order: -1;
+  }
+  .programa-split__foto img {
+    width: 100%;
+    height: auto;
+    max-height: 380px;
+    object-fit: cover;
+  }
+
+  /* Proyectos de cooperación: split → columna única */
+  .proyecto-split {
+    grid-template-columns: 1fr !important;
+  }
+  .proyecto-split .proyecto-foto {
+    max-height: 320px;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  /* Nuestro Trabajo — Container 1: grid → columna única */
+  .Pagina7-Container--1 {
+    grid-template-columns: 1fr !important;
+  }
+  .nt-photo {
+    min-height: 320px;
+    max-height: 420px;
+  }
+  .nt-photo img {
+    max-height: 420px;
+  }
+
+  /* Equipo grid: 2 → 1 columna */
+  .equipo-grid {
+    grid-template-columns: 1fr !important;
+    max-width: 520px;
+  }
+
+  /* Radio La Chispa: sidebar → columna única */
+  .chispa-about__inner {
+    grid-template-columns: 1fr !important;
+    text-align: center;
+  }
+  .chispa-about__sidebar {
+    align-items: center;
+  }
+
+  /* Chispa programs grid */
+  .chispa-programs__grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Banner donar */
+  .ra-donate-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  /* Pagina7 banner */
+  .Pagina7-Container--2 {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 1rem !important;
+    padding-right: var(--section-pad-x) !important;
+  }
+  .Pagina7-Container--2::after {
     display: none;
+  }
+
+  /* Novedades: grid 4 → 2 columnas */
+  .novedades-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Instituciones: logos más pequeños */
+  .instituciones-logos img,
+  .institucion-item img {
+    max-width: 100px;
   }
 }
 
+/* ── 640px: mobile grande ── */
 @media (max-width: 640px) {
-  /* en mobile la fase 1 muestra solo 2 columnas */
-  .hero-phase:not(.hero-phase--solo) .hero-col:nth-child(3),
+  /* Hero: altura reducida en mobile */
+  .container--1 {
+    height: 55svh;
+  }
+
+  /* Hero: mostrar las 3 columnas en fase 1 (no ocultarlas) */
+  .hero-phase:not(.hero-phase--solo) .hero-col:nth-child(3) {
+    display: flex;
+  }
+  /* Ocultar solo la 4ta columna de la fase 2 */
   .hero-phase:not(.hero-phase--solo) .hero-col:nth-child(4) {
     display: none;
   }
 
+  /* Reducir min-height de las secciones en mobile */
   .section,
   .container--3,
   .container--5,
   .container--6 {
     min-height: auto;
-    padding-top: 4rem;
-    padding-bottom: 4rem;
-  }
-  .container--1 {
-    height: 100vh;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
   }
 
+  /* Container 3 (stats bar): nowrap, compacto */
+  .container--3 {
+    flex-wrap: nowrap;
+    gap: clamp(0.75rem, 3vw, 2rem);
+    padding: 1.25rem var(--section-pad-x);
+    overflow-x: auto;
+  }
+
+  .stat {
+    padding: 0.5rem clamp(0.5rem, 2vw, 1.25rem);
+    flex-shrink: 0;
+  }
+
+  .stat__number {
+    font-size: clamp(1.5rem, 6vw, 2.4rem);
+  }
+
+  .stat__label {
+    font-size: clamp(0.62rem, 2.2vw, 0.82rem);
+  }
+
+  /* Novedades: imágenes más compactas */
+  .news-card img {
+    aspect-ratio: 16 / 10;
+    border-width: 5px;
+  }
+
+  .news-card__quote {
+    font-size: 0.85rem;
+  }
+
+  /* Cards de programa: más chicas */
+  .program-card {
+    width: clamp(140px, 40vw, 200px);
+  }
+
+  /* Noticias: 1 columna, centrado */
+  .news-grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin-inline: auto;
+  }
+
+  /* Novedades: 1 columna */
+  .novedades-grid {
+    grid-template-columns: 1fr !important;
+    max-width: 400px;
+    margin-inline: auto;
+  }
+
+  /* Videos: 1 columna */
+  .ra-video-grid {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+  }
+
+  /* Podcast cards: apilar verticalmente */
+  .ra-podcast-grid {
+    grid-template-columns: 1fr;
+  }
   .ra-podcast-card {
     flex-direction: column;
     padding: 1rem;
   }
-
   .ra-podcast-card__play {
     position: static;
     transform: none;
+    align-self: flex-start;
     margin-top: 0.5rem;
   }
 
+  /* Banner donar: full width */
   .ra-donate-banner {
     flex-direction: column;
     align-items: flex-start;
     text-align: left;
+    padding: 1.5rem var(--section-pad-x);
+  }
+  .banner-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Contacto: form en 1 columna (ya cubierto por .form-row pero asegurar) */
+  .contacto-form .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  /* Footer: compactar */
+  .footer-logo img {
+    width: 140px;
+  }
+
+  /* Chispa programs: 1 columna */
+  .chispa-programs__grid {
+    grid-template-columns: 1fr !important;
+    max-width: 400px;
+    margin-inline: auto;
+  }
+
+  /* Radio live player */
+  .chispa-live__player {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.75rem;
+  }
+
+  /* Pagina 7 banner: compactar botón */
+  .Pagina7-Container--2 .banner-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Instituciones: achicar logos en mobile */
+  .instituciones-logos {
+    gap: 1.25rem !important;
+  }
+  .institucion-item img {
+    max-width: 80px;
+  }
+
+  /* ProgramasInternacionales container 3 banner */
+  .PrgogramasInternacionales-container--3 {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 1rem !important;
+  }
+  .PrgogramasInternacionales-container--3 .banner-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* ProyectosCooperacion banner */
+  .ProyectosdeCoopalDesarrollo-container--5 {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 1rem !important;
+  }
+  .ProyectosdeCoopalDesarrollo-container--5 .banner-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ── 400px: mobile chico ── */
+@media (max-width: 400px) {
+  /* Reducir padding global */
+  :root {
+    --section-pad-x: 1rem;
+  }
+
+  /* Logo nav más pequeño */
+  .site-nav__logo img {
+    height: 28px;
+  }
+
+  /* Hero logo más pequeño */
+  .hero-logo {
+    width: clamp(90px, 28vw, 130px);
+  }
+
+  /* Stats: font más pequeño */
+  .stat__number {
+    font-size: clamp(2rem, 10vw, 2.8rem);
+  }
+
+  /* Programa cards: full width */
+  .program-card {
+    width: 100%;
+    max-width: 220px;
+  }
+
+  /* Video card title: reducir */
+  .ra-video-card__title {
+    font-size: 0.88rem;
+  }
+
+  /* Podcast card: reducir padding */
+  .ra-podcast-card {
+    padding: 0.75rem;
+  }
+
+  /* Formulario contacto: footer del form en columna */
+  .contacto-form__footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .btn--outline-red {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Chispa about logo más chico */
+  .chispa-about__logo {
+    width: 140px !important;
+  }
+
+  /* Footer form: botón full width */
+  .contact-form .btn {
+    width: 100%;
+    text-align: center;
   }
 }
 

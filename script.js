@@ -187,7 +187,7 @@ function iniciarNav() {
   //       (a menos que el mouse esté sobre la zona hover o el propio nav).
   // ──
 
-  const FLASH_MS = 1000;
+  const FLASH_MS = 2000;
 
   let flashTimeoutId = null;
   let ultimoScrollY = window.scrollY;
@@ -248,7 +248,7 @@ function iniciarNav() {
   const reocultarSiCorresponde = () => {
     if (!hoverZone.matches(":hover") && !nav.matches(":hover")) {
       cancelarFlash();
-      nav.classList.add("site-nav--hidden");
+      flashTimeoutId = setTimeout(ocultarNav, FLASH_MS);
     }
   };
 
