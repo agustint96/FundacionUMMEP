@@ -19,9 +19,9 @@
 
       .contacto-header__title {
         font-family: var(--font-heading);
-        font-size: clamp(1.6rem, 1rem + 2.2vw, 2.6rem);
+        font-size: clamp(1.2rem, 1rem + 2.2vw, 2.6rem);
         font-weight: 700;
-        letter-spacing: 0.18em;
+        letter-spacing: 0.1em;
         text-transform: uppercase;
         color: var(--color-white);
         margin: 0;
@@ -40,7 +40,7 @@
 
       .contacto-main__heading {
         font-family: var(--font-heading);
-        font-size: clamp(1.5rem, 1rem + 1.5vw, 2.2rem);
+        font-size: clamp(1.2rem, 1rem + 1.5vw, 2.2rem);
         font-weight: 700;
         color: var(--color-navy);
         margin-bottom: 2rem;
@@ -158,6 +158,13 @@
       @media (max-width: 640px) {
         .contacto-form .form-row {
           grid-template-columns: 1fr;
+        }
+        .contacto-header__title {
+          font-size: clamp(1.1rem, 1rem + 2.2vw, 1.5rem);
+          letter-spacing: 0.06em;
+        }
+        .contacto-main__heading {
+          font-size: clamp(1.05rem, 1rem + 1.5vw, 1.4rem);
         }
       }
     </style>

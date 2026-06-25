@@ -200,8 +200,11 @@ function iniciarNav() {
 
   const mostrarNav = () => nav.classList.remove("site-nav--hidden");
 
+  const menuAbierto = () => links.classList.contains("is-open");
+
   const ocultarNav = () => {
     if (hoverZone.matches(":hover") || nav.matches(":hover")) return;
+    if (menuAbierto()) return; // no ocultar mientras el menú esté desplegado
     nav.classList.add("site-nav--hidden");
   };
 
@@ -244,6 +247,14 @@ function iniciarNav() {
 
   // Estado inicial: siempre oculto
   nav.classList.add("site-nav--hidden");
+
+  // Al cerrar el menú mobile (burger), re-evaluar si el nav debe ocultarse
+  burger.addEventListener("click", () => {
+    if (!links.classList.contains("is-open")) {
+      cancelarFlash();
+      flashTimeoutId = setTimeout(ocultarNav, 300);
+    }
+  });
 
   const reocultarSiCorresponde = () => {
     if (!hoverZone.matches(":hover") && !nav.matches(":hover")) {

@@ -25,8 +25,8 @@
       .novedades-titulo {
         font-family: var(--font-heading);
         font-weight: 800;
-        font-size: clamp(1.8rem, 1.2rem + 2.5vw, 3rem);
-        letter-spacing: 0.18em;
+        font-size: clamp(1.3rem, 1.2rem + 2.5vw, 3rem);
+        letter-spacing: 0.12em;
         text-transform: uppercase;
         color: var(--color-white);
         text-align: center;
@@ -45,18 +45,27 @@
         gap: clamp(2rem, 4vw, 3rem);
       }
 
+      /* Grid con efecto blur hover (igual que index.html) */
       .novedades-grid {
+        list-style: none;
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        gap: clamp(1.5rem, 3vw, 2.5rem);
+        gap: clamp(1rem, 2.5vw, 1.75rem);
         width: 100%;
         max-width: var(--max-content);
+        padding: 0;
+        margin: 0;
       }
 
       .novedad-card {
         display: flex;
         flex-direction: column;
-        gap: 0.75rem;
+        gap: 0;
+        border-radius: 1rem;
+        box-shadow: 0 0.5rem 0.75rem -0.1rem rgba(22, 35, 74, 0.18);
+        overflow: hidden;
+        cursor: pointer;
+        background: var(--color-white);
       }
 
       .novedad-card img {
@@ -64,21 +73,42 @@
         aspect-ratio: 4 / 3;
         object-fit: cover;
         display: block;
+        filter: blur(0px);
+        transition: filter 0.5s ease-in-out;
+      }
+
+      /* efecto blur: al hacer hover sobre el grid, todo se desenfoca
+         menos la card que se está mirando */
+      .novedades-grid:hover .novedad-card:not(:hover) img {
+        filter: blur(4px);
+      }
+
+      .novedad-card__body {
+        padding: 0.75rem 0.85rem 0.9rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
       }
 
       .novedad-card__titulo {
         font-family: var(--font-body);
-        font-size: clamp(0.88rem, 0.82rem + 0.25vw, 1rem);
+        font-size: clamp(0.82rem, 0.78rem + 0.2vw, 0.95rem);
         color: var(--color-navy);
-        line-height: 1.5;
-        text-align: center;
+        line-height: 1.45;
+        max-height: calc(1.45em * 3);
+        overflow: hidden;
+        mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+        -webkit-mask-image: linear-gradient(
+          to bottom,
+          black 50%,
+          transparent 100%
+        );
       }
 
       .novedad-card__fecha {
         font-family: var(--font-body);
-        font-size: 0.82rem;
-        color: var(--color-navy-soft);
-        opacity: 0.7;
+        font-size: 0.76rem;
+        color: var(--color-muted);
       }
 
       /* ----------------------------------------------------------
@@ -149,17 +179,39 @@
          ---------------------------------------------------------- */
       @media (max-width: 900px) {
         .novedades-grid {
-          grid-template-columns: repeat(2, 1fr);
+          grid-template-columns: repeat(4, 1fr);
+          gap: clamp(0.4rem, 1.5vw, 1rem);
+        }
+        .novedad-card__body {
+          padding: 0.4rem 0.5rem 0.55rem;
+        }
+        .novedad-card__titulo {
+          font-size: 0.72rem;
+          line-height: 1.35;
+          max-height: calc(1.35em * 3);
+        }
+        .novedad-card__fecha {
+          font-size: 0.65rem;
+        }
+        .novedad-card {
+          border-radius: 0.5rem;
         }
       }
 
       @media (max-width: 540px) {
         .novedades-grid {
-          grid-template-columns: 1fr;
+          gap: 0.3rem;
         }
         .novadades-container--3 {
           flex-direction: column;
           text-align: center;
+        }
+        .novedades-titulo {
+          font-size: clamp(1.15rem, 1rem + 2.5vw, 1.6rem);
+          letter-spacing: 0.06em;
+        }
+        .banner-text {
+          font-size: clamp(1rem, 0.9rem + 1.5vw, 1.3rem);
         }
       }
     </style>
@@ -232,112 +284,128 @@
          CONTAINER 2 — Grid de notas / blogs
          ====================================================== -->
     <div class="novedades-container--2">
-      <div class="novedades-grid">
+      <ul class="novedades-grid">
         <!-- Nota 1 -->
-        <article class="novedad-card">
+        <li class="novedad-card">
           <img
             src="imagenes/FOTOS FINALES/Pagina 3 - Novedades/image (1).png"
             alt="Pesquisa activa en el Centro Vecinal de Alberdi"
           />
-          <p class="novedad-card__titulo">
-            Pesquisa activa en el Centro Vecinal de Alberdi
-          </p>
-          <span class="novedad-card__fecha">22 de junio, 2026</span>
-        </article>
+          <div class="novedad-card__body">
+            <p class="novedad-card__titulo">
+              Pesquisa activa en el Centro Vecinal de Alberdi
+            </p>
+            <span class="novedad-card__fecha">22 de junio, 2026</span>
+          </div>
+        </li>
 
         <!-- Nota 2 -->
-        <article class="novedad-card">
+        <li class="novedad-card">
           <img
             src="imagenes/FOTOS FINALES/Pagina 3 - Novedades/image (2).png"
             alt="Mujeres tejiendo redes"
           />
-          <p class="novedad-card__titulo">
-            Mujeres tejiendo redes: el tercer encuentro de formadoras sociales
-            abordó la violencia de género y la salud sexual y reproductiva en
-            Córdoba
-          </p>
-          <span class="novedad-card__fecha">26 de junio, 2026</span>
-        </article>
+          <div class="novedad-card__body">
+            <p class="novedad-card__titulo">
+              Mujeres tejiendo redes: el tercer encuentro de formadoras sociales
+              abordó la violencia de género y la salud sexual y reproductiva en
+              Córdoba
+            </p>
+            <span class="novedad-card__fecha">26 de junio, 2026</span>
+          </div>
+        </li>
 
         <!-- Nota 3 -->
-        <article class="novedad-card">
+        <li class="novedad-card">
           <img
             src="imagenes/FOTOS FINALES/Pagina 3 - Novedades/image (3).png"
             alt="Llegaron desde Fraile Pintado"
           />
-          <p class="novedad-card__titulo">
-            Llegaron desde Fraile Pintado al centro "Che Guevara" para operarse
-            de cataratas y pterigium
-          </p>
-          <span class="novedad-card__fecha">8 de junio, 2026</span>
-        </article>
+          <div class="novedad-card__body">
+            <p class="novedad-card__titulo">
+              Llegaron desde Fraile Pintado al centro "Che Guevara" para
+              operarse de cataratas y pterigium
+            </p>
+            <span class="novedad-card__fecha">8 de junio, 2026</span>
+          </div>
+        </li>
 
         <!-- Nota 4 -->
-        <article class="novedad-card">
+        <li class="novedad-card">
           <img
             src="imagenes/FOTOS FINALES/Pagina 3 - Novedades/image (4).png"
             alt="Periodismo y militancia a pie de calle"
           />
-          <p class="novedad-card__titulo">
-            "Periodismo y militancia a pie de calle": presentaron en Córdoba un
-            libro de conversaciones con Carlos Aznárez
-          </p>
-        </article>
+          <div class="novedad-card__body">
+            <p class="novedad-card__titulo">
+              "Periodismo y militancia a pie de calle": presentaron en Córdoba
+              un libro de conversaciones con Carlos Aznárez
+            </p>
+          </div>
+        </li>
 
         <!-- Nota 5 -->
-        <article class="novedad-card">
+        <li class="novedad-card">
           <img
             src="imagenes/FOTOS FINALES/Pagina 3 - Novedades/image (5).png"
             alt="Yo sí puedo en Barrio La Calera"
           />
-          <p class="novedad-card__titulo">
-            "Un hermoso y placentero desafío": el programa "Yo sí puedo"
-            alfabetiza en Barrio La Calera con clases semanales y actividades
-            lúdicas
-          </p>
-        </article>
+          <div class="novedad-card__body">
+            <p class="novedad-card__titulo">
+              "Un hermoso y placentero desafío": el programa "Yo sí puedo"
+              alfabetiza en Barrio La Calera con clases semanales y actividades
+              lúdicas
+            </p>
+          </div>
+        </li>
 
         <!-- Nota 6 -->
-        <article class="novedad-card">
+        <li class="novedad-card">
           <img
             src="imagenes/FOTOS FINALES/Pagina 3 - Novedades/image (6).png"
             alt="Manos trabajadoras por el buen vivir"
           />
-          <p class="novedad-card__titulo">
-            "Manos trabajadoras por el buen vivir": denuncian en Córdoba el
-            avance del extractivismo y la complicidad del Estado con grandes
-            empresas
-          </p>
-        </article>
+          <div class="novedad-card__body">
+            <p class="novedad-card__titulo">
+              "Manos trabajadoras por el buen vivir": denuncian en Córdoba el
+              avance del extractivismo y la complicidad del Estado con grandes
+              empresas
+            </p>
+          </div>
+        </li>
 
         <!-- Nota 7 -->
-        <article class="novedad-card">
+        <li class="novedad-card">
           <img
             src="imagenes/FOTOS FINALES/Pagina 3 - Novedades/image (7).png"
             alt="Recuperar la vista para seguir defendiendo el territorio"
           />
-          <p class="novedad-card__titulo">
-            "Recuperar la vista para seguir defendiendo el territorio: la
-            experiencia de una paciente jujeña en el centro oftalmológico Che
-            Guevara"
-          </p>
-        </article>
+          <div class="novedad-card__body">
+            <p class="novedad-card__titulo">
+              "Recuperar la vista para seguir defendiendo el territorio: la
+              experiencia de una paciente jujeña en el centro oftalmológico Che
+              Guevara"
+            </p>
+          </div>
+        </li>
 
         <!-- Nota 8 -->
-        <article class="novedad-card">
+        <li class="novedad-card">
           <img
             src="imagenes/FOTOS FINALES/Pagina 3 - Novedades/image.png"
             alt="Aprendemos haciendo, transformamos desde el barrio"
           />
-          <p class="novedad-card__titulo">
-            "Aprendemos haciendo, transformamos desde el barrio": se realizó el
-            segundo encuentro del curso de promotoras socio comunitarias en
-            Córdoba
-          </p>
-        </article>
-      </div>
+          <div class="novedad-card__body">
+            <p class="novedad-card__titulo">
+              "Aprendemos haciendo, transformamos desde el barrio": se realizó
+              el segundo encuentro del curso de promotoras socio comunitarias en
+              Córdoba
+            </p>
+          </div>
+        </li>
+      </ul>
     </div>
-    <!-- fin del Div contenedor grid -->
+    <!-- fin del contenedor grid -->
 
     <!-- ======================================================
          CONTAINER 3 — Banner donación
