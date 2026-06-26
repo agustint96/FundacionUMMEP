@@ -205,6 +205,7 @@ function iniciarNav() {
   const ocultarNav = () => {
     if (hoverZone.matches(":hover") || nav.matches(":hover")) return;
     if (menuAbierto()) return; // no ocultar mientras el menú esté desplegado
+    nav.classList.remove("is-expanded");
     nav.classList.add("site-nav--hidden");
   };
 
@@ -220,6 +221,8 @@ function iniciarNav() {
     if (hero) return hero.offsetTop + hero.offsetHeight * 0.9;
     return window.innerHeight * 0.9;
   };
+
+  const EXPANDED_THRESHOLD = 40; // px desde el tope para considerar "arriba del todo"
 
   const onScroll = () => {
     const actual = window.scrollY;
@@ -247,6 +250,53 @@ function iniciarNav() {
 
   // Estado inicial: siempre oculto
   nav.classList.add("site-nav--hidden");
+
+  // ── Overscroll hacia arriba: mostrar nav expandido ──
+  // En desktop usamos wheel; en mobile usamos touchmove.
+  // Solo se activa cuando ya estamos en scrollY === 0.
+
+  let overScrollTimer = null;
+
+  const mostrarExpandido = () => {
+    if (window.scrollY > EXPANDED_THRESHOLD) return;
+    cancelarFlash();
+    nav.classList.remove("site-nav--hidden");
+    clearTimeout(overScrollTimer);
+    overScrollTimer = setTimeout(() => {
+      ocultarNav();
+    }, 2200);
+  };
+
+  // Wheel: delta negativo = scroll hacia arriba
+  window.addEventListener(
+    "wheel",
+    (e) => {
+      if (e.deltaY < -5 && window.scrollY < EXPANDED_THRESHOLD) {
+        mostrarExpandido();
+      }
+    },
+    { passive: true },
+  );
+
+  // Touch: dedo arrastrando hacia abajo = scroll hacia arriba
+  let touchStartY = 0;
+  window.addEventListener(
+    "touchstart",
+    (e) => {
+      touchStartY = e.touches[0].clientY;
+    },
+    { passive: true },
+  );
+  window.addEventListener(
+    "touchmove",
+    (e) => {
+      const delta = e.touches[0].clientY - touchStartY;
+      if (delta > 30 && window.scrollY < EXPANDED_THRESHOLD) {
+        mostrarExpandido();
+      }
+    },
+    { passive: true },
+  );
 
   // Al cerrar el menú mobile (burger), re-evaluar si el nav debe ocultarse
   burger.addEventListener("click", () => {
