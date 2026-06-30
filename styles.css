@@ -773,6 +773,31 @@ textarea {
   object-fit: cover;
 }
 
+/* Estado de carga: cuadrado azul con "Cargando video..." mientras se
+   espera la respuesta de YouTube (o si la consulta llega a fallar). */
+.ra-video-card__thumb--loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-navy);
+}
+
+.ra-loading-label {
+  display: inline-flex;
+  align-items: baseline;
+  color: var(--color-white);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+}
+
+.ra-loading-dots {
+  display: inline-block;
+  min-width: 1.1em;
+  text-align: left;
+}
+
 .ra-video-card__duration {
   position: absolute;
   right: 0.5rem;
@@ -857,6 +882,16 @@ textarea {
   gap: clamp(1.25rem, 2.5vw, 2rem);
   width: 100%;
   max-width: var(--max-content);
+}
+
+.ra-podcast-embed {
+  width: 100%;
+  max-width: var(--max-content);
+}
+
+.ra-podcast-embed iframe {
+  display: block;
+  width: 100%;
 }
 
 .ra-podcast-card {

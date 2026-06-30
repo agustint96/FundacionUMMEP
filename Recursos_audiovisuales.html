@@ -314,97 +314,31 @@
       id="podcast"
     >
       <h2 class="section-title">Podcast</h2>
-      <div class="ra-podcast-grid">
-        <a href="https://open.spotify.com/show/1cxIDruvTkzX7NBHSxRIxx">
-          <article class="ra-podcast-card">
-            <div class="ra-podcast-card__thumb">
-              <img src="img/placeholder-video.svg" alt="" />
-            </div>
-            <div class="ra-podcast-card__body">
-              <p class="ra-podcast-card__title">
-                Operación Milagro hoy
-                <span>Veinte años de cirugías solidarias</span>
-              </p>
-              <p class="ra-podcast-card__source">
-                ▶ Episodio • Fundación UMMEP
-              </p>
-              <p class="ra-podcast-card__desc">
-                Repasamos junto a voluntarias el alcance actual del programa y
-                las historias de quienes recuperaron la vista.
-              </p>
-              <div class="ra-podcast-card__footer">
-                <span class="ra-podcast-card__date">12 jun 2026 • 22 min</span>
-                <div class="ra-podcast-card__actions">
-                  <button aria-label="Agregar a la lista">+</button>
-                  <button aria-label="Descargar">⭳</button>
-                  <button aria-label="Compartir">↗</button>
-                  <button aria-label="Más opciones">⋯</button>
-                </div>
-              </div>
-            </div>
-            <button class="ra-podcast-card__play" aria-label="Reproducir">
-              ▶
-            </button>
-          </article>
-        </a>
-
-        <article class="ra-podcast-card">
-          <div class="ra-podcast-card__thumb">
-            <img src="img/placeholder-video.svg" alt="" />
-          </div>
-          <div class="ra-podcast-card__body">
-            <p class="ra-podcast-card__title">
-              Yo Sí Puedo en el territorio
-              <span>Alfabetizar barrio por barrio</span>
-            </p>
-            <p class="ra-podcast-card__source">▶ Episodio • Fundación UMMEP</p>
-            <p class="ra-podcast-card__desc">
-              Conversamos con facilitadoras sobre cómo se organiza una campaña
-              de alfabetización popular.
-            </p>
-            <div class="ra-podcast-card__footer">
-              <span class="ra-podcast-card__date">3 jun 2026 • 18 min</span>
-              <div class="ra-podcast-card__actions">
-                <button aria-label="Agregar a la lista">+</button>
-                <button aria-label="Descargar">⭳</button>
-                <button aria-label="Compartir">↗</button>
-                <button aria-label="Más opciones">⋯</button>
-              </div>
-            </div>
-          </div>
-          <button class="ra-podcast-card__play" aria-label="Reproducir">
-            ▶
-          </button>
-        </article>
-
-        <article class="ra-podcast-card">
-          <div class="ra-podcast-card__thumb">
-            <img src="img/placeholder-video.svg" alt="" />
-          </div>
-          <div class="ra-podcast-card__body">
-            <p class="ra-podcast-card__title">
-              Mujeres Empoderadas
-              <span>Organización comunitaria desde abajo</span>
-            </p>
-            <p class="ra-podcast-card__source">▶ Episodio • Fundación UMMEP</p>
-            <p class="ra-podcast-card__desc">
-              Charlamos sobre los talleres barriales y el rol de las promotoras
-              de salud y educación.
-            </p>
-            <div class="ra-podcast-card__footer">
-              <span class="ra-podcast-card__date">28 may 2026 • 15 min</span>
-              <div class="ra-podcast-card__actions">
-                <button aria-label="Agregar a la lista">+</button>
-                <button aria-label="Descargar">⭳</button>
-                <button aria-label="Compartir">↗</button>
-                <button aria-label="Más opciones">⋯</button>
-              </div>
-            </div>
-          </div>
-          <button class="ra-podcast-card__play" aria-label="Reproducir">
-            ▶
-          </button>
-        </article>
+      <!--
+        Reproductor oficial embebido de Spotify: muestra siempre los
+        episodios reales y más recientes del programa directamente desde
+        Spotify (se actualiza solo, sin tocar este HTML ni usar ninguna
+        API key). Si en algún momento querés otra altura, ajustá el
+        atributo "height" del iframe.
+      -->
+      <div class="ra-podcast-embed">
+        <iframe
+          style="border-radius: 12px"
+          src="https://open.spotify.com/embed/show/1cxIDruvTkzX7NBHSxRIxx?utm_source=generator&theme=0"
+          width="100%"
+          height="352"
+          frameborder="0"
+          allowfullscreen=""
+          allow="
+            autoplay;
+            clipboard-write;
+            encrypted-media;
+            fullscreen;
+            picture-in-picture;
+          "
+          loading="lazy"
+          title="Reproductor de podcast — Fundación UMMEP en Spotify"
+        ></iframe>
       </div>
     </section>
 
@@ -498,5 +432,6 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="youtube-playlists.js"></script>
   </body>
 </html>
