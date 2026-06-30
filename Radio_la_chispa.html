@@ -15,11 +15,15 @@
         background-size: 480px;
         padding: clamp(1.5rem, 4vw, 2.5rem) var(--section-pad-x);
         text-align: center;
+        min-height: 140px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
       .chispa-header__title {
         font-family: var(--font-heading);
-        font-size: clamp(1.2rem, 1rem + 2.2vw, 2.6rem);
+        font-size: var(--title-font-size);
         font-weight: 700;
         letter-spacing: 0.1em;
         text-transform: uppercase;
@@ -261,7 +265,7 @@
         }
 
         .chispa-header__title {
-          font-size: clamp(1.1rem, 1rem + 2.2vw, 1.6rem);
+          font-size: var(--title-font-size);
           letter-spacing: 0.06em;
         }
       }
@@ -476,8 +480,13 @@
 
       <div class="chispa-programs__grid">
         <!-- Card 1 -->
+
         <div class="ra-video-card">
-          <a class="ra-video-card__thumb" href="#" aria-label="La Fragua #144">
+          <a
+            class="ra-video-card__thumb"
+            href="https://www.youtube.com/playlist?list=PLD2BlnPNqR9CXyyUHyTDFxe50ZQjNeC0t"
+            aria-label="La Fragua #144"
+          >
             <img
               src="https://img.youtube.com/vi/placeholder/hqdefault.jpg"
               onerror="

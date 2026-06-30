@@ -15,11 +15,15 @@
         background-size: 480px;
         padding: clamp(2rem, 5vw, 3rem) var(--section-pad-x);
         text-align: center;
+        min-height: 140px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
       .contacto-header__title {
         font-family: var(--font-heading);
-        font-size: clamp(1.2rem, 1rem + 2.2vw, 2.6rem);
+        font-size: var(--title-font-size);
         font-weight: 700;
         letter-spacing: 0.1em;
         text-transform: uppercase;
@@ -160,7 +164,7 @@
           grid-template-columns: 1fr;
         }
         .contacto-header__title {
-          font-size: clamp(1.1rem, 1rem + 2.2vw, 1.5rem);
+          font-size: var(--title-font-size);
           letter-spacing: 0.06em;
         }
         .contacto-main__heading {
@@ -308,10 +312,8 @@
        BANNER CTA — Donar
   ══════════════════════════════════════════ -->
     <div class="ra-donate-banner">
-      <p class="ra-donate-banner__text">
-        Te parece importante el trabajo que hacemos?
-      </p>
-      <a href="#" class="banner-btn">Doná acá</a>
+      <p class="banner-text">Te parece importante el trabajo que hacemos?</p>
+      <a href="Como_colaborar.html" class="banner-btn">Cómo colaborar?</a>
     </div>
 
     <!-- ══════════════════════════════════════════

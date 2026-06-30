@@ -19,13 +19,13 @@
         align-items: center;
         justify-content: center;
         padding: clamp(2rem, 5vh, 3.5rem) var(--section-pad-x);
-        min-height: 120px;
+        min-height: 140px;
       }
 
       .novedades-titulo {
         font-family: var(--font-heading);
         font-weight: 800;
-        font-size: clamp(1.3rem, 1.2rem + 2.5vw, 3rem);
+        font-size: var(--title-font-size);
         letter-spacing: 0.12em;
         text-transform: uppercase;
         color: var(--color-white);
@@ -207,7 +207,7 @@
           text-align: center;
         }
         .novedades-titulo {
-          font-size: clamp(1.15rem, 1rem + 2.5vw, 1.6rem);
+          font-size: var(--title-font-size);
           letter-spacing: 0.06em;
         }
         .banner-text {
@@ -290,18 +290,20 @@
     <div class="novedades-container--2">
       <ul class="novedades-grid">
         <!-- Nota 1 -->
-        <li class="novedad-card">
-          <img
-            src="imagenes/FOTOS FINALES/Pagina 3 - Novedades/image (1).png"
-            alt="Pesquisa activa en el Centro Vecinal de Alberdi"
-          />
-          <div class="novedad-card__body">
-            <p class="novedad-card__titulo">
-              Pesquisa activa en el Centro Vecinal de Alberdi
-            </p>
-            <span class="novedad-card__fecha">22 de junio, 2026</span>
-          </div>
-        </li>
+        <a href="Novedad.html" class="Novedad_Link">
+          <li class="novedad-card">
+            <img
+              src="imagenes/FOTOS FINALES/Pagina 3 - Novedades/image (1).png"
+              alt="Pesquisa activa en el Centro Vecinal de Alberdi"
+            />
+            <div class="novedad-card__body">
+              <p class="novedad-card__titulo">
+                Pesquisa activa en el Centro Vecinal de Alberdi
+              </p>
+              <span class="novedad-card__fecha">22 de junio, 2026</span>
+            </div>
+          </li>
+        </a>
 
         <!-- Nota 2 -->
         <li class="novedad-card">
@@ -416,7 +418,7 @@
          ====================================================== -->
     <div class="novadades-container--3">
       <p class="banner-text">Te parece importante el trabajo que hacemos?</p>
-      <a href="#donaciones" class="banner-btn">Doná acá</a>
+      <a href="Como_colaborar.html" class="banner-btn">Cómo colaborar?</a>
     </div>
     <!-- fin container colaboracion-->
 

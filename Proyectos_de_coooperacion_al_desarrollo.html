@@ -19,13 +19,13 @@
         align-items: center;
         justify-content: center;
         padding: clamp(1.5rem, 4vh, 2.5rem) var(--section-pad-x);
-        min-height: 100px;
+        min-height: 140px;
       }
 
       .pcd-titulo {
         font-family: var(--font-heading);
         font-weight: 800;
-        font-size: clamp(1.1rem, 0.8rem + 2vw, 2rem);
+        font-size: var(--title-font-size);
         letter-spacing: 0.08em;
         text-transform: uppercase;
         color: var(--color-white);
@@ -71,6 +71,7 @@
         color: var(--color-navy);
         margin-bottom: 1rem;
         line-height: 1.25;
+        scroll-margin-top: calc(var(--nav-h) + 1.5rem);
       }
 
       .proyecto-content p {
@@ -246,7 +247,7 @@
           gap: 2rem;
         }
         .pcd-titulo {
-          font-size: clamp(1rem, 0.8rem + 2vw, 1.5rem);
+          font-size: var(--title-font-size);
           letter-spacing: 0.05em;
         }
         .instituciones-titulo {
@@ -322,6 +323,7 @@
     <!-- ======================================================
          CONTAINER 1 — Título navy
          ====================================================== -->
+
     <div class="ProyectosdeCoopalDesarrollo-container--1">
       <h1 class="pcd-titulo">Proyectos de Cooperación al Desarrollo</h1>
     </div>
@@ -329,7 +331,10 @@
     <!-- ======================================================
          CONTAINER 2 — Mujeres que Fortalecen Mujeres
          ====================================================== -->
-    <div class="ProyectosdeCoopalDesarrollo-container--2 proyecto-section">
+    <div
+      class="ProyectosdeCoopalDesarrollo-container--2 proyecto-section"
+      href="./Proyectos_de_coooperacion_al_desarrollo.html/#MujeresQueFortalecenMujeres"
+    >
       <div class="proyecto-logo">
         <!--
           Reemplazá con el logo real:
@@ -342,7 +347,7 @@
       </div>
 
       <div class="proyecto-content">
-        <h2>Mujeres que Fortalecen Mujeres</h2>
+        <h2 id="MujeresQueFortalecenMujeres">Mujeres que Fortalecen Mujeres</h2>
         <p>
           El proyecto "Mujeres que Fortalecen Mujeres" es una iniciativa de
           cooperación internacional que impulsa un intercambio circular de
@@ -382,7 +387,9 @@
       </div>
 
       <div class="proyecto-content">
-        <h2>Mujeres Empoderadas, Germen de Sociedades más Justas</h2>
+        <h2 id="MujeresEmpoderadas">
+          Mujeres Empoderadas, Germen de Sociedades más Justas
+        </h2>
         <p>
           El proyecto "Mujeres empoderadas, germen de sociedades más justas"
           prioriza la formación integral de mujeres de organizaciones sociales,
@@ -410,7 +417,9 @@
          CONTAINER 4 — Instituciones participantes
          ====================================================== -->
     <div class="ProyectosdeCoopalDesarrollo-container--4">
-      <h2 class="instituciones-titulo">Instituciones Participantes</h2>
+      <h2 class="instituciones-titulo">
+        Instituciones con quienes venimos articulando nuestros proyectos
+      </h2>
 
       <div class="instituciones-logos">
         <!--
@@ -457,7 +466,7 @@
          ====================================================== -->
     <div class="ProyectosdeCoopalDesarrollo-container--5">
       <p class="banner-text">Te parece importante el trabajo que hacemos?</p>
-      <a href="#donaciones" class="banner-btn">Doná acá</a>
+      <a href="Como_colaborar.html" class="banner-btn">Cómo colaborar?</a>
     </div>
     <!-- fin colaboracion -->
 

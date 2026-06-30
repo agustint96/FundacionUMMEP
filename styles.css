@@ -105,11 +105,15 @@ textarea {
 /* every top-level section: full viewport height, full width */
 .container--1,
 .container--2,
-.container--3,
 .container--4,
 .container--5 {
   width: auto;
   min-height: 100vh;
+  position: relative;
+}
+
+.container--3 {
+  width: auto;
   position: relative;
 }
 
@@ -382,6 +386,7 @@ textarea {
   justify-content: center;
   gap: clamp(2.5rem, 8vw, 7rem);
   padding: 0.2rem;
+  min-height: 140px;
   overflow-x: hidden;
 }
 
@@ -559,6 +564,9 @@ textarea {
 .footer-col address a {
   text-decoration: underline;
 }
+.footer-col address a:hover {
+  color: #df2c1f;
+}
 
 .contact-form {
   display: flex;
@@ -694,7 +702,7 @@ textarea {
   background: var(--color-navy);
   background-image: var(--squiggle-bg-light);
   background-size: 480px;
-  min-height: clamp(200px, 26vh, 300px);
+  min-height: 140px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -970,13 +978,13 @@ textarea {
 /* --- 9.4 Colaboración / Donación --- */
 .ra-donate-banner {
   position: relative;
-  min-height: auto;
+  min-height: 140px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 1.5rem;
-  padding: clamp(1.75rem, 4vw, 2.75rem) var(--section-pad-x);
+  padding: clamp(2rem, 4vh, 3rem) clamp(2rem, 6vw, 5rem);
   background: var(--color-navy);
   background-image: var(--squiggle-bg-light);
   background-size: 600px;
@@ -993,6 +1001,16 @@ textarea {
 
 .ra-donate-banner__btn {
   flex: 0 0 auto;
+}
+
+.banner-text {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(1.15rem, 0.9rem + 1.5vw, 1.75rem);
+  color: var(--color-white);
+  max-width: 640px;
+  line-height: 1.3;
+  margin: 0;
 }
 
 .banner-btn {
@@ -1610,7 +1628,60 @@ textarea {
 }
 
 /* =========================================================
-   12. Navegación principal
+   12. Scroll reveal
+   ========================================================= */
+
+/* Estado inicial: oculto y corrido. El JS agrega .is-visible
+   cuando el elemento entra en el viewport (IntersectionObserver). */
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition:
+    opacity 0.7s var(--ease),
+    transform 0.7s var(--ease);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Variantes de dirección, por si se quiere variar manualmente */
+.reveal--left {
+  transform: translateX(-40px);
+}
+.reveal--left.is-visible {
+  transform: translateX(0);
+}
+
+.reveal--right {
+  transform: translateX(40px);
+}
+.reveal--right.is-visible {
+  transform: translateX(0);
+}
+
+.reveal--zoom {
+  transform: scale(0.92);
+}
+.reveal--zoom.is-visible {
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal--left,
+  .reveal--right,
+  .reveal--zoom {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* =========================================================
+   13. Navegación principal
    ========================================================= */
 
 /* Altura del nav — usada para compensar el sticky en el hero */
@@ -1636,6 +1707,29 @@ textarea {
     height 0.45s var(--ease),
     background 0.45s var(--ease),
     box-shadow 0.3s var(--ease);
+}
+
+/* En páginas que no son index: el nav arranca dentro del flujo normal
+   (ocupa su lugar real, por encima del primer contenedor) y recién al
+   pasar el 80% de ese primer contenedor se vuelve fixed (ver .site-nav--pinned). */
+.site-nav.site-nav--in-flow {
+  position: static;
+  transform: none !important;
+}
+
+/* Una vez "pineado": vuelve a comportarse como fixed normal */
+.site-nav.site-nav--pinned {
+  position: fixed;
+  animation: site-nav-pin-in 0.35s var(--ease);
+}
+
+@keyframes site-nav-pin-in {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
 
 /* ── Estado expandido: en el tope de la página, antes de scrollear ── */
@@ -1950,4 +2044,8 @@ body::before {
     opacity: 0 !important;
     transform: translate(-4px, 4px) !important;
   }
+}
+
+.Novedad_Link {
+  text-decoration: none;
 }

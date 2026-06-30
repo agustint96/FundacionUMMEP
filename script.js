@@ -108,13 +108,109 @@ function iniciarRotacionHero() {
   bucle();
 }
 
-/**
- * Envío del formulario de contacto.
- * No hay backend conectado todavía: por ahora sólo evita el
- * reload de la página y muestra una confirmación simple.
- * Cuando tengan un endpoint, reemplazar el contenido de este
- * listener por el fetch/POST correspondiente.
- */
+/* =======================================================
+   Scroll reveal
+   =======================================================
+   Detecta automáticamente los bloques de contenido de cada
+   página (cualquier "container--N", secciones de programa/
+   proyecto/recursos, tarjetas del equipo, columnas del
+   footer, etc.) y los anima al entrar en el viewport con un
+   IntersectionObserver. No hace falta tocar el HTML de cada
+   página: alcanza con que las clases sigan el patrón que ya
+   usa el sitio.
+   ======================================================= */
+function iniciarScrollReveal() {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  const CONTENEDORES = [
+    '[class*="ontainer--"]', // container--N / Container--N (todas las páginas)
+    ".programa-section",
+    ".proyecto-section",
+    ".ra-video-section",
+    ".ra-podcast-section",
+    ".equipo-grupo",
+    ".footer-col",
+  ].join(", ");
+
+  // Contenedores que NO se deben tocar (hero rotativo de index, nav,
+  // footer grande que ya tiene su propio formulario, etc.)
+  const EXCLUIR = ["#inicio", ".hero-phase", ".site-nav", ".container--6"];
+
+  // Dentro de cada contenedor, sólo se anima texto y botones/links —
+  // nunca el contenedor en sí (así su fondo de color queda siempre
+  // visible, sin parpadear ni desaparecer).
+  const TEXTO_Y_BOTONES = [
+    "h1",
+    "h2",
+    "h3",
+    "h4",
+    "h5",
+    "h6",
+    "p",
+    "li",
+    "blockquote",
+    "label",
+    "a.btn",
+    "a.banner-btn",
+    "button",
+    ".btn",
+  ].join(", ");
+
+  // Evitar animar elementos que ya están dentro de otro elemento
+  // animado (ej: un <a> dentro de un <li>), para no duplicar el efecto.
+  function elementosAnimables(contenedor) {
+    const encontrados = Array.from(
+      contenedor.querySelectorAll(TEXTO_Y_BOTONES),
+    );
+    return encontrados.filter(
+      (el) => !encontrados.some((otro) => otro !== el && otro.contains(el)),
+    );
+  }
+
+  const contenedores = new Set();
+  document.querySelectorAll(CONTENEDORES).forEach((el) => {
+    if (EXCLUIR.some((sel) => el.matches(sel) || el.closest(sel))) return;
+    contenedores.add(el);
+  });
+
+  if (!contenedores.size) return;
+
+  const observer = new IntersectionObserver(
+    (entradas) => {
+      entradas.forEach((entrada) => {
+        if (!entrada.isIntersecting) return;
+        const contenedor = entrada.target;
+        const hijos = elementosAnimables(contenedor);
+        hijos.forEach((el, i) => {
+          el.classList.add("reveal");
+          if (i > 0) {
+            const delay = Math.min(i * 0.08, 0.48);
+            el.style.transitionDelay = `${delay}s`;
+          }
+          // Forzar reflow antes de agregar is-visible para que la
+          // transición se dispare igual aunque el elemento se haya
+          // agregado y revelado en el mismo frame.
+          requestAnimationFrame(() => el.classList.add("is-visible"));
+        });
+        observer.unobserve(contenedor);
+      });
+    },
+    {
+      threshold: 0.15,
+      rootMargin: "0px 0px -8% 0px",
+    },
+  );
+
+  contenedores.forEach((el) => observer.observe(el));
+}
+
+/* =======================================================
+   Envío del formulario de contacto.
+   No hay backend conectado todavía: por ahora sólo evita el
+   reload de la página y muestra una confirmación simple.
+   Cuando tengan un endpoint, reemplazar el contenido de este
+   listener por el fetch/POST correspondiente.
+   ======================================================= */
 function iniciarFormularioContacto() {
   const form = document.getElementById("contact-form");
   if (!form) return;
@@ -161,8 +257,9 @@ function iniciarNav() {
   });
 
   // ── Marcar link activo según nombre de archivo ──
-  const archivo = location.pathname.split("/").pop() || "Principal.html";
+  const archivo = location.pathname.split("/").pop() || "index.html";
   const mapa = {
+    "index.html": "principal",
     "Principal.html": "principal",
     "Nuestro_Trabajo.html": "nuestro-trabajo",
     "Novedades.html": "novedades",
@@ -178,7 +275,54 @@ function iniciarNav() {
     if (link) link.classList.add("is-active");
   }
 
-  // ── El nav siempre arranca oculto.
+  const esIndex = archivo === "index.html" || archivo === "Principal.html";
+
+  // ── Páginas que NO son index: el nav arranca ocupando su lugar
+  //    real en el flujo del documento, por encima del primer
+  //    contenedor (header/banner). Recién al bajar un 80% de la
+  //    altura de ese primer contenedor, el nav se "pinea" (se vuelve
+  //    fixed) y a partir de ahí te sigue siempre arriba.
+  // ──
+  if (!esIndex) {
+    nav.classList.remove("site-nav--hidden");
+    nav.classList.add("site-nav--in-flow");
+
+    const primerContenedor = nav.nextElementSibling;
+    let pineado = false;
+
+    const getUmbral80 = () => {
+      if (primerContenedor) {
+        // offsetTop del contenedor relativo al documento (el nav está
+        // en flujo normal, así que esto ya contempla su propia altura).
+        return primerContenedor.offsetTop + primerContenedor.offsetHeight * 0.8;
+      }
+      return window.innerHeight * 0.8;
+    };
+
+    const onScrollSimple = () => {
+      const actual = window.scrollY;
+      const umbral = getUmbral80();
+
+      if (!pineado && actual >= umbral) {
+        pineado = true;
+        nav.classList.remove("site-nav--in-flow");
+        nav.classList.add("site-nav--pinned");
+      } else if (pineado && actual < umbral) {
+        pineado = false;
+        nav.classList.remove("site-nav--pinned");
+        nav.classList.add("site-nav--in-flow");
+      }
+
+      nav.classList.toggle("is-scrolled", actual > 10);
+    };
+
+    window.addEventListener("scroll", onScrollSimple, { passive: true });
+    onScrollSimple();
+
+    return; // no aplicamos la lógica de esconder/mostrar de index.html
+  }
+
+  // ── El nav de index.html siempre arranca oculto.
   //
   //    Hay dos formas de que aparezca:
   //    1. Hover sobre la zona invisible del tope (sin delay).
@@ -325,4 +469,5 @@ document.addEventListener("DOMContentLoaded", () => {
   iniciarRotacionHero();
   iniciarFormularioContacto();
   iniciarNav();
+  iniciarScrollReveal();
 });

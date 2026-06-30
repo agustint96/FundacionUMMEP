@@ -1,0 +1,732 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cómo colaborar — Fundación UMMEP</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      /* =========================================================
+         PÁGINA 8 — Cómo colaborar
+         ========================================================= */
+
+      /* ----------------------------------------------------------
+         Header — Título rojo (igual al resto de subpáginas)
+         ---------------------------------------------------------- */
+      .cc-header {
+        background: var(--color-red);
+        background-image: var(--squiggle-bg-light);
+        background-size: 480px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: clamp(1.5rem, 4vh, 2.5rem) var(--section-pad-x);
+        min-height: 140px;
+      }
+      .cc-header h1 {
+        font-family: var(--font-heading);
+        font-weight: 800;
+        font-size: var(--title-font-size);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--color-white);
+        text-align: center;
+        margin: 0;
+      }
+
+      /* ----------------------------------------------------------
+         Título de sección (compartido por los 4 bloques)
+         ---------------------------------------------------------- */
+      .cc-section-title {
+        font-family: var(--font-heading);
+        font-weight: 800;
+        font-size: clamp(1.3rem, 1.05rem + 1.1vw, 2rem);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--color-navy);
+        margin: 0 0 1.5rem;
+      }
+
+      .cc-section-intro {
+        max-width: 920px;
+        font-size: clamp(0.95rem, 0.9rem + 0.2vw, 1.05rem);
+        color: var(--color-navy-soft);
+        margin: 0 0 2.25rem;
+      }
+
+      /* ----------------------------------------------------------
+         Bloque 1 — Intro (fondo blanco)
+         ---------------------------------------------------------- */
+      .cc-intro {
+        background: var(--color-white);
+        padding: clamp(2.5rem, 6vh, 4rem) var(--section-pad-x);
+      }
+      .cc-intro__inner {
+        max-width: var(--max-content);
+        margin-inline: auto;
+      }
+      .cc-intro__title {
+        font-family: var(--font-heading);
+        font-weight: 800;
+        font-size: clamp(1.15rem, 1rem + 0.9vw, 1.55rem);
+        letter-spacing: 0.01em;
+        text-transform: uppercase;
+        text-align: center;
+        color: var(--color-navy);
+        max-width: 980px;
+        margin: 0 auto clamp(2rem, 5vw, 3rem);
+        line-height: 1.4;
+      }
+      .cc-intro__grid {
+        display: grid;
+        grid-template-columns: 1fr 1.2fr 1.2fr;
+        gap: clamp(1.5rem, 3vw, 2.5rem);
+        align-items: center;
+      }
+      .cc-intro__img {
+        width: 100%;
+        aspect-ratio: 4 / 3.4;
+        object-fit: cover;
+        border-radius: 6px;
+        box-shadow: 0 10px 26px rgba(22, 35, 74, 0.14);
+      }
+      .cc-intro__text {
+        font-size: clamp(0.92rem, 0.88rem + 0.2vw, 1rem);
+        color: var(--color-navy-soft);
+        text-align: center;
+        line-height: 1.7;
+      }
+
+      /* ----------------------------------------------------------
+         Bloque 2 — Aporte económico (fondo arena)
+         ---------------------------------------------------------- */
+      .cc-aporte {
+        background: var(--color-sand);
+        padding: clamp(2.5rem, 6vh, 4rem) var(--section-pad-x);
+      }
+      .cc-aporte__inner {
+        max-width: var(--max-content);
+        margin-inline: auto;
+      }
+      .cc-opcion {
+        font-family: var(--font-heading);
+        font-weight: 700;
+        font-size: clamp(1rem, 0.94rem + 0.3vw, 1.2rem);
+        color: var(--color-navy);
+        margin: 0 0 1rem;
+      }
+      .cc-opcion:not(:first-of-type) {
+        margin-top: 2.75rem;
+      }
+
+      .cc-mp-card {
+        display: block;
+        max-width: 620px;
+        width: 100%;
+        border-radius: 6px;
+        box-shadow: 0 10px 26px rgba(22, 35, 74, 0.12);
+      }
+
+      .cc-paypal-card {
+        display: block;
+        max-width: 220px;
+        width: 100%;
+      }
+
+      .cc-banco-row {
+        display: flex;
+        align-items: stretch;
+        gap: clamp(1.25rem, 3vw, 2rem);
+        flex-wrap: wrap;
+      }
+      .cc-banco-logo {
+        width: 220px;
+        max-width: 100%;
+        flex-shrink: 0;
+        border-radius: 6px;
+        box-shadow: 0 10px 26px rgba(22, 35, 74, 0.12);
+      }
+      .cc-banco-box {
+        flex: 1;
+        min-width: 260px;
+        border: 1px solid var(--color-navy);
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 1.5rem 2rem;
+      }
+      .cc-banco-box p {
+        font-family: var(--font-heading);
+        font-weight: 700;
+        font-size: clamp(0.95rem, 0.9rem + 0.25vw, 1.1rem);
+        color: var(--color-navy);
+        margin: 0.2rem 0;
+      }
+
+      /* ----------------------------------------------------------
+         Bloque 3 — Donación de insumos (fondo blanco)
+         ---------------------------------------------------------- */
+      .cc-insumos {
+        background: var(--color-white);
+        padding: clamp(2.5rem, 6vh, 4rem) var(--section-pad-x);
+      }
+      .cc-insumos__inner {
+        max-width: var(--max-content);
+        margin-inline: auto;
+      }
+      .cc-insumos__row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(1.5rem, 4vw, 3rem);
+        align-items: center;
+      }
+      .cc-insumos__row + .cc-insumos__row {
+        margin-top: clamp(2.5rem, 6vw, 3.5rem);
+      }
+      .cc-insumos__row--reverse .cc-insumos__img {
+        order: -1;
+      }
+      .cc-insumos__img {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+        border-radius: 6px;
+        box-shadow: 0 10px 26px rgba(22, 35, 74, 0.14);
+      }
+      .cc-insumos__heading {
+        font-family: var(--font-heading);
+        font-weight: 800;
+        font-size: clamp(1rem, 0.94rem + 0.35vw, 1.3rem);
+        text-transform: uppercase;
+        color: var(--color-navy);
+        margin: 0 0 0.75rem;
+      }
+      .cc-insumos__text {
+        font-size: clamp(0.92rem, 0.88rem + 0.2vw, 1rem);
+        color: var(--color-navy-soft);
+        line-height: 1.7;
+      }
+      .cc-insumos__text strong {
+        color: var(--color-navy);
+      }
+
+      /* ----------------------------------------------------------
+         Bloque 4 — Voluntariado (fondo arena)
+         ---------------------------------------------------------- */
+      .cc-voluntariado {
+        background: var(--color-sand);
+        padding: clamp(2.5rem, 6vh, 4rem) var(--section-pad-x);
+      }
+      .cc-voluntariado__inner {
+        max-width: var(--max-content);
+        margin-inline: auto;
+      }
+      .cc-voluntariado__subtitle {
+        font-family: var(--font-heading);
+        font-weight: 700;
+        font-size: clamp(0.95rem, 0.9rem + 0.25vw, 1.1rem);
+        color: var(--color-navy);
+        text-transform: uppercase;
+        margin: 0 0 2.25rem;
+      }
+      .cc-voluntariado__grid {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: clamp(1.5rem, 4vw, 3rem);
+        align-items: start;
+      }
+      .cc-voluntariado__lead {
+        font-family: var(--font-heading);
+        font-weight: 700;
+        font-size: clamp(1rem, 0.94rem + 0.3vw, 1.2rem);
+        color: var(--color-navy);
+        text-align: center;
+        line-height: 1.6;
+        margin: 0 0 1.75rem;
+      }
+      .cc-voluntariado__text {
+        font-size: clamp(0.92rem, 0.88rem + 0.2vw, 1rem);
+        color: var(--color-navy-soft);
+        line-height: 1.7;
+      }
+      .cc-voluntariado__text + .cc-voluntariado__text {
+        margin-top: 1.1rem;
+      }
+      .cc-voluntariado__text strong {
+        color: var(--color-navy);
+      }
+      .cc-voluntariado__photos {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+      }
+      .cc-voluntariado__photos img {
+        width: 100%;
+        aspect-ratio: 16 / 10;
+        object-fit: cover;
+        border-radius: 6px;
+        box-shadow: 0 10px 26px rgba(22, 35, 74, 0.14);
+      }
+
+      /* ----------------------------------------------------------
+         Bloque 5 — CTA de contacto (fondo blanco)
+         ---------------------------------------------------------- */
+      .cc-contact-cta {
+        background: var(--color-white);
+        padding: clamp(2.5rem, 6vh, 3.5rem) var(--section-pad-x);
+        text-align: center;
+      }
+      .cc-contact-cta p {
+        max-width: 760px;
+        margin: 0 auto;
+        font-family: var(--font-heading);
+        font-weight: 700;
+        font-size: clamp(0.95rem, 0.9rem + 0.25vw, 1.1rem);
+        color: var(--color-navy);
+        line-height: 1.7;
+      }
+      .cc-contact-cta a {
+        color: var(--color-red);
+        text-decoration: underline;
+      }
+      .cc-contact-cta a:hover {
+        text-decoration: none;
+      }
+
+      /* ----------------------------------------------------------
+         Responsive
+         ---------------------------------------------------------- */
+      @media (max-width: 860px) {
+        .cc-intro__grid {
+          grid-template-columns: 1fr;
+        }
+        .cc-intro__img {
+          max-width: 420px;
+          margin-inline: auto;
+        }
+        .cc-insumos__row {
+          grid-template-columns: 1fr;
+        }
+        .cc-insumos__row--reverse .cc-insumos__img {
+          order: 0;
+        }
+        .cc-voluntariado__grid {
+          grid-template-columns: 1fr;
+        }
+        .cc-voluntariado__photos {
+          flex-direction: row;
+          flex-wrap: wrap;
+        }
+        .cc-voluntariado__photos img {
+          flex: 1 1 240px;
+        }
+      }
+      @media (max-width: 560px) {
+        .cc-banco-row {
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        }
+        .cc-voluntariado__photos {
+          flex-direction: column;
+        }
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <nav class="site-nav" aria-label="Navegación principal">
+      <a
+        class="site-nav__logo"
+        href="index.html"
+        aria-label="Inicio — Fundación UMMEP"
+      >
+        <img
+          src="imagenes/FOTOS FINALES/fundacion-ummep-h (1).png"
+          alt="Fundación UMMEP"
+        />
+      </a>
+      <ul class="site-nav__links" id="nav-links">
+        <li><a href="index.html" data-nav="principal">Inicio</a></li>
+        <li>
+          <a href="Nuestro_Trabajo.html" data-nav="nuestro-trabajo"
+            >Nuestro trabajo</a
+          >
+        </li>
+        <li><a href="Novedades.html" data-nav="novedades">Novedades</a></li>
+        <li class="site-nav__sep" role="separator" aria-hidden="true"></li>
+        <li>
+          <a href="Programas_internacionales.html" data-nav="programas"
+            >Programas internacionalistas</a
+          >
+        </li>
+        <li>
+          <a
+            href="Proyectos_de_coooperacion_al_desarrollo.html"
+            data-nav="proyectos"
+            >Proyectos de cooperación</a
+          >
+        </li>
+        <li class="site-nav__sep" role="separator" aria-hidden="true"></li>
+        <li>
+          <a href="Recursos_audiovisuales.html" data-nav="recursos"
+            >Recursos audiovisuales</a
+          >
+        </li>
+        <li>
+          <a href="Radio_la_chispa.html" data-nav="radio">Radio La Chispa</a>
+        </li>
+        <li class="site-nav__sep" role="separator" aria-hidden="true"></li>
+        <li><a href="Contacto.html" data-nav="contacto">Contacto</a></li>
+      </ul>
+      <button
+        class="site-nav__burger"
+        id="nav-burger"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="nav-links"
+      >
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+
+    <!-- ══════════════════════════════════════════
+       HEADER ROJO
+  ══════════════════════════════════════════ -->
+    <header class="cc-header">
+      <h1>Cómo colaborar</h1>
+    </header>
+
+    <!-- ══════════════════════════════════════════
+       BLOQUE 1 — INTRO
+  ══════════════════════════════════════════ -->
+    <section class="cc-intro container--7" id="donaciones">
+      <div class="cc-intro__inner">
+        <h2 class="cc-intro__title">
+          La solidaridad y la empatía entre los pueblos es posible y necesaria
+          para construir un mundo mejor
+        </h2>
+        <div class="cc-intro__grid">
+          <img
+            class="cc-intro__img"
+            src="imagenes/FOTOS FINALES/Pagina 8 - Como colaborar/operacion-milagro-grupo.jpg"
+            alt="Equipo de Operación Milagro en Argentina"
+            onerror="
+              this.style.background = '#f1ece2';
+              this.removeAttribute('onerror');
+            "
+          />
+          <p class="cc-intro__text">
+            Ayudános a fortalecer comunidades, organizaciones de base,
+            sindicales y sociales para luchar por un mundo justo e igual para
+            todxs. Nuestro trabajo impacta de manera directa en la calidad de
+            vida de miles de personas vulneradas.
+          </p>
+          <p class="cc-intro__text">
+            A través de la atención médica, la alfabetización y la formación con
+            eje en salud, educación, género y ambiente llegamos a los
+            territorios con herramientas concretas para practicar la solidaridad
+            y contagiar la necesidad de una transformacion profunda.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+       BLOQUE 2 — APORTE ECONÓMICO
+  ══════════════════════════════════════════ -->
+    <section class="cc-aporte container--8">
+      <div class="cc-aporte__inner">
+        <h2 class="cc-section-title">Aporte económico</h2>
+        <p class="cc-section-intro">
+          Tu aporte va destinado a cubrir cirugías para personas vulnerables y
+          sin obra social ni recursos para solventar las intervenciones
+          quirúrgicas necesarias para evitar la ceguera.
+        </p>
+
+        <h3 class="cc-opcion">Opción 1 - Doná con Mercado pago</h3>
+        <img
+          class="cc-mp-card"
+          src="imagenes/FOTOS FINALES/Pagina 8 - Como colaborar/mercado-pago-qr.png"
+          alt="Escaneá el código QR de Mercado Pago para donar a Fundación UMMEP"
+          onerror="
+            this.style.background = '#ffffff';
+            this.removeAttribute('onerror');
+          "
+        />
+
+        <h3 class="cc-opcion">Opción 2 - Doná con Paypal</h3>
+        <img
+          class="cc-paypal-card"
+          src="imagenes/FOTOS FINALES/Pagina 8 - Como colaborar/paypal-logo.png"
+          alt="Doná a través de Paypal"
+          onerror="
+            this.style.background = '#ffffff';
+            this.removeAttribute('onerror');
+          "
+        />
+
+        <h3 class="cc-opcion">
+          Opción 3 - Transferencia o depósito bancario con pesos argentinos
+        </h3>
+        <div class="cc-banco-row">
+          <img
+            class="cc-banco-logo"
+            src="imagenes/FOTOS FINALES/Pagina 8 - Como colaborar/banco-credicoop.png"
+            alt="Banco Credicoop — La Banca Solidaria"
+            onerror="
+              this.style.background = '#ffffff';
+              this.removeAttribute('onerror');
+            "
+          />
+          <div class="cc-banco-box">
+            <div>
+              <p>Banco Credicoop</p>
+              <p>Cuenta corriente en pesos 191-002-004091/8</p>
+              <p>CBU: 1910002555000200409182</p>
+              <p>ALIAS: FARDO.POETA.DILEMA</p>
+              <p>CUIT 30-70909113-8</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+       BLOQUE 3 — DONACIÓN DE INSUMOS
+  ══════════════════════════════════════════ -->
+    <section class="cc-insumos container--9">
+      <div class="cc-insumos__inner">
+        <h2 class="cc-section-title">Donación de insumos</h2>
+
+        <div class="cc-insumos__row">
+          <div>
+            <h3 class="cc-insumos__heading">Campaña Volver a verte</h3>
+            <p class="cc-insumos__text">
+              Lanzamos la campaña <strong>Volver a verte.</strong> Podés
+              colaborar dondando anteojos usados con el marco y las patillas
+              sanas. El objetivos es cambiarles el lente y reacondicionarlos en
+              nuestra óptica para entregarselos a quienes los necesitan.
+            </p>
+          </div>
+          <img
+            class="cc-insumos__img"
+            src="imagenes/FOTOS FINALES/Pagina 8 - Como colaborar/volver-a-verte-poster.jpg"
+            alt="Campaña Volver a Verte — Doná tus anteojos usados"
+            onerror="
+              this.style.background = '#f1ece2';
+              this.removeAttribute('onerror');
+            "
+          />
+        </div>
+
+        <div class="cc-insumos__row cc-insumos__row--reverse">
+          <img
+            class="cc-insumos__img"
+            src="imagenes/FOTOS FINALES/Pagina 8 - Como colaborar/equipo-insumos-medicos.jpg"
+            alt="Equipo del Centro Oftalmológico Che Guevara"
+            onerror="
+              this.style.background = '#f1ece2';
+              this.removeAttribute('onerror');
+            "
+          />
+          <div>
+            <h3 class="cc-insumos__heading">Ayudá donando insumos médicos</h3>
+            <p class="cc-insumos__text">
+              Necesitamos medicamentos oftalmológicos, gasas, alcohol, jeringas
+              y agujas descartables. Si tenés otros insumos médicos o de
+              laboratorio consultá antes de hacer la donación al contacto que
+              aparece más abajo.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+       BLOQUE 4 — VOLUNTARIADO
+  ══════════════════════════════════════════ -->
+    <section class="cc-voluntariado container--10">
+      <div class="cc-voluntariado__inner">
+        <h2 class="cc-section-title">Voluntariado</h2>
+        <p class="cc-voluntariado__subtitle">
+          Sumate a nuestros equipos de trabajo a través de los distintos
+          voluntariados
+        </p>
+
+        <div class="cc-voluntariado__grid">
+          <div>
+            <p class="cc-voluntariado__lead">
+              Las actividades que se realizan en el Centro Oftalmológico serían
+              imposibles sin la solidaridad del pueblo cubano y la labor
+              voluntaria de decenas de personas que cotidianamente aportan a su
+              sostenimiento. Hoy, más que nunca, son fundamentales las manos
+              solidarias.
+            </p>
+
+            <p class="cc-voluntariado__text">
+              Se necesitan Voluntarios para colaborar en: El Centro
+              Oftalmológico "Dr. Ernesto Che Guevara", en Córdoba.
+            </p>
+
+            <p class="cc-voluntariado__text">
+              Te podés sumar al <strong>área médica</strong>: se necesitan
+              médicos/as clínicos/as, Oftalmólogas/os, enfermeras/os,
+              Opticos/as, Cardiólogos/as, y todos/as quienes quieran dar su mano
+              solidaria en el área de <strong>hospedaje</strong> y atención a
+              personas en situación de vulnerabilidad.
+            </p>
+
+            <p class="cc-voluntariado__text">
+              Podés sumarte el
+              <strong>área de comunicación</strong>, prensa y difusión de la
+              Fundación.
+            </p>
+
+            <p class="cc-voluntariado__text">
+              También te podes sumar al
+              <strong>área de formación</strong>, educación, apoyo escolar,
+              escuela de ajedréz y alfabetización.
+            </p>
+
+            <p class="cc-voluntariado__text">
+              Consultá por <strong>jornadas de trabajo voluntario</strong>
+              en el Centro Oftalmológico para sumarte a poner el cuerpo y
+              colaborar con la mantención y crecimiento del edificio.
+            </p>
+          </div>
+
+          <div class="cc-voluntariado__photos">
+            <img
+              src="imagenes/FOTOS FINALES/Pagina 8 - Como colaborar/voluntariado-1.jpg"
+              alt="Charla con voluntarios en el Centro Oftalmológico Che Guevara"
+              onerror="
+                this.style.background = '#ffffff';
+                this.removeAttribute('onerror');
+              "
+            />
+            <img
+              src="imagenes/FOTOS FINALES/Pagina 8 - Como colaborar/voluntariado-2.jpg"
+              alt="Voluntarios trabajando en la terraza del Centro Oftalmológico"
+              onerror="
+                this.style.background = '#ffffff';
+                this.removeAttribute('onerror');
+              "
+            />
+            <img
+              src="imagenes/FOTOS FINALES/Pagina 8 - Como colaborar/voluntariado-3.jpg"
+              alt="Voluntaria colaborando en tareas de mantenimiento"
+              onerror="
+                this.style.background = '#ffffff';
+                this.removeAttribute('onerror');
+              "
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+       BLOQUE 5 — CTA CONTACTO
+  ══════════════════════════════════════════ -->
+    <section class="cc-contact-cta container--11">
+      <p>
+        Para más información, dejanos un mensaje o comunicate al siguiente mail:
+        <a href="mailto:administracion@fundacionummep.org.ar"
+          >administracion@fundacionummep.org.ar</a
+        >. Para comunicación telefonica llamá al teléfono +54 351 472-4588 o
+        escribinos al Whatsapp +54 9 351 3719143
+      </p>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════ -->
+    <footer class="container--6" id="contacto">
+      <div class="footer-grid">
+        <div class="footer-col footer-col--social">
+          <h3>Seguinos en redes</h3>
+          <div class="social-icons">
+            <a href="#" aria-label="Facebook"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="#" aria-label="Instagram"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a href="#" aria-label="X (Twitter)"
+              ><i class="fab fa-x-twitter"></i
+            ></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          </div>
+          <div class="footer-logo">
+            <img src="img/fundacion-ummep-h (1).png" alt="" />
+          </div>
+        </div>
+
+        <div class="footer-col footer-col--contact">
+          <h3>Contacto</h3>
+          <address>
+            Tomás Guido 757<br />
+            Córdoba Capital<br />
+            Argentina<br />
+            <a href="mailto:c.o.e.guevara@gmail.com">c.o.e.guevara@gmail.com</a>
+          </address>
+        </div>
+
+        <div class="footer-col footer-col--form">
+          <h3>Dejanos un mensaje</h3>
+          <form class="contact-form" id="contact-form">
+            <div class="form-row">
+              <label
+                >Nombre (*)
+                <input type="text" name="nombre" required />
+              </label>
+              <label
+                >Apellido (*)
+                <input type="text" name="apellido" required />
+              </label>
+            </div>
+            <div class="form-row">
+              <label
+                >E-Mail (*)
+                <input type="email" name="email" required />
+              </label>
+              <label
+                >Teléfono
+                <input type="tel" name="telefono" />
+              </label>
+            </div>
+            <div class="form-row">
+              <label
+                >Ciudad, Provincia y/o País (*)
+                <input type="text" name="ciudad" required />
+              </label>
+              <label
+                >Motivo de la consulta
+                <select name="motivo">
+                  <option value="">— Por favor, elige una opción —</option>
+                  <option>Consulta general</option>
+                  <option>Quiero ser voluntario/a</option>
+                  <option>Propuesta de cooperación</option>
+                  <option>Prensa</option>
+                </select>
+              </label>
+            </div>
+            <label class="form-row form-row--full"
+              >Consulta (*)
+              <textarea name="consulta" required></textarea>
+            </label>
+            <button type="submit" class="btn btn--red">Enviar</button>
+          </form>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
