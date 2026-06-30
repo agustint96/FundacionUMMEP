@@ -749,6 +749,41 @@ textarea {
   text-align: left;
 }
 
+/* --- Botón "Ver playlist completa" debajo de cada grilla de videos --- */
+.ra-playlist-link-wrap {
+  width: 100%;
+  max-width: var(--max-content);
+  display: flex;
+  justify-content: center;
+  margin-top: -1rem;
+}
+
+.ra-playlist-link {
+  display: inline-block;
+  padding: 0.6rem 1.8rem;
+  border-radius: 999px;
+  border: 2px solid var(--color-navy);
+  background: transparent;
+  color: var(--color-navy);
+  text-decoration: none;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    background 0.2s var(--ease),
+    color 0.2s var(--ease),
+    transform 0.2s var(--ease);
+}
+
+.ra-playlist-link:hover {
+  background: var(--color-navy);
+  color: var(--color-white);
+  transform: translateY(-2px);
+}
+
 .ra-video-card__thumb {
   position: relative;
   display: block;

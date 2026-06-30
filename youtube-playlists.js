@@ -243,12 +243,46 @@
     return div.innerHTML;
   }
 
+  // Arma el link a la playlist completa en YouTube a partir del playlistId
+  // configurado en FEEDS.
+  function playlistUrl(playlistId) {
+    return `https://www.youtube.com/playlist?list=${playlistId}`;
+  }
+
+  // Inserta (una sola vez) el botón "Ver playlist completa" justo debajo
+  // de la grilla. Es un link estático armado con el playlistId, así que
+  // se agrega siempre, sin depender de que la llamada a la API funcione.
+  function addPlaylistLink(grid, feed) {
+    if (
+      grid.nextElementSibling &&
+      grid.nextElementSibling.classList.contains("ra-playlist-link-wrap")
+    ) {
+      return; // ya está agregado, no lo duplicamos
+    }
+
+    const wrap = document.createElement("div");
+    wrap.className = "ra-playlist-link-wrap";
+
+    const link = document.createElement("a");
+    link.href = playlistUrl(feed.playlistId);
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.className = "ra-playlist-link";
+    link.textContent = "Ver playlist completa";
+
+    wrap.appendChild(link);
+    grid.insertAdjacentElement("afterend", wrap);
+  }
+
   async function renderFeed(feed) {
     // Si esta página no tiene el contenedor de este feed, no hacemos nada
     // (por ejemplo: el feed "radio-la-chispa" se ignora en
     // Recursos_audiovisuales.html, y viceversa).
     const grid = document.querySelector(feed.gridSelector);
     if (!grid) return;
+
+    // Botón "Ver playlist completa" debajo de la grilla.
+    addPlaylistLink(grid, feed);
 
     // Mostramos el estado de carga (cuadrados azules) de entrada, en vez
     // de dejar ver el contenido estático/de ejemplo que hubiera en el HTML.
