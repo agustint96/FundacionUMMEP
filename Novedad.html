@@ -161,6 +161,8 @@
         cursor: pointer;
         padding: 6px;
         margin-left: auto;
+        position: relative;
+        z-index: 1001;
       }
       .site-nav__burger span {
         display: block;
@@ -457,7 +459,7 @@
           background: var(--color-white);
           padding: 1.5rem var(--section-pad-x) 2rem;
           overflow-y: auto;
-          z-index: 99;
+          z-index: 1000;
         }
         .site-nav__links.is-open a {
           font-size: 0.9rem;
@@ -818,9 +820,11 @@
               ><i class="fab fa-x-twitter"></i
             ></a>
           </div>
-          <div class="footer-logo">
-            <img src="img/fundacion-ummep-h (1).png" alt="" />
-          </div>
+          <a href="/index.html">
+            <div class="footer-logo">
+              <img src="img/fundacion-ummep-h (1).png" alt="" />
+            </div>
+          </a>
         </div>
 
         <div class="footer-col footer-col--contact">
