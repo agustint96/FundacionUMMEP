@@ -384,7 +384,7 @@ textarea {
   flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
-  gap: clamp(2.5rem, 8vw, 7rem);
+  gap: clamp(1rem, 4vw, 5rem);
   padding: 0.2rem;
   min-height: 140px;
   overflow-x: hidden;
@@ -400,7 +400,7 @@ textarea {
 .stat + .stat::before {
   content: "";
   position: absolute;
-  left: calc(-1 * clamp(1.25rem, 4vw, 3.5rem));
+  left: calc(-1 * clamp(0.5rem, 2vw, 2.5rem));
   top: 8%;
   bottom: 8%;
   width: 1px;
@@ -1391,25 +1391,29 @@ textarea {
     padding-bottom: 3rem;
   }
 
-  /* Container 3 (stats bar): nowrap, sin scroll, compacto */
+  /* Container 3 (stats bar): en mobile chico, space-around; si no
+     entran, caen a una segunda fila en vez de achicarse demasiado */
   .container--3 {
-    flex-wrap: nowrap;
-    gap: clamp(0.3rem, 1vw, 0.75rem);
-    padding: 0.5rem var(--section-pad-x);
-    overflow-x: hidden;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    row-gap: 1rem;
+    column-gap: clamp(0.75rem, 4vw, 2rem);
+    padding: 0.75rem var(--section-pad-x);
+    overflow-x: visible;
   }
 
   .stat {
-    padding: 0.25rem clamp(0.15rem, 0.5vw, 0.5rem);
+    padding: 0.25rem clamp(0.5rem, 2vw, 1rem);
+    flex: 0 1 140px;
     flex-shrink: 1;
   }
 
   .stat__number {
-    font-size: clamp(1rem, 3.5vw, 1.6rem);
+    font-size: clamp(1.3rem, 5vw, 1.8rem);
   }
 
   .stat__label {
-    font-size: clamp(0.45rem, 1.4vw, 0.6rem);
+    font-size: clamp(0.6rem, 2vw, 0.72rem);
     margin-top: 0.2rem;
     letter-spacing: 0.02em;
   }
@@ -1640,10 +1644,10 @@ textarea {
 
   /* Stats: aún más pequeño */
   .stat__number {
-    font-size: clamp(0.9rem, 3vw, 1.2rem);
+    font-size: clamp(1.1rem, 4.5vw, 1.4rem);
   }
   .stat__label {
-    font-size: clamp(0.4rem, 1.2vw, 0.5rem);
+    font-size: clamp(0.55rem, 1.8vw, 0.65rem);
   }
 
   /* Video card title: reducir */
