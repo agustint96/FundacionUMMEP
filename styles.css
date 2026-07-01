@@ -1,6 +1,23 @@
 /* =======================================================
    Fundación UMMEP — styles.css
    "Un mundo mejor es posible"
+   =======================================================
+
+   BREAKPOINTS GLOBALES (usados en este archivo):
+     1320px → el nav pasa de barra horizontal a menú hamburguesa
+     1200px → desktop grande → tablet landscape (grillas 3→2 columnas)
+      900px → tablet portrait
+      640px → mobile grande
+      400px → mobile chico
+
+   Cada página además tiene sus propios breakpoints en el <style>
+   interno de su HTML (Nuestro_Trabajo.html, Programas_internacionales.html
+   y Proyectos_de_coooperacion_al_desarrollo.html usan 768px; Contacto.html
+   usa 640px; Novedades.html usa 900px/540px; Como_colaborar.html usa
+   860px/560px; Novedad.html usa 1100px/860px; Radio_la_chispa.html usa
+   760px). No se unificaron con los de acá porque cada uno fue ajustado a
+   mano para el layout específico de esa página, y cambiar el valor sin
+   poder revisar el resultado visualmente podría romper esos layouts.
    ======================================================= */
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Mulish:wght@400;500;600;700&display=swap");
@@ -15,6 +32,7 @@
   --color-salmon: #e3a191;
   --color-red: #df2c1f;
   --color-purple: #7c6bab;
+  --color-green: #aed7b6;
   --color-cream: #f8f4ee;
   --color-sand: #f1ece2;
   --color-white: #ffffff;
@@ -368,6 +386,9 @@ textarea {
 }
 .btn--purple {
   background: var(--color-purple);
+}
+.btn--green {
+  background: var(--color-green);
 }
 .btn--gold {
   background: var(--color-gold);
@@ -1699,6 +1720,15 @@ textarea {
   .social-icons a {
     transition: none;
   }
+  /* Scroll reveal (ver sección 12): sin animación, contenido visible directo */
+  .reveal,
+  .reveal--left,
+  .reveal--right,
+  .reveal--zoom {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }
 
 /* =========================================================
@@ -1741,17 +1771,6 @@ textarea {
 }
 .reveal--zoom.is-visible {
   transform: scale(1);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .reveal,
-  .reveal--left,
-  .reveal--right,
-  .reveal--zoom {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-  }
 }
 
 /* =========================================================
@@ -1947,8 +1966,13 @@ textarea {
    Nota: la altura del hero se define en el bloque de arriba (.container--1)
    y se sobrescribe en los media queries mobile/tablet. */
 
-/* ── Responsive ── */
+/* ── Responsive ──
+   NOTA: todas las reglas mobile/tablet del nav (burger, menú, letras
+   verticales, flecha roja de hover y dropdown de Radio La Chispa) están
+   unificadas en un único @media (max-width: 1320px) para evitar tener
+   el mismo breakpoint repetido varias veces en el archivo. */
 @media (max-width: 1320px) {
+  /* -- Menú hamburguesa + panel lateral -- */
   .site-nav__burger {
     display: flex;
   }
@@ -2000,6 +2024,166 @@ textarea {
     width: 100%;
     height: 1px;
     margin: 0.25rem 0;
+  }
+
+  /* -- Letras verticales animadas al hover/touch de cada link -- */
+  .site-nav__links li {
+    position: relative;
+  }
+
+  .nav-vertical-letters {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: -1.8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .nav-vertical-letters span {
+    font-family: var(--font-heading);
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-red);
+    line-height: 1.1;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition:
+      opacity 0.15s var(--ease),
+      transform 0.15s var(--ease);
+  }
+
+  .site-nav__links li:hover .nav-vertical-letters span,
+  .site-nav__links li.is-touched .nav-vertical-letters span {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* -- Flecha roja ↗ en links del nav (solo hover, no en página activa) -- */
+  .site-nav__links a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .site-nav__links a::after {
+    content: "↗";
+    color: var(--color-red);
+    opacity: 0;
+    transform: translate(-4px, 4px);
+    transition:
+      opacity 0.22s var(--ease),
+      transform 0.22s var(--ease);
+    flex-shrink: 0;
+  }
+
+  .site-nav__links a:hover::after {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+
+  /* El link activo (página actual) NO muestra la flecha */
+  .site-nav__links a.is-active::after {
+    opacity: 0 !important;
+    transform: translate(-4px, 4px) !important;
+  }
+
+  /* -- Dropdown "Radio La Chispa" → Escuchanos en vivo --
+     El submenu queda oculto por defecto. Al lado de "Radio La Chispa"
+     aparece un botón con flechita (azul oscuro, como el resto de los
+     links) que al hacer tap/hover se pone rojo y despliega el submenu. */
+  .site-nav__item--dropdown {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .site-nav__item--dropdown > a {
+    flex: 1;
+  }
+
+  .site-nav__dropdown-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    margin-left: auto;
+    padding: 0;
+    background: none;
+    border: none;
+    color: var(--color-navy);
+    cursor: pointer;
+    transition:
+      color 0.2s var(--ease),
+      transform 0.25s var(--ease);
+  }
+
+  .site-nav__dropdown-toggle svg {
+    width: 11px;
+    height: 7px;
+    transition: transform 0.25s var(--ease);
+  }
+
+  .site-nav__dropdown-toggle:hover,
+  .site-nav__dropdown-toggle:focus-visible {
+    color: var(--color-red);
+  }
+
+  .site-nav__item--dropdown.is-open .site-nav__dropdown-toggle {
+    color: var(--color-red);
+  }
+
+  .site-nav__item--dropdown.is-open .site-nav__dropdown-toggle svg {
+    transform: rotate(180deg);
+  }
+
+  .site-nav__dropdown {
+    position: static;
+    flex-basis: 100%;
+    width: 100%;
+    min-width: 100%;
+    max-height: 0;
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+    pointer-events: none;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+    padding: 0 0 0 1rem;
+    transform: none;
+    transition:
+      max-height 0.3s var(--ease),
+      opacity 0.2s var(--ease),
+      visibility 0.2s;
+  }
+
+  .site-nav__dropdown::before {
+    content: none;
+  }
+
+  .site-nav__item--dropdown.is-open .site-nav__dropdown {
+    max-height: 120px;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    padding: 0.25rem 0 0.5rem 1rem;
+  }
+
+  .site-nav__dropdown-link {
+    flex-direction: row;
+    justify-content: flex-start;
+    text-align: left;
+    font-size: 0.78rem !important;
+    padding: 0.5rem !important;
+    color: var(--color-navy-soft);
   }
 }
 
@@ -2053,79 +2237,6 @@ body::before {
 .ProyectosdeCoopalDesarrollo-container--5 {
   background: transparent !important;
   background-image: none !important;
-}
-
-/* =========================================================
-   MOBILE NAV — Letras verticales animadas al hover/touch
-   ========================================================= */
-@media (max-width: 1320px) {
-  .site-nav__links li {
-    position: relative;
-  }
-
-  .nav-vertical-letters {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: -1.8rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    pointer-events: none;
-    z-index: 10;
-  }
-
-  .nav-vertical-letters span {
-    font-family: var(--font-heading);
-    font-size: 0.58rem;
-    font-weight: 800;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--color-red);
-    line-height: 1.1;
-    opacity: 0;
-    transform: translateY(-4px);
-    transition:
-      opacity 0.15s var(--ease),
-      transform 0.15s var(--ease);
-  }
-
-  .site-nav__links li:hover .nav-vertical-letters span,
-  .site-nav__links li.is-touched .nav-vertical-letters span {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ── Flecha roja ↗ en links del nav mobile (solo hover, no en página activa) ── */
-@media (max-width: 1320px) {
-  .site-nav__links a {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .site-nav__links a::after {
-    content: "↗";
-    color: var(--color-red);
-    opacity: 0;
-    transform: translate(-4px, 4px);
-    transition:
-      opacity 0.22s var(--ease),
-      transform 0.22s var(--ease);
-    flex-shrink: 0;
-  }
-
-  .site-nav__links a:hover::after {
-    opacity: 1;
-    transform: translate(0, 0);
-  }
-
-  /* El link activo (página actual) NO muestra la flecha */
-  .site-nav__links a.is-active::after {
-    opacity: 0 !important;
-    transform: translate(-4px, 4px) !important;
-  }
 }
 
 .Novedad_Link {
@@ -2218,102 +2329,10 @@ body::before {
   }
 }
 
-/* Botón flechita — solo visible en mobile/tablet (ver media query) */
+/* Botón flechita — solo visible en mobile/tablet.
+   Las reglas responsive de este dropdown (mostrar el botón, desplegar
+   el submenu, etc.) viven en el @media (max-width: 1320px) unificado
+   más arriba, junto con el resto de las reglas mobile del nav. */
 .site-nav__dropdown-toggle {
   display: none;
-}
-
-/* ── Mobile/tablet (menú hamburguesa) ──
-   El submenu queda oculto por defecto. Al lado de "Radio La Chispa"
-   aparece un botón con flechita (azul oscuro, como el resto de los
-   links) que al hacer tap/hover se pone rojo y despliega el submenu. */
-@media (max-width: 1320px) {
-  .site-nav__item--dropdown {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-
-  .site-nav__item--dropdown > a {
-    flex: 1;
-  }
-
-  .site-nav__dropdown-toggle {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    width: 40px;
-    height: 40px;
-    margin-left: auto;
-    padding: 0;
-    background: none;
-    border: none;
-    color: var(--color-navy);
-    cursor: pointer;
-    transition:
-      color 0.2s var(--ease),
-      transform 0.25s var(--ease);
-  }
-
-  .site-nav__dropdown-toggle svg {
-    width: 11px;
-    height: 7px;
-    transition: transform 0.25s var(--ease);
-  }
-
-  .site-nav__dropdown-toggle:hover,
-  .site-nav__dropdown-toggle:focus-visible {
-    color: var(--color-red);
-  }
-
-  .site-nav__item--dropdown.is-open .site-nav__dropdown-toggle {
-    color: var(--color-red);
-  }
-
-  .site-nav__item--dropdown.is-open .site-nav__dropdown-toggle svg {
-    transform: rotate(180deg);
-  }
-
-  .site-nav__dropdown {
-    position: static;
-    flex-basis: 100%;
-    width: 100%;
-    min-width: 100%;
-    max-height: 0;
-    opacity: 0;
-    visibility: hidden;
-    overflow: hidden;
-    pointer-events: none;
-    box-shadow: none;
-    border: none;
-    background: transparent;
-    padding: 0 0 0 1rem;
-    transform: none;
-    transition:
-      max-height 0.3s var(--ease),
-      opacity 0.2s var(--ease),
-      visibility 0.2s;
-  }
-
-  .site-nav__dropdown::before {
-    content: none;
-  }
-
-  .site-nav__item--dropdown.is-open .site-nav__dropdown {
-    max-height: 120px;
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    padding: 0.25rem 0 0.5rem 1rem;
-  }
-
-  .site-nav__dropdown-link {
-    flex-direction: row;
-    justify-content: flex-start;
-    text-align: left;
-    font-size: 0.78rem !important;
-    padding: 0.5rem !important;
-    color: var(--color-navy-soft);
-  }
 }

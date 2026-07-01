@@ -83,15 +83,11 @@
     if (diffDays === 1) return "Publicado hace 1 día";
     if (diffDays < 7) return `Publicado hace ${diffDays} días`;
     if (diffDays < 14) return "Publicado hace 1 semana";
-    if (diffDays < 30)
-      return `Publicado hace ${Math.floor(diffDays / 7)} semanas`;
+    if (diffDays < 30) return `Publicado hace ${Math.floor(diffDays / 7)} semanas`;
     if (diffDays < 60) return "Publicado hace 1 mes";
-    if (diffDays < 365)
-      return `Publicado hace ${Math.floor(diffDays / 30)} meses`;
+    if (diffDays < 365) return `Publicado hace ${Math.floor(diffDays / 30)} meses`;
     const years = Math.floor(diffDays / 365);
-    return years === 1
-      ? "Publicado hace 1 año"
-      : `Publicado hace ${years} años`;
+    return years === 1 ? "Publicado hace 1 año" : `Publicado hace ${years} años`;
   }
 
   function bestThumbnail(thumbnails) {
@@ -114,9 +110,7 @@
 
     const res = await fetch(url);
     if (!res.ok) {
-      throw new Error(
-        `Error al consultar playlist ${playlistId}: ${res.status}`,
-      );
+      throw new Error(`Error al consultar playlist ${playlistId}: ${res.status}`);
     }
     const data = await res.json();
     return data.items || [];
@@ -146,17 +140,13 @@
 
     // Descartamos videos eliminados/privados (no tienen videoId válido)
     const validItems = items.filter(
-      (it) => it.contentDetails && it.contentDetails.videoId,
+      (it) => it.contentDetails && it.contentDetails.videoId
     );
 
     // Ordenamos por fecha real de publicación del video (más nuevo primero)
     validItems.sort((a, b) => {
-      const dateA = new Date(
-        a.contentDetails.videoPublishedAt || a.snippet.publishedAt,
-      );
-      const dateB = new Date(
-        b.contentDetails.videoPublishedAt || b.snippet.publishedAt,
-      );
+      const dateA = new Date(a.contentDetails.videoPublishedAt || a.snippet.publishedAt);
+      const dateB = new Date(b.contentDetails.videoPublishedAt || b.snippet.publishedAt);
       return dateB - dateA;
     });
 
@@ -175,7 +165,7 @@
         duration: detail ? formatDuration(detail.contentDetails.duration) : "",
         viewsText: detail ? formatViews(detail.statistics.viewCount) : "",
         dateText: formatRelativeDate(
-          it.contentDetails.videoPublishedAt || it.snippet.publishedAt,
+          it.contentDetails.videoPublishedAt || it.snippet.publishedAt
         ),
       };
     });

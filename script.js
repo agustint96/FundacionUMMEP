@@ -38,9 +38,7 @@ function iniciarRotacionHero() {
   }
 
   function ocultarColumnas(phase) {
-    phase
-      .querySelectorAll("img")
-      .forEach((img) => img.classList.remove("is-visible"));
+    phase.querySelectorAll("img").forEach((img) => img.classList.remove("is-visible"));
     phase
       .querySelectorAll(".hero-col")
       .forEach((col) => col.classList.remove("is-solo-active"));
@@ -159,11 +157,9 @@ function iniciarScrollReveal() {
   // Evitar animar elementos que ya están dentro de otro elemento
   // animado (ej: un <a> dentro de un <li>), para no duplicar el efecto.
   function elementosAnimables(contenedor) {
-    const encontrados = Array.from(
-      contenedor.querySelectorAll(TEXTO_Y_BOTONES),
-    );
+    const encontrados = Array.from(contenedor.querySelectorAll(TEXTO_Y_BOTONES));
     return encontrados.filter(
-      (el) => !encontrados.some((otro) => otro !== el && otro.contains(el)),
+      (el) => !encontrados.some((otro) => otro !== el && otro.contains(el))
     );
   }
 
@@ -198,7 +194,7 @@ function iniciarScrollReveal() {
     {
       threshold: 0.15,
       rootMargin: "0px 0px -8% 0px",
-    },
+    }
   );
 
   contenedores.forEach((el) => observer.observe(el));
@@ -432,7 +428,7 @@ function iniciarNav() {
         mostrarExpandido();
       }
     },
-    { passive: true },
+    { passive: true }
   );
 
   // Touch: dedo arrastrando hacia abajo = scroll hacia arriba
@@ -442,7 +438,7 @@ function iniciarNav() {
     (e) => {
       touchStartY = e.touches[0].clientY;
     },
-    { passive: true },
+    { passive: true }
   );
   window.addEventListener(
     "touchmove",
@@ -452,7 +448,7 @@ function iniciarNav() {
         mostrarExpandido();
       }
     },
-    { passive: true },
+    { passive: true }
   );
 
   // Al cerrar el menú mobile (burger), re-evaluar si el nav debe ocultarse
