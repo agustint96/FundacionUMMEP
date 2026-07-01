@@ -229,13 +229,19 @@
         font-size: clamp(0.95rem, 0.9rem + 0.25vw, 1.1rem);
         color: var(--color-navy);
         text-transform: uppercase;
+        text-align: center;
         margin: 0 0 2.25rem;
       }
       .cc-voluntariado__grid {
         display: grid;
         grid-template-columns: 1.2fr 1fr;
         gap: clamp(1.5rem, 4vw, 3rem);
-        align-items: start;
+        align-items: stretch;
+      }
+      .cc-voluntariado__content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
       }
       .cc-voluntariado__lead {
         font-family: var(--font-heading);
@@ -261,10 +267,12 @@
         display: flex;
         flex-direction: column;
         gap: 1.25rem;
+        height: 100%;
       }
       .cc-voluntariado__photos img {
         width: 100%;
-        aspect-ratio: 16 / 10;
+        flex: 1 1 0;
+        min-height: 0;
         object-fit: cover;
         border-radius: 6px;
         box-shadow: 0 10px 26px rgba(22, 35, 74, 0.14);
@@ -318,9 +326,11 @@
         .cc-voluntariado__photos {
           flex-direction: row;
           flex-wrap: wrap;
+          height: auto;
         }
         .cc-voluntariado__photos img {
           flex: 1 1 240px;
+          aspect-ratio: 16 / 10;
         }
       }
       @media (max-width: 560px) {
@@ -341,7 +351,11 @@
   </head>
   <body>
     <nav class="site-nav" aria-label="Navegación principal">
-      <a class="site-nav__logo" href="index.html" aria-label="Inicio — Fundación UMMEP">
+      <a
+        class="site-nav__logo"
+        href="index.html"
+        aria-label="Inicio — Fundación UMMEP"
+      >
         <img
           src="imagenes/FOTOS FINALES/fundacion-ummep-h (1).png"
           alt="Fundación UMMEP"
@@ -350,7 +364,9 @@
       <ul class="site-nav__links" id="nav-links">
         <li><a href="index.html" data-nav="principal">Inicio</a></li>
         <li>
-          <a href="Nuestro_Trabajo.html" data-nav="nuestro-trabajo">Nuestro trabajo</a>
+          <a href="Nuestro_Trabajo.html" data-nav="nuestro-trabajo"
+            >Nuestro trabajo</a
+          >
         </li>
         <li><a href="Novedades.html" data-nav="novedades">Novedades</a></li>
         <li class="site-nav__sep" role="separator" aria-hidden="true"></li>
@@ -360,7 +376,9 @@
           >
         </li>
         <li>
-          <a href="Proyectos_de_coooperacion_al_desarrollo.html" data-nav="proyectos"
+          <a
+            href="Proyectos_de_coooperacion_al_desarrollo.html"
+            data-nav="proyectos"
             >Proyectos de cooperación</a
           >
         </li>
@@ -429,13 +447,13 @@
     <section class="cc-intro container--7" id="donaciones">
       <div class="cc-intro__inner">
         <h2 class="cc-intro__title">
-          La solidaridad y la empatía entre los pueblos es posible y necesaria para
-          construir un mundo mejor
+          La solidaridad y la empatía entre los pueblos es posible y necesaria
+          para construir un mundo mejor
         </h2>
         <div class="cc-intro__grid">
           <img
             class="cc-intro__img"
-            src="imagenes/FOTOS FINALES/Pagina 8 - Como colaborar/operacion-milagro-grupo.jpg"
+            src="imagenes/FOTOS FINALES/Pagina 9 - Como colaborar/operacion-milagro-grupo.jpg"
             alt="Equipo de Operación Milagro en Argentina"
             onerror="
               this.style.background = '#f1ece2';
@@ -443,16 +461,16 @@
             "
           />
           <p class="cc-intro__text">
-            Ayudános a fortalecer comunidades, organizaciones de base, sindicales y
-            sociales para luchar por un mundo justo e igual para todxs. Nuestro trabajo
-            impacta de manera directa en la calidad de vida de miles de personas
-            vulneradas.
+            Ayudános a fortalecer comunidades, organizaciones de base,
+            sindicales y sociales para luchar por un mundo justo e igual para
+            todxs. Nuestro trabajo impacta de manera directa en la calidad de
+            vida de miles de personas vulneradas.
           </p>
           <p class="cc-intro__text">
-            A través de la atención médica, la alfabetización y la formación con eje en
-            salud, educación, género y ambiente llegamos a los territorios con
-            herramientas concretas para practicar la solidaridad y contagiar la necesidad
-            de una transformacion profunda.
+            A través de la atención médica, la alfabetización y la formación con
+            eje en salud, educación, género y ambiente llegamos a los
+            territorios con herramientas concretas para practicar la solidaridad
+            y contagiar la necesidad de una transformacion profunda.
           </p>
         </div>
       </div>
@@ -465,15 +483,15 @@
       <div class="cc-aporte__inner">
         <h2 class="cc-section-title">Aporte económico</h2>
         <p class="cc-section-intro">
-          Tu aporte va destinado a cubrir cirugías para personas vulnerables y sin obra
-          social ni recursos para solventar las intervenciones quirúrgicas necesarias para
-          evitar la ceguera.
+          Tu aporte va destinado a cubrir cirugías para personas vulnerables y
+          sin obra social ni recursos para solventar las intervenciones
+          quirúrgicas necesarias para evitar la ceguera.
         </p>
 
         <h3 class="cc-opcion">Opción 1 - Doná con Mercado pago</h3>
         <img
           class="cc-mp-card"
-          src="imagenes/FOTOS FINALES/Pagina 8 - Como colaborar/mercado-pago-qr.png"
+          src="imagenes/FOTOS FINALES/Pagina 9 - Como colaborar/mercado-pago-qr.png"
           alt="Escaneá el código QR de Mercado Pago para donar a Fundación UMMEP"
           onerror="
             this.style.background = '#ffffff';
@@ -485,7 +503,7 @@
         <a href="https://www.paypal.com/donate/?hosted_button_id=96ZJD4HHX84XQ">
           <img
             class="cc-paypal-card"
-            src="imagenes/FOTOS FINALES/Pagina 8 - Como colaborar/paypal-logo.png"
+            src="imagenes/FOTOS FINALES/Pagina 9 - Como colaborar/paypal-logo.png"
             alt="Doná a través de Paypal"
             onerror="
               this.style.background = '#ffffff';
@@ -500,7 +518,7 @@
         <div class="cc-banco-row">
           <img
             class="cc-banco-logo"
-            src="imagenes/FOTOS FINALES/Pagina 8 - Como colaborar/banco-credicoop.png"
+            src="imagenes/FOTOS FINALES/Pagina 9 - Como colaborar/banco-credicoop.png"
             alt="Banco Credicoop — La Banca Solidaria"
             onerror="
               this.style.background = '#ffffff';
@@ -531,15 +549,15 @@
           <div>
             <h3 class="cc-insumos__heading">Campaña Volver a verte</h3>
             <p class="cc-insumos__text">
-              Lanzamos la campaña <strong>Volver a verte.</strong> Podés colaborar
-              dondando anteojos usados con el marco y las patillas sanas. El objetivos es
-              cambiarles el lente y reacondicionarlos en nuestra óptica para entregarselos
-              a quienes los necesitan.
+              Lanzamos la campaña <strong>Volver a verte.</strong> Podés
+              colaborar dondando anteojos usados con el marco y las patillas
+              sanas. El objetivos es cambiarles el lente y reacondicionarlos en
+              nuestra óptica para entregarselos a quienes los necesitan.
             </p>
           </div>
           <img
             class="cc-insumos__img"
-            src="imagenes/FOTOS FINALES/Pagina 8 - Como colaborar/volver-a-verte-poster.jpg"
+            src="imagenes/FOTOS FINALES/Pagina 9 - Como colaborar/VOLVER a VERTE - 1.png"
             alt="Campaña Volver a Verte — Doná tus anteojos usados"
             onerror="
               this.style.background = '#f1ece2';
@@ -551,7 +569,7 @@
         <div class="cc-insumos__row cc-insumos__row--reverse">
           <img
             class="cc-insumos__img"
-            src="imagenes/FOTOS FINALES/Pagina 8 - Como colaborar/equipo-insumos-medicos.jpg"
+            src="imagenes/FOTOS FINALES/Pagina 9 - Como colaborar/1765027503026.jpg"
             alt="Equipo del Centro Oftalmológico Che Guevara"
             onerror="
               this.style.background = '#f1ece2';
@@ -561,9 +579,10 @@
           <div>
             <h3 class="cc-insumos__heading">Ayudá donando insumos médicos</h3>
             <p class="cc-insumos__text">
-              Necesitamos medicamentos oftalmológicos, gasas, alcohol, jeringas y agujas
-              descartables. Si tenés otros insumos médicos o de laboratorio consultá antes
-              de hacer la donación al contacto que aparece más abajo.
+              Necesitamos medicamentos oftalmológicos, gasas, alcohol, jeringas
+              y agujas descartables. Si tenés otros insumos médicos o de
+              laboratorio consultá antes de hacer la donación al contacto que
+              aparece más abajo.
             </p>
           </div>
         </div>
@@ -577,52 +596,57 @@
       <div class="cc-voluntariado__inner">
         <h2 class="cc-section-title">Voluntariado</h2>
         <p class="cc-voluntariado__subtitle">
-          Sumate a nuestros equipos de trabajo a través de los distintos voluntariados
+          Sumate a nuestros equipos de trabajo a través de los distintos
+          voluntariados
         </p>
 
         <div class="cc-voluntariado__grid">
-          <div>
+          <div class="cc-voluntariado__content">
             <p class="cc-voluntariado__lead">
-              Las actividades que se realizan en el Centro Oftalmológico serían imposibles
-              sin la solidaridad del pueblo cubano y la labor voluntaria de decenas de
-              personas que cotidianamente aportan a su sostenimiento. Hoy, más que nunca,
-              son fundamentales las manos solidarias.
+              Las actividades que se realizan en el Centro Oftalmológico serían
+              imposibles sin la solidaridad del pueblo cubano y la labor
+              voluntaria de decenas de personas que cotidianamente aportan a su
+              sostenimiento. Hoy, más que nunca, son fundamentales las manos
+              solidarias.
             </p>
 
             <p class="cc-voluntariado__text">
-              Se necesitan Voluntarios para colaborar en: El Centro Oftalmológico "Dr.
-              Ernesto Che Guevara", en Córdoba.
+              <strong
+                >Se necesitan Voluntarios para colaborar en: El Centro
+                Oftalmológico "Dr. Ernesto Che Guevara", en Córdoba.</strong
+              >
             </p>
 
             <p class="cc-voluntariado__text">
-              Te podés sumar al <strong>área médica</strong>: se necesitan médicos/as
-              clínicos/as, Oftalmólogas/os, enfermeras/os, Opticos/as, Cardiólogos/as, y
-              todos/as quienes quieran dar su mano solidaria en el área de
-              <strong>hospedaje</strong> y atención a personas en situación de
-              vulnerabilidad.
+              Te podés sumar al <strong>área médica</strong>: se necesitan
+              médicos/as clínicos/as, Oftalmólogas/os, enfermeras/os,
+              Opticos/as, Cardiólogos/as, y todos/as quienes quieran dar su mano
+              solidaria en el área de <strong>hospedaje</strong> y atención a
+              personas en situación de vulnerabilidad.
             </p>
 
             <p class="cc-voluntariado__text">
               Podés sumarte el
-              <strong>área de comunicación</strong>, prensa y difusión de la Fundación.
+              <strong>área de comunicación</strong>, prensa y difusión de la
+              Fundación.
             </p>
 
             <p class="cc-voluntariado__text">
               También te podes sumar al
-              <strong>área de formación</strong>, educación, apoyo escolar, escuela de
-              ajedréz y alfabetización.
+              <strong>área de formación</strong>, educación, apoyo escolar,
+              escuela de ajedréz y alfabetización.
             </p>
 
             <p class="cc-voluntariado__text">
               Consultá por <strong>jornadas de trabajo voluntario</strong>
-              en el Centro Oftalmológico para sumarte a poner el cuerpo y colaborar con la
-              mantención y crecimiento del edificio.
+              en el Centro Oftalmológico para sumarte a poner el cuerpo y
+              colaborar con la mantención y crecimiento del edificio.
             </p>
           </div>
 
           <div class="cc-voluntariado__photos">
             <img
-              src="imagenes/FOTOS FINALES/Pagina 8 - Como colaborar/voluntariado-1.jpg"
+              src="imagenes/FOTOS FINALES/Pagina 9 - Como colaborar/DSC00075.JPG"
               alt="Charla con voluntarios en el Centro Oftalmológico Che Guevara"
               onerror="
                 this.style.background = '#ffffff';
@@ -630,7 +654,7 @@
               "
             />
             <img
-              src="imagenes/FOTOS FINALES/Pagina 8 - Como colaborar/voluntariado-2.jpg"
+              src="imagenes/FOTOS FINALES/Pagina 9 - Como colaborar/DSC00238.JPG"
               alt="Voluntarios trabajando en la terraza del Centro Oftalmológico"
               onerror="
                 this.style.background = '#ffffff';
@@ -638,7 +662,7 @@
               "
             />
             <img
-              src="imagenes/FOTOS FINALES/Pagina 8 - Como colaborar/voluntariado-3.jpg"
+              src="imagenes/FOTOS FINALES/Pagina 9 - Como colaborar/DSC00193.JPG"
               alt="Voluntaria colaborando en tareas de mantenimiento"
               onerror="
                 this.style.background = '#ffffff';
@@ -658,8 +682,8 @@
         Para más información, dejanos un mensaje o comunicate al siguiente mail:
         <a href="mailto:administracion@fundacionummep.org.ar"
           >administracion@fundacionummep.org.ar</a
-        >. Para comunicación telefonica llamá al teléfono +54 351 472-4588 o escribinos al
-        Whatsapp +54 9 351 3719143
+        >. Para comunicación telefonica llamá al teléfono +54 351 472-4588 o
+        escribinos al Whatsapp +54 9 351 3719143
       </p>
     </section>
 
@@ -674,7 +698,9 @@
             <a href="https://www.facebook.com/ummep" aria-label="Facebook"
               ><i class="fab fa-facebook-f"></i
             ></a>
-            <a href="https://www.instagram.com/fundacionummep/" aria-label="Instagram"
+            <a
+              href="https://www.instagram.com/fundacionummep/"
+              aria-label="Instagram"
               ><i class="fab fa-instagram"></i
             ></a>
             <a href="https://x.com/FundacionUMMEP" aria-label="X (Twitter)"
