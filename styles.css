@@ -2131,3 +2131,189 @@ body::before {
 .Novedad_Link {
   text-decoration: none;
 }
+
+/* =========================================================
+   NAV — Dropdown "Radio La Chispa" → Escuchanos en vivo
+   ========================================================= */
+.site-nav__item--dropdown {
+  position: relative;
+}
+
+/* Desktop: el submenu tiene el mismo ancho que el link "Radio La
+   Chispa" (100% del li, que es su contenedor posicionado). */
+.site-nav__dropdown {
+  box-sizing: border-box;
+  list-style: none;
+  margin: 0;
+  padding: 0.3rem;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  min-width: 100%;
+  background: var(--color-white);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-6px);
+  transition:
+    opacity 0.2s var(--ease),
+    transform 0.2s var(--ease),
+    visibility 0.2s;
+  z-index: 50;
+}
+
+/* Pequeño "puente" invisible para que el mouse pueda viajar del link
+   al submenu sin que el hover se pierda en el medio. */
+.site-nav__dropdown::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 0;
+  right: 0;
+  height: 8px;
+}
+
+.site-nav__item--dropdown:hover .site-nav__dropdown,
+.site-nav__item--dropdown:focus-within .site-nav__dropdown {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.site-nav__dropdown-link {
+  display: flex !important;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  padding: 0.4rem 0.3rem !important;
+  white-space: normal;
+  text-align: center;
+  line-height: 1.25;
+  font-size: 0.58rem !important;
+  letter-spacing: 0.04em;
+  border-radius: 4px;
+}
+
+/* Punto rojo tipo "señal en vivo" */
+.site-nav__live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-red);
+  flex-shrink: 0;
+  animation: site-nav-live-pulse 1.3s ease-in-out infinite;
+}
+
+@keyframes site-nav-live-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.12;
+  }
+}
+
+/* Botón flechita — solo visible en mobile/tablet (ver media query) */
+.site-nav__dropdown-toggle {
+  display: none;
+}
+
+/* ── Mobile/tablet (menú hamburguesa) ──
+   El submenu queda oculto por defecto. Al lado de "Radio La Chispa"
+   aparece un botón con flechita (azul oscuro, como el resto de los
+   links) que al hacer tap/hover se pone rojo y despliega el submenu. */
+@media (max-width: 1320px) {
+  .site-nav__item--dropdown {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .site-nav__item--dropdown > a {
+    flex: 1;
+  }
+
+  .site-nav__dropdown-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    margin-left: auto;
+    padding: 0;
+    background: none;
+    border: none;
+    color: var(--color-navy);
+    cursor: pointer;
+    transition:
+      color 0.2s var(--ease),
+      transform 0.25s var(--ease);
+  }
+
+  .site-nav__dropdown-toggle svg {
+    width: 11px;
+    height: 7px;
+    transition: transform 0.25s var(--ease);
+  }
+
+  .site-nav__dropdown-toggle:hover,
+  .site-nav__dropdown-toggle:focus-visible {
+    color: var(--color-red);
+  }
+
+  .site-nav__item--dropdown.is-open .site-nav__dropdown-toggle {
+    color: var(--color-red);
+  }
+
+  .site-nav__item--dropdown.is-open .site-nav__dropdown-toggle svg {
+    transform: rotate(180deg);
+  }
+
+  .site-nav__dropdown {
+    position: static;
+    flex-basis: 100%;
+    width: 100%;
+    min-width: 100%;
+    max-height: 0;
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+    pointer-events: none;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+    padding: 0 0 0 1rem;
+    transform: none;
+    transition:
+      max-height 0.3s var(--ease),
+      opacity 0.2s var(--ease),
+      visibility 0.2s;
+  }
+
+  .site-nav__dropdown::before {
+    content: none;
+  }
+
+  .site-nav__item--dropdown.is-open .site-nav__dropdown {
+    max-height: 120px;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    padding: 0.25rem 0 0.5rem 1rem;
+  }
+
+  .site-nav__dropdown-link {
+    flex-direction: row;
+    justify-content: flex-start;
+    text-align: left;
+    font-size: 0.78rem !important;
+    padding: 0.5rem !important;
+    color: var(--color-navy-soft);
+  }
+}

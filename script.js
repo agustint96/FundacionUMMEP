@@ -256,6 +256,19 @@ function iniciarNav() {
     });
   });
 
+  // ── Dropdown "Radio La Chispa" (botón flechita, solo mobile/tablet) ──
+  links.querySelectorAll(".site-nav__item--dropdown").forEach((item) => {
+    const toggle = item.querySelector(".site-nav__dropdown-toggle");
+    if (!toggle) return;
+
+    toggle.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const abierto = item.classList.toggle("is-open");
+      toggle.setAttribute("aria-expanded", String(abierto));
+    });
+  });
+
   // ── Marcar link activo según nombre de archivo ──
   const archivo = location.pathname.split("/").pop() || "index.html";
   const mapa = {

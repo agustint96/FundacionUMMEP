@@ -378,8 +378,37 @@
             >Recursos audiovisuales</a
           >
         </li>
-        <li>
+        <li class="site-nav__item--dropdown">
           <a href="Radio_la_chispa.html" data-nav="radio">Radio La Chispa</a>
+          <button
+            class="site-nav__dropdown-toggle"
+            type="button"
+            aria-label="Mostrar opciones de Radio La Chispa"
+            aria-expanded="false"
+          >
+            <svg viewBox="0 0 10 6" fill="none" aria-hidden="true">
+              <path
+                d="M1 1L5 5L9 1"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+          <ul class="site-nav__dropdown">
+            <li>
+              <a
+                href="https://www.radiolachispa.com.ar/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="site-nav__dropdown-link"
+              >
+                <span class="site-nav__live-dot" aria-hidden="true"></span>
+                En vivo
+              </a>
+            </li>
+          </ul>
         </li>
         <li class="site-nav__sep" role="separator" aria-hidden="true"></li>
         <li><a href="Contacto.html" data-nav="contacto">Contacto</a></li>
