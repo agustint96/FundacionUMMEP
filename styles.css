@@ -266,12 +266,23 @@ textarea {
 /* decorative waves — dos capas (haikei), ancladas al fondo del hero */
 .hero-wave {
   position: absolute;
-  left: 0;
+  /* ancho de sobra (60px de cada lado) para que el parallax horizontal
+     del mouse nunca deje ver el borde de la ola; el overflow: hidden
+     de .container--1 recorta ese excedente */
+  left: -60px;
   bottom: -2px;
-  width: 100%;
+  width: calc(100% + 120px);
   /* la altura ocupa el tercio inferior del hero para que las olas sean generosas */
   height: clamp(180px, 38vh, 340px);
   pointer-events: none;
+  /* el translate3d lo maneja script.js (parallax al scrollear/mouse) */
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-wave {
+    transform: none !important;
+  }
 }
 
 /* ola más lejana: navy semitransparente, la más alta y más atrás */

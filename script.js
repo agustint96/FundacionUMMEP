@@ -38,7 +38,9 @@ function iniciarRotacionHero() {
   }
 
   function ocultarColumnas(phase) {
-    phase.querySelectorAll("img").forEach((img) => img.classList.remove("is-visible"));
+    phase
+      .querySelectorAll("img")
+      .forEach((img) => img.classList.remove("is-visible"));
     phase
       .querySelectorAll(".hero-col")
       .forEach((col) => col.classList.remove("is-solo-active"));
@@ -157,9 +159,11 @@ function iniciarScrollReveal() {
   // Evitar animar elementos que ya están dentro de otro elemento
   // animado (ej: un <a> dentro de un <li>), para no duplicar el efecto.
   function elementosAnimables(contenedor) {
-    const encontrados = Array.from(contenedor.querySelectorAll(TEXTO_Y_BOTONES));
+    const encontrados = Array.from(
+      contenedor.querySelectorAll(TEXTO_Y_BOTONES),
+    );
     return encontrados.filter(
-      (el) => !encontrados.some((otro) => otro !== el && otro.contains(el))
+      (el) => !encontrados.some((otro) => otro !== el && otro.contains(el)),
     );
   }
 
@@ -194,10 +198,111 @@ function iniciarScrollReveal() {
     {
       threshold: 0.15,
       rootMargin: "0px 0px -8% 0px",
-    }
+    },
   );
 
   contenedores.forEach((el) => observer.observe(el));
+}
+
+/* =======================================================
+   Parallax de las olas del hero (index.html)
+   =======================================================
+   Las tres capas de olas (.hero-wave--far / --back / --front)
+   se mueven en dos ejes:
+     · Vertical (scroll): a distinta velocidad según la capa;
+       la más lejana se mueve poco, la trasera un poco más.
+       La delantera (blanca/crema) casi no se mueve para que
+       siga sirviendo de "piso" estable donde se apoya el logo.
+     · Horizontal (mouse): al mover el mouse dentro del hero,
+       las capas se corren hacia los costados según qué tan
+       lejos esté el cursor del centro — la más cercana
+       (front) se mueve más que la lejana (far). Cada capa
+       tiene ancho de sobra en CSS (.hero-wave) para que este
+       movimiento nunca deje ver el borde.
+   Solo corre en index.html (donde existe #inicio con las
+   olas), el eje X solo con mouse real (no en touch), y todo
+   se desactiva si el usuario prefiere menos animaciones.
+   ======================================================= */
+function iniciarParallaxOlas() {
+  const hero = document.getElementById("inicio");
+  if (!hero) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  const capas = [
+    {
+      el: hero.querySelector(".hero-wave--far"),
+      velocidadY: 0.12,
+      velocidadX: 10,
+    },
+    {
+      el: hero.querySelector(".hero-wave--back"),
+      velocidadY: 0.22,
+      velocidadX: 20,
+    },
+    {
+      el: hero.querySelector(".hero-wave--front"),
+      velocidadY: 0.03,
+      velocidadX: 32,
+    },
+  ].filter((capa) => capa.el);
+
+  if (!capas.length) return;
+
+  let progresoScroll = 0; // 0→1, cuánto salió el hero de pantalla
+  let ratioMouseX = 0; // -1→1, posición del cursor respecto al centro
+  let renderPendiente = false;
+
+  function render() {
+    renderPendiente = false;
+    const alturaHero = hero.offsetHeight || window.innerHeight;
+
+    capas.forEach(({ el, velocidadY, velocidadX }) => {
+      const y = progresoScroll * alturaHero * velocidadY;
+      const x = ratioMouseX * velocidadX;
+      el.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+    });
+  }
+
+  function pedirRender() {
+    if (renderPendiente) return;
+    renderPendiente = true;
+    requestAnimationFrame(render);
+  }
+
+  function onScroll() {
+    const alturaHero = hero.offsetHeight || window.innerHeight;
+    progresoScroll = Math.min(Math.max(window.scrollY / alturaHero, 0), 1);
+    pedirRender();
+  }
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll, { passive: true });
+
+  // ── movimiento horizontal con el mouse (solo dispositivos con puntero fino) ──
+  const tieneMouse = window.matchMedia("(pointer: fine)").matches;
+
+  if (tieneMouse) {
+    function onMouseMove(e) {
+      const rect = hero.getBoundingClientRect();
+      const centroX = rect.left + rect.width / 2;
+      // normalizado entre -1 (borde izquierdo) y 1 (borde derecho)
+      ratioMouseX = Math.min(
+        Math.max((e.clientX - centroX) / (rect.width / 2), -1),
+        1,
+      );
+      pedirRender();
+    }
+
+    function onMouseLeave() {
+      ratioMouseX = 0;
+      pedirRender();
+    }
+
+    hero.addEventListener("mousemove", onMouseMove);
+    hero.addEventListener("mouseleave", onMouseLeave);
+  }
+
+  onScroll();
 }
 
 /* =======================================================
@@ -428,7 +533,7 @@ function iniciarNav() {
         mostrarExpandido();
       }
     },
-    { passive: true }
+    { passive: true },
   );
 
   // Touch: dedo arrastrando hacia abajo = scroll hacia arriba
@@ -438,7 +543,7 @@ function iniciarNav() {
     (e) => {
       touchStartY = e.touches[0].clientY;
     },
-    { passive: true }
+    { passive: true },
   );
   window.addEventListener(
     "touchmove",
@@ -448,7 +553,7 @@ function iniciarNav() {
         mostrarExpandido();
       }
     },
-    { passive: true }
+    { passive: true },
   );
 
   // Al cerrar el menú mobile (burger), re-evaluar si el nav debe ocultarse
@@ -476,6 +581,7 @@ function iniciarNav() {
 
 document.addEventListener("DOMContentLoaded", () => {
   iniciarRotacionHero();
+  iniciarParallaxOlas();
   iniciarFormularioContacto();
   iniciarNav();
   iniciarScrollReveal();
