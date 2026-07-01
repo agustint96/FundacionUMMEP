@@ -205,20 +205,27 @@ function iniciarScrollReveal() {
 }
 
 /* =======================================================
-   Parallax de las olas del hero (index.html)
+   Parallax del hero (index.html)
    =======================================================
-   Las tres capas de olas (.hero-wave--far / --back / --front)
-   se mueven en dos ejes:
+   Varias capas: las fotos de fondo, las tres olas de color
+   (.hero-wave--far / --back / --front) y, por encima de todo,
+   la imagen de líneas topográficas decorativas
+   (.hero-wave--lines).
      · Vertical (scroll): a distinta velocidad según la capa;
        la más lejana se mueve poco, la trasera un poco más.
-       La delantera (blanca/crema) casi no se mueve para que
-       siga sirviendo de "piso" estable donde se apoya el logo.
-     · Horizontal (mouse): al mover el mouse dentro del hero,
-       las capas se corren hacia los costados según qué tan
-       lejos esté el cursor del centro — la más cercana
-       (front) se mueve más que la lejana (far). Cada capa
-       tiene ancho de sobra en CSS (.hero-wave) para que este
-       movimiento nunca deje ver el borde.
+       Las fotos y las capas "de piso" (ola delantera y líneas)
+       casi no se mueven para no perder el anclaje ni revelar
+       el borde de la imagen.
+     · Horizontal (mouse): SOLO se mueven las tres olas de
+       color. Las fotos quedan fijas (velocidadX en 0) para que
+       el efecto de profundidad se sienta en las olas y no
+       "tiemble" la imagen de fondo. Las líneas también quedan
+       fijas en X: ese dibujo llega hasta el borde real del
+       archivo, sin margen — cualquier desplazamiento
+       horizontal, por chico que fuera, terminaba mostrando un
+       corte de un lado. Las olas sí tienen ancho de sobra en
+       CSS (.hero-wave) para que ese movimiento nunca deje ver
+       un borde vacío.
    Solo corre en index.html (donde existe #inicio con las
    olas), el eje X solo con mouse real (no en touch), y todo
    se desactiva si el usuario prefiere menos animaciones.
@@ -230,21 +237,33 @@ function iniciarParallaxOlas() {
 
   const capas = [
     {
-      el: hero.querySelector(".hero-wave--far"),
+      els: Array.from(hero.querySelectorAll(".hero-phase")),
+      velocidadY: 0,
+      velocidadX: 0,
+    },
+    {
+      els: [hero.querySelector(".hero-wave--far")],
       velocidadY: 0.12,
       velocidadX: 10,
     },
     {
-      el: hero.querySelector(".hero-wave--back"),
+      els: [hero.querySelector(".hero-wave--back")],
       velocidadY: 0.22,
       velocidadX: 20,
     },
     {
-      el: hero.querySelector(".hero-wave--front"),
+      els: [hero.querySelector(".hero-wave--front")],
       velocidadY: 0.03,
       velocidadX: 32,
     },
-  ].filter((capa) => capa.el);
+    {
+      els: [hero.querySelector(".hero-wave--lines")],
+      velocidadY: 0.05,
+      velocidadX: 0,
+    },
+  ]
+    .map((capa) => ({ ...capa, els: capa.els.filter(Boolean) }))
+    .filter((capa) => capa.els.length);
 
   if (!capas.length) return;
 
@@ -256,10 +275,13 @@ function iniciarParallaxOlas() {
     renderPendiente = false;
     const alturaHero = hero.offsetHeight || window.innerHeight;
 
-    capas.forEach(({ el, velocidadY, velocidadX }) => {
+    capas.forEach(({ els, velocidadY, velocidadX }) => {
       const y = progresoScroll * alturaHero * velocidadY;
       const x = ratioMouseX * velocidadX;
-      el.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+      const transform = `translate3d(${x}px, ${y}px, 0)`;
+      els.forEach((el) => {
+        el.style.transform = transform;
+      });
     });
   }
 

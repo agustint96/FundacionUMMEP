@@ -199,10 +199,16 @@ textarea {
 /* Cada fase ocupa todo el hero y se superpone */
 .hero-phase {
   position: absolute;
-  inset: 0;
+  /* 30px de sobra a cada lado (igual que .hero-wave) para que el
+     parallax horizontal de las fotos nunca deje ver el borde */
+  top: 0;
+  right: -30px;
+  bottom: 0;
+  left: -30px;
   display: flex;
   opacity: 0;
   pointer-events: none;
+  will-change: transform;
   /* transición de entrada/salida de la fase completa */
   transition: opacity 1.2s var(--ease);
 }
@@ -305,6 +311,24 @@ textarea {
   height: clamp(208px, 67vh, 616px);
 }
 
+/* líneas topográficas decorativas (PNG) — van POR ENCIMA de las tres
+   olas y de las fotos, pegadas al mismo borde inferior. Es una imagen
+   (no SVG), pero se ajusta igual que las olas: object-fit: fill la
+   ESTIRA para ocupar todo el ancho/alto sin recortar nada. A diferencia
+   de las otras capas, esta NO tiene colchón lateral ni se mueve en el
+   eje X con el mouse (en script.js su velocidadX es 0): el dibujo llega
+   hasta el borde real del archivo, así que cualquier desplazamiento
+   horizontal — por chico que sea — terminaba mostrando un corte de un
+   lado. Se queda fija en 100% de ancho, siempre completa. */
+.hero-wave--lines {
+  left: 0;
+  width: 100%;
+  z-index: 4;
+  height: clamp(180px, 42vh, 380px);
+  object-fit: fill;
+  opacity: 0.9;
+}
+
 .hero-wave__fill {
   fill: var(--color-salmon);
 }
@@ -317,7 +341,7 @@ textarea {
   left: 50%;
   bottom: clamp(18px, 3vh, 28px);
   transform: translateX(-50%);
-  z-index: 4;
+  z-index: 5;
   width: clamp(230px, 14vw, 200px);
   filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.25));
 }
@@ -1208,6 +1232,9 @@ textarea {
   .hero-wave--front {
     height: clamp(120px, 36vh, 300px);
   }
+  .hero-wave--lines {
+    height: clamp(130px, 40vh, 340px);
+  }
 }
 
 /* ── 900px: tablet portrait ── */
@@ -1394,6 +1421,9 @@ textarea {
   }
   .hero-wave--front {
     height: clamp(80px, 26vh, 140px);
+  }
+  .hero-wave--lines {
+    height: clamp(90px, 30vh, 160px);
   }
 
   /* Logo del hero: en mobile se posiciona fuera del hero con fondo crema */
