@@ -97,7 +97,7 @@
       thumbnails?.high?.url ||
       thumbnails?.medium?.url ||
       thumbnails?.default?.url ||
-      "img/placeholder-video.svg"
+      "imagenes/FOTOS FINALES/placeholder-video.svg"
     );
   }
 

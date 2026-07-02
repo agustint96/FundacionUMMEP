@@ -34,6 +34,49 @@
       }
 
       /* ----------------------------------------------------------
+         Animación de entrada del título (Animista: swing-in-top-fwd)
+         ---------------------------------------------------------- */
+      .swing-in-top-fwd {
+        -webkit-animation: swing-in-top-fwd 0.5s
+          cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+        animation: swing-in-top-fwd 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+          both;
+      }
+
+      @-webkit-keyframes swing-in-top-fwd {
+        0% {
+          -webkit-transform: rotateX(-100deg);
+          transform: rotateX(-100deg);
+          -webkit-transform-origin: top;
+          transform-origin: top;
+          opacity: 0;
+        }
+        100% {
+          -webkit-transform: rotateX(0deg);
+          transform: rotateX(0deg);
+          -webkit-transform-origin: top;
+          transform-origin: top;
+          opacity: 1;
+        }
+      }
+      @keyframes swing-in-top-fwd {
+        0% {
+          -webkit-transform: rotateX(-100deg);
+          transform: rotateX(-100deg);
+          -webkit-transform-origin: top;
+          transform-origin: top;
+          opacity: 0;
+        }
+        100% {
+          -webkit-transform: rotateX(0deg);
+          transform: rotateX(0deg);
+          -webkit-transform-origin: top;
+          transform-origin: top;
+          opacity: 1;
+        }
+      }
+
+      /* ----------------------------------------------------------
          Shared proyecto section
          ---------------------------------------------------------- */
       .proyecto-section {
@@ -52,6 +95,7 @@
         align-items: flex-start;
         justify-content: center;
         padding-top: 0.5rem;
+        perspective: 800px;
       }
 
       .proyecto-logo img {
@@ -97,9 +141,11 @@
          Container 4 — Instituciones participantes
          ---------------------------------------------------------- */
       .ProyectosdeCoopalDesarrollo-container--4 {
-        background: var(--color-cream);
-        background-image: var(--squiggle-bg);
-        background-size: 480px;
+        background-image: url("imagenes/FOTOS FINALES/posterstock.png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
         padding: clamp(2.5rem, 6vh, 4.5rem) clamp(2rem, 6vw, 5rem);
         display: flex;
         flex-direction: column;
@@ -364,12 +410,12 @@
       <div class="proyecto-logo">
         <!--
           Reemplazá con el logo real:
-          <img src="img/logo-mujeres-que-fortalecen.png" alt="Mujeres que Fortalecen Mujeres" />
+          <img src="imagenes/FOTOS FINALES/logo-mujeres-que-fortalecen.png" alt="Mujeres que Fortalecen Mujeres" loading="lazy" decoding="async" />
         -->
         <img
           src="imagenes/FOTOS FINALES/Pagina 5 - Proyectos de cooperación/Gemini_Generated_Image_jab6qgjab6qgjab6-removebg-preview.png"
           alt="Mujeres que Fortalecen Mujeres"
-        />
+          class="swing-in-top-fwd" loading="lazy" decoding="async" />
       </div>
 
       <div class="proyecto-content">
@@ -404,12 +450,12 @@
       <div class="proyecto-logo">
         <!--
           Reemplazá con el logo real:
-          <img src="img/logo-mujeres-que-fortalecen.png" alt="Mujeres que Fortalecen Mujeres" />
+          <img src="imagenes/FOTOS FINALES/logo-mujeres-que-fortalecen.png" alt="Mujeres que Fortalecen Mujeres" loading="lazy" decoding="async" />
         -->
         <img
           src="imagenes/FOTOS FINALES/Pagina 5 - Proyectos de cooperación/Gemini_Generated_Image_ng825qng825qng82-removebg-preview.png"
           alt="Mujeres que Fortalecen Mujeres"
-        />
+          class="swing-in-top-fwd" loading="lazy" decoding="async" />
       </div>
 
       <div class="proyecto-content">
@@ -450,12 +496,12 @@
       <div class="proyecto-logo">
         <!--
           Reemplazá con el logo real:
-          <img src="img/logo-mujeres-empoderadas.png" alt="Mujeres Empoderadas, Germen de Sociedades más Justas" />
+          <img src="imagenes/FOTOS FINALES/logo-mujeres-empoderadas.png" alt="Mujeres Empoderadas, Germen de Sociedades más Justas" loading="lazy" decoding="async" />
         -->
         <img
           src="imagenes/FOTOS FINALES/Pagina 5 - Proyectos de cooperación/logo_final-removebg-preview.png"
           alt="Mujeres Empoderadas, Germen de Sociedades más Justas"
-        />
+          class="swing-in-top-fwd" loading="lazy" decoding="async" />
       </div>
 
       <div class="proyecto-content">
@@ -502,32 +548,27 @@
         <div class="institucion-item">
           <img
             src="imagenes/FOTOS FINALES/Pagina 5 - Proyectos de cooperación/ate 100 años.png"
-            alt="ATE — 100 años"
-          />
+            alt="ATE — 100 años" loading="lazy" decoding="async" />
         </div>
         <div class="institucion-item">
           <img
             src="imagenes/FOTOS FINALES/Pagina 5 - Proyectos de cooperación/centro vecinal alberdi.png"
-            alt="Centro Vecinal Alberdi"
-          />
+            alt="Centro Vecinal Alberdi" loading="lazy" decoding="async" />
         </div>
         <div class="institucion-item">
           <img
             src="imagenes/FOTOS FINALES/Pagina 5 - Proyectos de cooperación/ica.png"
-            alt="Instituto de Cultura"
-          />
+            alt="Instituto de Cultura" loading="lazy" decoding="async" />
         </div>
         <div class="institucion-item">
           <img
             src="imagenes/FOTOS FINALES/Pagina 5 - Proyectos de cooperación/juanitamoro.png"
-            alt="Juanita Moro — Jujuy Argentina"
-          />
+            alt="Juanita Moro — Jujuy Argentina" loading="lazy" decoding="async" />
         </div>
         <div class="institucion-item">
           <img
             src="imagenes/FOTOS FINALES/Pagina 5 - Proyectos de cooperación/logo_asociacion_desembarco_del_granma_0.png"
-            alt='Asociación "Desembarco del Granma"'
-          />
+            alt='Asociación "Desembarco del Granma"' loading="lazy" decoding="async" />
         </div>
       </div>
     </div>
@@ -564,7 +605,7 @@
           </div>
           <a href="/index.html#inicio">
             <div class="footer-logo">
-              <img src="img/fundacion-ummep-h (1).png" alt="" />
+              <img src="imagenes/FOTOS FINALES/fundacion-ummep-h (1).png" alt="" loading="lazy" decoding="async" />
             </div>
           </a>
         </div>

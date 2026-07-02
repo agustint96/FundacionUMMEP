@@ -151,9 +151,11 @@ textarea {
   text-align: center;
   gap: clamp(2rem, 5vw, 3.5rem);
   padding: var(--section-pad-y) var(--section-pad-x);
-  background-color: var(--color-cream);
-  background-image: var(--squiggle-bg);
-  background-size: 480px;
+  background-image: url("imagenes/FOTOS FINALES/posterstock.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .section-title {
@@ -350,7 +352,10 @@ textarea {
    4. CONTAINER 2 — Programas internacionalistas de Cuba
    ========================================================= */
 .container--2 {
-  /* uses .section */
+  /* fondo sólido: mismo tono que la ola "blanca" (crema) del hero */
+  background-image: none;
+  background-color: var(--color-cream);
+  background-attachment: scroll;
 }
 
 .program-cards {
