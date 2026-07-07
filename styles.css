@@ -2315,7 +2315,7 @@ body::before {
   pointer-events: none;
   transform: translateY(-6px);
   transition:
-    opacity 0.2s var(--ease),
+    opacity 1.2s var(--ease),
     transform 0.2s var(--ease),
     visibility 0.2s;
   z-index: 50;
