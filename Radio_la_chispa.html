@@ -39,7 +39,7 @@
 
       .chispa-about__inner {
         display: grid;
-        grid-template-columns: 260px 1fr;
+        grid-template-columns: minmax(220px, 340px) 1fr;
         gap: clamp(2rem, 5vw, 4rem);
         max-width: var(--max-content);
         margin-inline: auto;
@@ -47,6 +47,8 @@
       }
 
       .chispa-about__sidebar {
+        position: relative;
+        z-index: 1;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -90,32 +92,35 @@
         height: 100%;
         border-radius: 6px;
         background-color: var(--color-white);
-        background-image: url("imagenes/FOTOS FINALES/Pagina 7 - Radio la chispa/1 PNG Principal.png");
-        background-size: contain;
+        background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
-        opacity: 0.55;
+        opacity: 0.15;
         transform: rotateY(var(--rotatey)) translateZ(var(--tz));
-        transition: opacity 0.3s var(--ease);
-      }
-
-      .chispa-logo-carrousel__item:hover {
-        opacity: 1;
       }
 
       @media (min-width: 761px) {
         .chispa-logo-carrousel {
-          --widthItem: 100px;
-          --heightItem: 68px;
+          --widthItem: 220px;
+          --heightItem: 150px;
         }
       }
 
       .chispa-about__socials {
+        position: relative;
+        z-index: 5;
         display: flex;
         gap: 0.6rem;
         flex-wrap: wrap;
         justify-content: center;
+        width: 100%;
+      }
+
+      @media (min-width: 761px) {
+        .chispa-about__socials {
+          margin-top: 1.5rem;
+        }
       }
 
       .chispa-about__socials a {
@@ -166,6 +171,12 @@
       }
 
       .chispa-about__text {
+        position: relative;
+        z-index: 2;
+        background: var(--color-white);
+        margin-left: -90px;
+        padding: 0.5rem 0 0.5rem 2rem;
+        border-radius: 8px;
         font-size: clamp(0.95rem, 0.88rem + 0.3vw, 1.08rem);
         line-height: 1.75;
         color: var(--color-navy-soft);
@@ -304,9 +315,14 @@
           grid-template-columns: 1fr;
         }
 
+        .chispa-about__text {
+          margin-left: 0;
+          padding-left: 0;
+          background: transparent;
+        }
+
         .chispa-about__sidebar {
-          flex-direction: row;
-          flex-wrap: wrap;
+          flex-direction: column;
         }
 
         .chispa-programs__grid {
@@ -331,7 +347,11 @@
   </head>
   <body>
     <nav class="site-nav" aria-label="Navegación principal">
-      <a class="site-nav__logo" href="index.html" aria-label="Inicio — Fundación UMMEP">
+      <a
+        class="site-nav__logo"
+        href="index.html"
+        aria-label="Inicio — Fundación UMMEP"
+      >
         <img
           src="imagenes/FOTOS FINALES/fundacion-ummep-h (1).png"
           alt="Fundación UMMEP"
@@ -340,7 +360,9 @@
       <ul class="site-nav__links" id="nav-links">
         <li><a href="index.html" data-nav="principal">Inicio</a></li>
         <li>
-          <a href="Nuestro_Trabajo.html" data-nav="nuestro-trabajo">Nuestro trabajo</a>
+          <a href="Nuestro_Trabajo.html" data-nav="nuestro-trabajo"
+            >Nuestro trabajo</a
+          >
         </li>
         <li><a href="Novedades.html" data-nav="novedades">Novedades</a></li>
         <li class="site-nav__sep" role="separator" aria-hidden="true"></li>
@@ -350,7 +372,9 @@
           >
         </li>
         <li>
-          <a href="Proyectos_de_coooperacion_al_desarrollo.html" data-nav="proyectos"
+          <a
+            href="Proyectos_de_coooperacion_al_desarrollo.html"
+            data-nav="proyectos"
             >Proyectos de cooperación</a
           >
         </li>
@@ -427,12 +451,30 @@
           >
             <div class="chispa-logo-carrousel__stage">
               <div class="chispa-logo-carrousel__track">
-                <div class="chispa-logo-carrousel__item"></div>
-                <div class="chispa-logo-carrousel__item"></div>
-                <div class="chispa-logo-carrousel__item"></div>
-                <div class="chispa-logo-carrousel__item"></div>
-                <div class="chispa-logo-carrousel__item"></div>
-                <div class="chispa-logo-carrousel__item"></div>
+                <div
+                  class="chispa-logo-carrousel__item"
+                  style="background-image: url('imagenes/FOTOS FINALES/Pagina 7 - Radio la chispa/Carrousel/1.jpg')"
+                ></div>
+                <div
+                  class="chispa-logo-carrousel__item"
+                  style="background-image: url('imagenes/FOTOS FINALES/Pagina 7 - Radio la chispa/Carrousel/2.jpg')"
+                ></div>
+                <div
+                  class="chispa-logo-carrousel__item"
+                  style="background-image: url('imagenes/FOTOS FINALES/Pagina 7 - Radio la chispa/Carrousel/3.jpg')"
+                ></div>
+                <div
+                  class="chispa-logo-carrousel__item"
+                  style="background-image: url('imagenes/FOTOS FINALES/Pagina 7 - Radio la chispa/Carrousel/4.jpg')"
+                ></div>
+                <div
+                  class="chispa-logo-carrousel__item"
+                  style="background-image: url('imagenes/FOTOS FINALES/Pagina 7 - Radio la chispa/Carrousel/5.jpg')"
+                ></div>
+                <div
+                  class="chispa-logo-carrousel__item"
+                  style="background-image: url('imagenes/FOTOS FINALES/Pagina 7 - Radio la chispa/Carrousel/6.jpg')"
+                ></div>
               </div>
             </div>
           </div>
@@ -514,21 +556,23 @@
 
         <div class="chispa-about__text">
           <p>
-            <strong>Radio La Chispa</strong> es un proyecto de comunicación comunitaria y
-            popular ubicado en el primer piso del Centro Oftalmológico Dr. Ernesto Che
-            Guevara, en el Barrio San Martín de la ciudad de Córdoba. Concebida como una
-            herramienta de fortalecimiento comunitario, la radio se diferencia ideológica
-            y prácticamente de los medios masivos tradicionales, apostando a la
-            participación activa de actores sociales del barrio y sus territorios
-            cercanos. Sus contenidos se construyen desde las problemáticas cotidianas de
-            los sectores populares, promoviendo redes de participación, organización
-            comunitaria y el diálogo entre los equipos de las Misiones Cubanas en
-            Argentina y su labor solidaria. Alineada con los valores y principios de la
-            cooperación internacional cubana, la radio busca ser un espacio colectivo de
-            reflexión y disputa contra los sentidos hegemónicos, sin adherir a
-            polarizaciones políticas locales, y con la convicción de que un mundo mejor es
-            posible. Sus objetivos iniciales son establecer redes de participación
-            popular, construir un espacio de comunicación colectiva entre pares, y
+            <strong>Radio La Chispa</strong> es un proyecto de comunicación
+            comunitaria y popular ubicado en el primer piso del Centro
+            Oftalmológico Dr. Ernesto Che Guevara, en el Barrio San Martín de la
+            ciudad de Córdoba. Concebida como una herramienta de fortalecimiento
+            comunitario, la radio se diferencia ideológica y prácticamente de
+            los medios masivos tradicionales, apostando a la participación
+            activa de actores sociales del barrio y sus territorios cercanos.
+            Sus contenidos se construyen desde las problemáticas cotidianas de
+            los sectores populares, promoviendo redes de participación,
+            organización comunitaria y el diálogo entre los equipos de las
+            Misiones Cubanas en Argentina y su labor solidaria. Alineada con los
+            valores y principios de la cooperación internacional cubana, la
+            radio busca ser un espacio colectivo de reflexión y disputa contra
+            los sentidos hegemónicos, sin adherir a polarizaciones políticas
+            locales, y con la convicción de que un mundo mejor es posible. Sus
+            objetivos iniciales son establecer redes de participación popular,
+            construir un espacio de comunicación colectiva entre pares, y
             fortalecer la organización comunitaria como base del poder popular.
           </p>
         </div>
@@ -550,9 +594,14 @@
           <img
             class="chispa-live__player-logo"
             src="imagenes/FOTOS FINALES/Pagina 7 - Radio la chispa/1 PNG Principal.png"
-            alt="Logo Radio La Chispa" loading="lazy" decoding="async" />
+            alt="Logo Radio La Chispa"
+            loading="lazy"
+            decoding="async"
+          />
           <div class="chispa-live__player-info">
-            <p class="chispa-live__player-name">.:&nbsp;Radio La Chispa&nbsp;:.</p>
+            <p class="chispa-live__player-name">
+              .:&nbsp;Radio La Chispa&nbsp;:.
+            </p>
             <p class="chispa-live__player-location">
               .:&nbsp;Córdoba - Argentina&nbsp;:.
             </p>
@@ -562,7 +611,12 @@
               target="_blank"
               rel="noopener"
             >
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+              <svg
+                viewBox="0 0 24 24"
+                width="14"
+                height="14"
+                fill="currentColor"
+              >
                 <path
                   d="M12 2a10 10 0 100 20A10 10 0 0012 2zm0 2c1.3 0 2.6.6 3.8 2H8.2C9.4 4.6 10.7 4 12 4zm-7.8 4h15.6c.7 1.2 1.1 2.6 1.2 4H3c.1-1.4.5-2.8 1.2-4zm1.2 10c-.7-1.2-1.1-2.6-1.2-4h17.6c-.1 1.4-.5 2.8-1.2 4H5.4zm2.8 2c1.2 1.4 2.5 2 3.8 2s2.6-.6 3.8-2H8.2z"
                 />
@@ -595,7 +649,10 @@
                 this.style.display = 'none';
                 this.parentElement.style.background = 'var(--color-navy)';
               "
-              alt="La Fragua #144 thumbnail" loading="lazy" decoding="async" />
+              alt="La Fragua #144 thumbnail"
+              loading="lazy"
+              decoding="async"
+            />
             <!-- Placeholder title overlay -->
             <div
               style="
@@ -623,7 +680,9 @@
                     line-height: 1;
                   "
                 >
-                  LA<br /><span style="font-size: 2.2rem; color: white">FRAGUA</span>
+                  LA<br /><span style="font-size: 2.2rem; color: white"
+                    >FRAGUA</span
+                  >
                 </div>
                 <div
                   style="
@@ -644,9 +703,13 @@
             <p class="ra-video-card__title">
               La Fragua #144 - Miradas sobre la salud mental
             </p>
-            <button class="ra-video-card__menu" aria-label="Más opciones">⋮</button>
+            <button class="ra-video-card__menu" aria-label="Más opciones">
+              ⋮
+            </button>
           </div>
-          <p class="ra-video-card__meta">34 visualizaciones · Emitido hace 4 días</p>
+          <p class="ra-video-card__meta">
+            34 visualizaciones · Emitido hace 4 días
+          </p>
         </div>
 
         <!-- Card 2 -->
@@ -678,7 +741,9 @@
                     line-height: 1;
                   "
                 >
-                  LA<br /><span style="font-size: 2.2rem; color: white">FRAGUA</span>
+                  LA<br /><span style="font-size: 2.2rem; color: white"
+                    >FRAGUA</span
+                  >
                 </div>
                 <div
                   style="
@@ -696,10 +761,16 @@
             <div class="ra-video-card__progress" style="width: 22%"></div>
           </a>
           <div class="ra-video-card__body">
-            <p class="ra-video-card__title">La Fragua #143 - Rebelión en Bolivia</p>
-            <button class="ra-video-card__menu" aria-label="Más opciones">⋮</button>
+            <p class="ra-video-card__title">
+              La Fragua #143 - Rebelión en Bolivia
+            </p>
+            <button class="ra-video-card__menu" aria-label="Más opciones">
+              ⋮
+            </button>
           </div>
-          <p class="ra-video-card__meta">126 visualizaciones · Emitido hace 1 semana</p>
+          <p class="ra-video-card__meta">
+            126 visualizaciones · Emitido hace 1 semana
+          </p>
         </div>
 
         <!-- Card 3 -->
@@ -731,7 +802,9 @@
                     line-height: 1;
                   "
                 >
-                  LA<br /><span style="font-size: 2.2rem; color: white">FRAGUA</span>
+                  LA<br /><span style="font-size: 2.2rem; color: white"
+                    >FRAGUA</span
+                  >
                 </div>
                 <div
                   style="
@@ -752,9 +825,13 @@
             <p class="ra-video-card__title">
               La Fragua #142 - Construir entre todes: gestión…
             </p>
-            <button class="ra-video-card__menu" aria-label="Más opciones">⋮</button>
+            <button class="ra-video-card__menu" aria-label="Más opciones">
+              ⋮
+            </button>
           </div>
-          <p class="ra-video-card__meta">155 visualizaciones · Emitido hace 2 semanas</p>
+          <p class="ra-video-card__meta">
+            155 visualizaciones · Emitido hace 2 semanas
+          </p>
         </div>
       </div>
     </section>
@@ -792,7 +869,9 @@
             <a href="https://www.facebook.com/ummep" aria-label="Facebook"
               ><i class="fab fa-facebook-f"></i
             ></a>
-            <a href="https://www.instagram.com/fundacionummep/" aria-label="Instagram"
+            <a
+              href="https://www.instagram.com/fundacionummep/"
+              aria-label="Instagram"
               ><i class="fab fa-instagram"></i
             ></a>
             <a href="https://x.com/FundacionUMMEP" aria-label="X (Twitter)"
@@ -801,7 +880,12 @@
           </div>
           <a href="/index.html#inicio">
             <div class="footer-logo">
-              <img src="imagenes/FOTOS FINALES/fundacion-ummep-h (1).png" alt="" loading="lazy" decoding="async" />
+              <img
+                src="imagenes/FOTOS FINALES/fundacion-ummep-h (1).png"
+                alt=""
+                loading="lazy"
+                decoding="async"
+              />
             </div>
           </a>
         </div>
@@ -906,21 +990,104 @@
           return { w: bounding.width, h: bounding.height };
         };
 
+        // Ángulo base de cada foto (se guarda para calcular su opacidad
+        // en cada frame, ver updateOpacities más abajo).
+        let itemAngles = [];
+
         const createCarrousel = () => {
           const props = onResize();
           const length = items.length;
           const degrees = 360 / length;
           const gap = 8;
           const tz = distanceZ(props.w, length, gap);
-          const height = calculateHeight(tz);
 
-          wrap.style.width = tz * 2 + gap * length + "px";
-          wrap.style.height = height + "px";
+          // El espacio reservado en el layout (wrap) coincide con el
+          // tamaño real del logo (--widthItem / --heightItem). "tz" solo
+          // se usa para la rotación 3D en sí (translateZ de cada cara),
+          // no para el tamaño de la caja en la página — si no, la caja
+          // reservada queda mucho más ancha que el logo visible.
+          wrap.style.width = props.w + "px";
+          wrap.style.height = props.h + "px";
 
+          itemAngles = [];
           items.forEach((item, i) => {
-            item.style.setProperty("--rotatey", degrees * i + "deg");
+            const angle = degrees * i;
+            itemAngles.push(angle);
+            item.style.setProperty("--rotatey", angle + "deg");
             item.style.setProperty("--tz", tz + "px");
           });
+        };
+
+        // ── Tamaño dinámico del logo ─────────────────────────────────
+        // En escritorio: el carrusel ocupa casi el alto del bloque de
+        // texto "Quiénes somos", con el ancho calculado automáticamente
+        // a partir de esa altura (misma proporción que el logo, 220:150).
+        // En mobile: el layout se apila, así que en cambio el carrusel
+        // ocupa casi todo el ancho disponible y el alto sigue esa misma
+        // proporción automáticamente.
+        //
+        // ── DÓNDE AJUSTAR TAMAÑOS ──
+        // - LOGO_RATIO: proporción ancho/alto del logo (no la toques salvo
+        //   que cambies la imagen por una con otra forma).
+        // - MIN_HEIGHT / MAX_HEIGHT: piso y techo del alto en ESCRITORIO.
+        // - El "0.92" en "textHeight * 0.92": % del alto del texto que
+        //   ocupa el logo en escritorio (subilo/bajalo para más/menos alto).
+        // - MOBILE_MAX_HEIGHT: techo del alto en MOBILE.
+        // - El "0.92" en "availWrapWidth * 0.92": % del ancho disponible
+        //   que ocupa el logo en MOBILE (subilo/bajalo para más/menos ancho).
+        // - grid-template-columns de .chispa-about__inner (CSS, arriba):
+        //   ancho máximo de la columna lateral en escritorio.
+        const textEl = document.querySelector(".chispa-about__text");
+        const LOGO_RATIO = 220 / 150; // ancho / alto de cada cara del logo
+        const MIN_HEIGHT = 150; // px — alto mínimo (escritorio)
+        const MAX_HEIGHT = 340; // px — alto máximo (escritorio)
+        const MOBILE_MAX_HEIGHT = 420; // px — alto máximo (mobile)
+
+        const syncCarrouselSize = () => {
+          const isMobile = window.innerWidth <= 760;
+          const availWidth = wrap.parentElement.getBoundingClientRect().width;
+
+          if (isMobile) {
+            // Mobile: manda el ANCHO (casi todo el disponible) y el alto
+            // sigue automáticamente la proporción del logo.
+            let targetWidth = availWidth * 0.92;
+            let targetHeight = Math.min(
+              MOBILE_MAX_HEIGHT,
+              targetWidth / LOGO_RATIO,
+            );
+            targetWidth = targetHeight * LOGO_RATIO; // por si el alto topeó
+
+            wrap.style.setProperty("--widthItem", targetWidth + "px");
+            wrap.style.setProperty("--heightItem", targetHeight + "px");
+            createCarrousel();
+            return;
+          }
+
+          if (!textEl) {
+            createCarrousel();
+            return;
+          }
+
+          // Escritorio: manda el ALTO (casi el del texto) y el ancho sigue
+          // automáticamente la proporción del logo.
+          const textHeight = textEl.getBoundingClientRect().height;
+          let targetHeight = Math.min(
+            MAX_HEIGHT,
+            Math.max(MIN_HEIGHT, textHeight * 0.92),
+          );
+          let targetWidth = targetHeight * LOGO_RATIO;
+
+          // Si ese ancho no entra en la columna lateral, lo limitamos por
+          // ancho disponible y recalculamos el alto para mantener la
+          // proporción (igual que "object-fit: contain").
+          if (targetWidth > availWidth) {
+            targetWidth = availWidth;
+            targetHeight = targetWidth / LOGO_RATIO;
+          }
+
+          wrap.style.setProperty("--heightItem", targetHeight + "px");
+          wrap.style.setProperty("--widthItem", targetWidth + "px");
+          createCarrousel();
         };
 
         const getPosX = (x) => {
@@ -929,12 +1096,37 @@
           lastX = currentX;
         };
 
+        // Opacidad mínima para las fotos que están de costado/atrás, y
+        // exponente de la curva: cuanto más alto, más "de golpe" aparece
+        // la foto al llegar al frente (en vez de un fade parejo).
+        const MIN_OPACITY = 0.15;
+        const FADE_CURVE = 1.6;
+
+        const updateOpacities = () => {
+          itemAngles.forEach((baseAngle, i) => {
+            // Ángulo actual de esta foto respecto a la cámara, normalizado
+            // a -180°..180° (0° = mirando de frente al usuario).
+            let angle = (baseAngle + lastAngle) % 360;
+            if (angle > 180) angle -= 360;
+            if (angle < -180) angle += 360;
+
+            const rad = (angle * Math.PI) / 180;
+            // cos(0°) = 1 → de frente; cos(±90°) = 0 → de perfil.
+            const facing = Math.max(0, Math.cos(rad));
+            const opacity =
+              MIN_OPACITY + (1 - MIN_OPACITY) * Math.pow(facing, FADE_CURVE);
+
+            items[i].style.opacity = opacity.toFixed(3);
+          });
+        };
+
         const update = () => {
           // Cuando nadie lo está arrastrando, sigue girando solo.
           if (autoRotate) targetAngle += 0.15;
 
           lastAngle = lerp(targetAngle, lastAngle, 0.05);
           track.style.setProperty("--rotatey", lastAngle + "deg");
+          updateOpacities();
           requestAnimationFrame(update);
         };
 
@@ -962,7 +1154,7 @@
           });
           window.addEventListener(
             "mousemove",
-            (e) => isDown && getPosX(e.clientX)
+            (e) => isDown && getPosX(e.clientX),
           );
 
           track.addEventListener(
@@ -972,7 +1164,7 @@
               lastX = e.touches[0].clientX;
               pauseAutoRotate();
             },
-            { passive: true }
+            { passive: true },
           );
           window.addEventListener("touchend", () => {
             isDown = false;
@@ -981,13 +1173,18 @@
           track.addEventListener(
             "touchmove",
             (e) => isDown && getPosX(e.touches[0].clientX),
-            { passive: true }
+            { passive: true },
           );
 
-          window.addEventListener("resize", createCarrousel);
+          window.addEventListener("resize", syncCarrouselSize);
+
+          if (window.ResizeObserver && textEl) {
+            // Si el texto cambia de alto (reflow, fuentes, etc.) recalculamos.
+            new ResizeObserver(() => syncCarrouselSize()).observe(textEl);
+          }
 
           update();
-          createCarrousel();
+          syncCarrouselSize();
         };
 
         initEvents();
