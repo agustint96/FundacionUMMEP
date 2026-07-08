@@ -38,21 +38,43 @@
       }
 
       .chispa-about__inner {
-        display: grid;
-        grid-template-columns: minmax(220px, 340px) 1fr;
-        gap: clamp(2rem, 5vw, 4rem);
+        display: flex;
+        flex-direction: column;
+        gap: clamp(2rem, 5vw, 3rem);
         max-width: var(--max-content);
         margin-inline: auto;
-        align-items: start;
       }
 
+      /* Fila de arriba: logo a la izquierda + texto acomodándose al lado */
+      .chispa-about__top {
+        display: flex;
+        align-items: flex-start;
+        gap: clamp(1.5rem, 4vw, 3rem);
+      }
+
+      /* Logo estático — izquierda, arriba */
+      .chispa-about__logo {
+        flex: 0 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .chispa-about__logo img {
+        width: 100%;
+        max-width: 220px;
+        height: auto;
+        display: block;
+      }
+
+      /* Fila de abajo: carrusel + redes, centrado horizontalmente */
       .chispa-about__sidebar {
-        position: relative;
         z-index: 1;
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 1.5rem;
+        margin-inline: auto;
       }
 
       /* Logo — carrusel 3D (gira solo y también se puede arrastrar) */
@@ -174,8 +196,8 @@
         position: relative;
         z-index: 2;
         background: var(--color-white);
-        margin-left: -90px;
-        padding: 0.5rem 0 0.5rem 2rem;
+        margin-left: 0;
+        padding: 0.5rem;
         border-radius: 8px;
         font-size: clamp(0.95rem, 0.88rem + 0.3vw, 1.08rem);
         line-height: 1.75;
@@ -311,8 +333,13 @@
 
       /* ── Footer ── */
       @media (max-width: 760px) {
-        .chispa-about__inner {
-          grid-template-columns: 1fr;
+        .chispa-about__top {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .chispa-about__logo img {
+          max-width: 200px;
         }
 
         .chispa-about__text {
@@ -442,6 +469,41 @@
   ══════════════════════════════════════════ -->
     <section class="chispa-about">
       <div class="chispa-about__inner">
+        <div class="chispa-about__top">
+          <aside class="chispa-about__logo">
+            <img
+              src="imagenes/FOTOS FINALES/Pagina 7 - Radio la chispa/1 PNG Principal.png"
+              alt="Logo Radio La Chispa"
+              loading="lazy"
+              decoding="async"
+            />
+          </aside>
+
+          <div class="chispa-about__text">
+            <p>
+              <strong>Radio La Chispa</strong> es un proyecto de comunicación
+              comunitaria y popular ubicado en el primer piso del Centro
+              Oftalmológico Dr. Ernesto Che Guevara, en el Barrio San Martín de
+              la ciudad de Córdoba. Concebida como una herramienta de
+              fortalecimiento comunitario, la radio se diferencia ideológica y
+              prácticamente de los medios masivos tradicionales, apostando a la
+              participación activa de actores sociales del barrio y sus
+              territorios cercanos. Sus contenidos se construyen desde las
+              problemáticas cotidianas de los sectores populares, promoviendo
+              redes de participación, organización comunitaria y el diálogo
+              entre los equipos de las Misiones Cubanas en Argentina y su labor
+              solidaria. Alineada con los valores y principios de la cooperación
+              internacional cubana, la radio busca ser un espacio colectivo de
+              reflexión y disputa contra los sentidos hegemónicos, sin adherir a
+              polarizaciones políticas locales, y con la convicción de que un
+              mundo mejor es posible. Sus objetivos iniciales son establecer
+              redes de participación popular, construir un espacio de
+              comunicación colectiva entre pares, y fortalecer la organización
+              comunitaria como base del poder popular.
+            </p>
+          </div>
+        </div>
+
         <aside class="chispa-about__sidebar">
           <!-- Logo — carrusel 3D -->
           <div
@@ -453,27 +515,39 @@
               <div class="chispa-logo-carrousel__track">
                 <div
                   class="chispa-logo-carrousel__item"
-                  style="background-image: url('imagenes/FOTOS FINALES/Pagina 7 - Radio la chispa/Carrousel/1.jpg')"
+                  style="
+                    background-image: url(&quot;imagenes/FOTOS FINALES/Pagina 7 - Radio la chispa/Carrousel/1.jpg&quot;);
+                  "
                 ></div>
                 <div
                   class="chispa-logo-carrousel__item"
-                  style="background-image: url('imagenes/FOTOS FINALES/Pagina 7 - Radio la chispa/Carrousel/2.jpg')"
+                  style="
+                    background-image: url(&quot;imagenes/FOTOS FINALES/Pagina 7 - Radio la chispa/Carrousel/2.jpg&quot;);
+                  "
                 ></div>
                 <div
                   class="chispa-logo-carrousel__item"
-                  style="background-image: url('imagenes/FOTOS FINALES/Pagina 7 - Radio la chispa/Carrousel/3.jpg')"
+                  style="
+                    background-image: url(&quot;imagenes/FOTOS FINALES/Pagina 7 - Radio la chispa/Carrousel/3.jpg&quot;);
+                  "
                 ></div>
                 <div
                   class="chispa-logo-carrousel__item"
-                  style="background-image: url('imagenes/FOTOS FINALES/Pagina 7 - Radio la chispa/Carrousel/4.jpg')"
+                  style="
+                    background-image: url(&quot;imagenes/FOTOS FINALES/Pagina 7 - Radio la chispa/Carrousel/4.jpg&quot;);
+                  "
                 ></div>
                 <div
                   class="chispa-logo-carrousel__item"
-                  style="background-image: url('imagenes/FOTOS FINALES/Pagina 7 - Radio la chispa/Carrousel/5.jpg')"
+                  style="
+                    background-image: url(&quot;imagenes/FOTOS FINALES/Pagina 7 - Radio la chispa/Carrousel/5.jpg&quot;);
+                  "
                 ></div>
                 <div
                   class="chispa-logo-carrousel__item"
-                  style="background-image: url('imagenes/FOTOS FINALES/Pagina 7 - Radio la chispa/Carrousel/6.jpg')"
+                  style="
+                    background-image: url(&quot;imagenes/FOTOS FINALES/Pagina 7 - Radio la chispa/Carrousel/6.jpg&quot;);
+                  "
                 ></div>
               </div>
             </div>
@@ -553,29 +627,6 @@
             </a>
           </div>
         </aside>
-
-        <div class="chispa-about__text">
-          <p>
-            <strong>Radio La Chispa</strong> es un proyecto de comunicación
-            comunitaria y popular ubicado en el primer piso del Centro
-            Oftalmológico Dr. Ernesto Che Guevara, en el Barrio San Martín de la
-            ciudad de Córdoba. Concebida como una herramienta de fortalecimiento
-            comunitario, la radio se diferencia ideológica y prácticamente de
-            los medios masivos tradicionales, apostando a la participación
-            activa de actores sociales del barrio y sus territorios cercanos.
-            Sus contenidos se construyen desde las problemáticas cotidianas de
-            los sectores populares, promoviendo redes de participación,
-            organización comunitaria y el diálogo entre los equipos de las
-            Misiones Cubanas en Argentina y su labor solidaria. Alineada con los
-            valores y principios de la cooperación internacional cubana, la
-            radio busca ser un espacio colectivo de reflexión y disputa contra
-            los sentidos hegemónicos, sin adherir a polarizaciones políticas
-            locales, y con la convicción de que un mundo mejor es posible. Sus
-            objetivos iniciales son establecer redes de participación popular,
-            construir un espacio de comunicación colectiva entre pares, y
-            fortalecer la organización comunitaria como base del poder popular.
-          </p>
-        </div>
       </div>
     </section>
 
@@ -1035,8 +1086,8 @@
         // - MOBILE_MAX_HEIGHT: techo del alto en MOBILE.
         // - El "0.92" en "availWrapWidth * 0.92": % del ancho disponible
         //   que ocupa el logo en MOBILE (subilo/bajalo para más/menos ancho).
-        // - grid-template-columns de .chispa-about__inner (CSS, arriba):
-        //   ancho máximo de la columna lateral en escritorio.
+        // - .chispa-about__sidebar { margin-inline: auto } (CSS, arriba):
+        //   controla que el bloque quede centrado horizontalmente abajo.
         const textEl = document.querySelector(".chispa-about__text");
         const LOGO_RATIO = 220 / 150; // ancho / alto de cada cara del logo
         const MIN_HEIGHT = 150; // px — alto mínimo (escritorio)
