@@ -379,7 +379,7 @@ textarea {
 }
 
 .program-card__logo {
-  width: clamp(70px, 18vw, 150px);
+  width: clamp(144px, 18vw, 150px);
   height: clamp(70px, 18vw, 150px);
   object-fit: contain;
 }
