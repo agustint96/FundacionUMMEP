@@ -120,7 +120,7 @@ function iniciarRotacionHero() {
    usa el sitio.
    ======================================================= */
 function iniciarScrollReveal() {
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  return;
 
   const CONTENEDORES = [
     '[class*="ontainer--"]', // container--N / Container--N (todas las páginas)

@@ -1851,54 +1851,15 @@ textarea {
   }
 }
 
-/* =========================================================
-   12. Scroll reveal
-   ========================================================= */
-
-/* Estado inicial: oculto y corrido desde el costado. El JS agrega
-   .is-visible cuando el elemento entra en el viewport
-   (IntersectionObserver). Por defecto entra desde la izquierda. */
-.reveal {
-  opacity: 0;
-  transform: translateX(-70px);
-  transition:
-    opacity 0.7s var(--ease),
-    transform 0.7s var(--ease);
-  will-change: opacity, transform;
-}
-
-.reveal.is-visible {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-/* Variantes de dirección (el JS alterna izquierda/derecha automáticamente) */
-.reveal--left {
-  transform: translateX(-70px);
-}
-.reveal--left.is-visible {
-  transform: translateX(0);
-}
-
-.reveal--right {
-  transform: translateX(70px);
-}
-.reveal--right.is-visible {
-  transform: translateX(0);
-}
-
-.reveal--up {
-  transform: translateY(40px);
-}
-.reveal--up.is-visible {
-  transform: translateY(0);
-}
-
+/* Scroll reveal desactivado. */
+.reveal,
+.reveal--left,
+.reveal--right,
+.reveal--up,
 .reveal--zoom {
-  transform: scale(0.85);
-}
-.reveal--zoom.is-visible {
-  transform: scale(1);
+  opacity: 1;
+  transform: none;
+  transition: none;
 }
 
 /* =========================================================
