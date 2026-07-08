@@ -12,7 +12,11 @@
   </head>
   <body>
     <nav class="site-nav" aria-label="Navegación principal">
-      <a class="site-nav__logo" href="index.html" aria-label="Inicio — Fundación UMMEP">
+      <a
+        class="site-nav__logo"
+        href="index.html"
+        aria-label="Inicio — Fundación UMMEP"
+      >
         <img
           src="imagenes/FOTOS FINALES/fundacion-ummep-h (1).png"
           alt="Fundación UMMEP"
@@ -21,7 +25,9 @@
       <ul class="site-nav__links" id="nav-links">
         <li><a href="index.html" data-nav="principal">Inicio</a></li>
         <li>
-          <a href="Nuestro_Trabajo.html" data-nav="nuestro-trabajo">Nuestro trabajo</a>
+          <a href="Nuestro_Trabajo.html" data-nav="nuestro-trabajo"
+            >Nuestro trabajo</a
+          >
         </li>
         <li><a href="Novedades.html" data-nav="novedades">Novedades</a></li>
         <li class="site-nav__sep" role="separator" aria-hidden="true"></li>
@@ -31,7 +37,9 @@
           >
         </li>
         <li>
-          <a href="Proyectos_de_coooperacion_al_desarrollo.html" data-nav="proyectos"
+          <a
+            href="Proyectos_de_coooperacion_al_desarrollo.html"
+            data-nav="proyectos"
             >Proyectos de cooperación</a
           >
         </li>
@@ -87,194 +95,268 @@
       </button>
     </nav>
 
-    <!-- ============ CONTAINER 1 — TÍTULO ============ -->
-    <header class="RecursosAudiovisuales-container--1">
-      <h1 class="ra-page-title">Recursos audiovisuales</h1>
-    </header>
+    <!-- ============ ZONA CON FONDO DE TIRITAS DE VIDEO ============
+         Envuelve el título y las 3 secciones de video: el fondo de
+         tiritas corre continuo detrás de todo este bloque, y cada
+         sección se ve como una tarjeta blanca flotando encima, dejando
+         ver el patrón por los costados y entre tarjetas. -->
+    <div class="ra-filmstrip-zone">
+      <div class="ra-filmstrip-layer ra-filmstrip-layer--fixed" aria-hidden="true"></div>
+      <div class="ra-filmstrip-layer ra-filmstrip-layer--moving" aria-hidden="true"></div>
 
-    <!-- ============ CONTAINER 2 — ENTREVISTAS A PACIENTES ============
+      <!-- ============ CONTAINER 1 — TÍTULO ============ -->
+      <header class="RecursosAudiovisuales-container--1">
+        <h1 class="ra-page-title">Recursos audiovisuales</h1>
+      </header>
+
+      <!-- ============ CONTAINER 2 — ENTREVISTAS A PACIENTES ============
          Reemplazá las miniaturas (imagenes/FOTOS FINALES/placeholder-video.svg) por las fotos
          reales y los <a> por el link a cada video. -->
-    <section class="RecursosAudiovisuales-container--2 ra-video-section" id="entrevistas">
-      <h2 class="section-title">Entrevistas a pacientes</h2>
-      <div class="ra-video-grid">
-        <article class="ra-video-card">
-          <a
-            href="https://www.youtube.com/watch?v=_rVGxaiQhOQ&list=PLEKqH2_ubRhBIm27Ya3lepGQPxhwHLDsT"
-            class="ra-video-card__thumb"
-          >
-            <img
-              src="imagenes/FOTOS FINALES/placeholder-video.svg"
-              alt="Entrevista a paciente de Operación Milagro" loading="lazy" decoding="async" />
-            <span class="ra-video-card__duration">08:12</span>
-            <span class="ra-video-card__progress"></span>
-          </a>
-          <div class="ra-video-card__body">
-            <p class="ra-video-card__title">
-              Recuperar la vista para seguir trabajando la tierra
-            </p>
-            <button class="ra-video-card__menu" aria-label="Más opciones">⋮</button>
-          </div>
-          <p class="ra-video-card__meta">320 visualizaciones • Publicado hace 4 días</p>
-        </article>
+      <section
+        class="RecursosAudiovisuales-container--2 ra-video-section"
+      >
+        <div class="ra-video-panel">
+          <div class="ra-video-block" id="entrevistas">
+            <h2 class="section-title">Entrevistas a pacientes</h2>
+            <div class="ra-video-grid">
+              <article class="ra-video-card">
+                <a
+                  href="https://www.youtube.com/watch?v=_rVGxaiQhOQ&list=PLEKqH2_ubRhBIm27Ya3lepGQPxhwHLDsT"
+                  class="ra-video-card__thumb"
+                >
+                  <img
+                    src="imagenes/FOTOS FINALES/placeholder-video.svg"
+                    alt="Entrevista a paciente de Operación Milagro"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <span class="ra-video-card__duration">08:12</span>
+                  <span class="ra-video-card__progress"></span>
+                </a>
+                <div class="ra-video-card__body">
+                  <p class="ra-video-card__title">
+                    Recuperar la vista para seguir trabajando la tierra
+                  </p>
+                  <button class="ra-video-card__menu" aria-label="Más opciones">
+                    ⋮
+                  </button>
+                </div>
+                <p class="ra-video-card__meta">
+                  320 visualizaciones • Publicado hace 4 días
+                </p>
+              </article>
 
-        <article class="ra-video-card">
-          <a href="#" class="ra-video-card__thumb">
-            <img
-              src="imagenes/FOTOS FINALES/placeholder-video.svg"
-              alt="Testimonio de una alfabetizada con Yo Sí Puedo" loading="lazy" decoding="async" />
-            <span class="ra-video-card__duration">06:45</span>
-            <span class="ra-video-card__progress"></span>
-          </a>
-          <div class="ra-video-card__body">
-            <p class="ra-video-card__title">
-              Aprender a leer a los 68 años: el testimonio de Marta
-            </p>
-            <button class="ra-video-card__menu" aria-label="Más opciones">⋮</button>
-          </div>
-          <p class="ra-video-card__meta">210 visualizaciones • Publicado hace 1 semana</p>
-        </article>
+              <article class="ra-video-card">
+                <a href="#" class="ra-video-card__thumb">
+                  <img
+                    src="imagenes/FOTOS FINALES/placeholder-video.svg"
+                    alt="Testimonio de una alfabetizada con Yo Sí Puedo"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <span class="ra-video-card__duration">06:45</span>
+                  <span class="ra-video-card__progress"></span>
+                </a>
+                <div class="ra-video-card__body">
+                  <p class="ra-video-card__title">
+                    Aprender a leer a los 68 años: el testimonio de Marta
+                  </p>
+                  <button class="ra-video-card__menu" aria-label="Más opciones">
+                    ⋮
+                  </button>
+                </div>
+                <p class="ra-video-card__meta">
+                  210 visualizaciones • Publicado hace 1 semana
+                </p>
+              </article>
 
-        <article class="ra-video-card">
-          <a href="#" class="ra-video-card__thumb">
-            <img
-              src="imagenes/FOTOS FINALES/placeholder-video.svg"
-              alt="Familia beneficiada por un programa de salud comunitaria" loading="lazy" decoding="async" />
-            <span class="ra-video-card__duration">11:30</span>
-            <span class="ra-video-card__progress"></span>
-          </a>
-          <div class="ra-video-card__body">
-            <p class="ra-video-card__title">
-              Una cirugía que cambió la vida de toda una familia
-            </p>
-            <button class="ra-video-card__menu" aria-label="Más opciones">⋮</button>
+              <article class="ra-video-card">
+                <a href="#" class="ra-video-card__thumb">
+                  <img
+                    src="imagenes/FOTOS FINALES/placeholder-video.svg"
+                    alt="Familia beneficiada por un programa de salud comunitaria"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <span class="ra-video-card__duration">11:30</span>
+                  <span class="ra-video-card__progress"></span>
+                </a>
+                <div class="ra-video-card__body">
+                  <p class="ra-video-card__title">
+                    Una cirugía que cambió la vida de toda una familia
+                  </p>
+                  <button class="ra-video-card__menu" aria-label="Más opciones">
+                    ⋮
+                  </button>
+                </div>
+                <p class="ra-video-card__meta">
+                  450 visualizaciones • Publicado hace 2 semanas
+                </p>
+              </article>
+            </div>
           </div>
-          <p class="ra-video-card__meta">
-            450 visualizaciones • Publicado hace 2 semanas
-          </p>
-        </article>
-      </div>
-    </section>
 
-    <!-- ============ CONTAINER 3 — DOCUMENTALES ============ -->
-    <section
-      class="RecursosAudiovisuales-container--3 ra-video-section"
-      id="documentales"
-    >
-      <h2 class="section-title">Documentales</h2>
-      <div class="ra-video-grid">
-        <article class="ra-video-card">
-          <a href="#" class="ra-video-card__thumb">
-            <img
-              src="imagenes/FOTOS FINALES/placeholder-video.svg"
-              alt="Documental sobre Operación Milagro en Argentina" loading="lazy" decoding="async" />
-            <span class="ra-video-card__duration">24:18</span>
-            <span class="ra-video-card__progress"></span>
-          </a>
-          <div class="ra-video-card__body">
-            <p class="ra-video-card__title">
-              Operación Milagro: 20 años devolviendo la vista
-            </p>
-            <button class="ra-video-card__menu" aria-label="Más opciones">⋮</button>
-          </div>
-          <p class="ra-video-card__meta">
-            980 visualizaciones • Publicado hace 3 semanas
-          </p>
-        </article>
+          <div class="ra-video-block" id="documentales">
+            <h2 class="section-title">Documentales</h2>
+          <div class="ra-video-grid">
+            <article class="ra-video-card">
+              <a href="#" class="ra-video-card__thumb">
+                <img
+                  src="imagenes/FOTOS FINALES/placeholder-video.svg"
+                  alt="Documental sobre Operación Milagro en Argentina"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span class="ra-video-card__duration">24:18</span>
+                <span class="ra-video-card__progress"></span>
+              </a>
+              <div class="ra-video-card__body">
+                <p class="ra-video-card__title">
+                  Operación Milagro: 20 años devolviendo la vista
+                </p>
+                <button class="ra-video-card__menu" aria-label="Más opciones">
+                  ⋮
+                </button>
+              </div>
+              <p class="ra-video-card__meta">
+                980 visualizaciones • Publicado hace 3 semanas
+              </p>
+            </article>
 
-        <article class="ra-video-card">
-          <a href="#" class="ra-video-card__thumb">
-            <img
-              src="imagenes/FOTOS FINALES/placeholder-video.svg"
-              alt="Documental sobre el programa Yo Sí Puedo" loading="lazy" decoding="async" />
-            <span class="ra-video-card__duration">19:52</span>
-            <span class="ra-video-card__progress"></span>
-          </a>
-          <div class="ra-video-card__body">
-            <p class="ra-video-card__title">
-              Yo Sí Puedo: alfabetización popular en barrios vulnerables
-            </p>
-            <button class="ra-video-card__menu" aria-label="Más opciones">⋮</button>
-          </div>
-          <p class="ra-video-card__meta">670 visualizaciones • Publicado hace 1 mes</p>
-        </article>
+            <article class="ra-video-card">
+              <a href="#" class="ra-video-card__thumb">
+                <img
+                  src="imagenes/FOTOS FINALES/placeholder-video.svg"
+                  alt="Documental sobre el programa Yo Sí Puedo"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span class="ra-video-card__duration">19:52</span>
+                <span class="ra-video-card__progress"></span>
+              </a>
+              <div class="ra-video-card__body">
+                <p class="ra-video-card__title">
+                  Yo Sí Puedo: alfabetización popular en barrios vulnerables
+                </p>
+                <button class="ra-video-card__menu" aria-label="Más opciones">
+                  ⋮
+                </button>
+              </div>
+              <p class="ra-video-card__meta">
+                670 visualizaciones • Publicado hace 1 mes
+              </p>
+            </article>
 
-        <article class="ra-video-card">
-          <a href="#" class="ra-video-card__thumb">
-            <img
-              src="imagenes/FOTOS FINALES/placeholder-video.svg"
-              alt="Documental sobre cooperación comunitaria" loading="lazy" decoding="async" />
-            <span class="ra-video-card__duration">31:05</span>
-            <span class="ra-video-card__progress"></span>
-          </a>
-          <div class="ra-video-card__body">
-            <p class="ra-video-card__title">
-              Organización popular: la salud como derecho colectivo
-            </p>
-            <button class="ra-video-card__menu" aria-label="Más opciones">⋮</button>
+            <article class="ra-video-card">
+              <a href="#" class="ra-video-card__thumb">
+                <img
+                  src="imagenes/FOTOS FINALES/placeholder-video.svg"
+                  alt="Documental sobre cooperación comunitaria"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span class="ra-video-card__duration">31:05</span>
+                <span class="ra-video-card__progress"></span>
+              </a>
+              <div class="ra-video-card__body">
+                <p class="ra-video-card__title">
+                  Organización popular: la salud como derecho colectivo
+                </p>
+                <button class="ra-video-card__menu" aria-label="Más opciones">
+                  ⋮
+                </button>
+              </div>
+              <p class="ra-video-card__meta">
+                540 visualizaciones • Publicado hace 1 mes
+              </p>
+            </article>
           </div>
-          <p class="ra-video-card__meta">540 visualizaciones • Publicado hace 1 mes</p>
-        </article>
-      </div>
-    </section>
 
-    <!-- ============ CONTAINER 4 — CHARLAS ============ -->
-    <section class="RecursosAudiovisuales-container--4 ra-video-section" id="charlas">
-      <h2 class="section-title">Charlas</h2>
-      <div class="ra-video-grid">
-        <article class="ra-video-card">
-          <a href="#" class="ra-video-card__thumb">
-            <img
-              src="imagenes/FOTOS FINALES/placeholder-video.svg"
-              alt="Charla sobre cooperación internacionalista" loading="lazy" decoding="async" />
-            <span class="ra-video-card__duration">42:10</span>
-            <span class="ra-video-card__progress"></span>
-          </a>
-          <div class="ra-video-card__body">
-            <p class="ra-video-card__title">
-              50 años de cooperación médica cubana en el mundo
-            </p>
-            <button class="ra-video-card__menu" aria-label="Más opciones">⋮</button>
-          </div>
-          <p class="ra-video-card__meta">190 visualizaciones • Emitido hace 5 días</p>
-        </article>
+          <div class="ra-video-block" id="charlas">
+            <h2 class="section-title">Charlas</h2>
+          <div class="ra-video-grid">
+            <article class="ra-video-card">
+              <a href="#" class="ra-video-card__thumb">
+                <img
+                  src="imagenes/FOTOS FINALES/placeholder-video.svg"
+                  alt="Charla sobre cooperación internacionalista"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span class="ra-video-card__duration">42:10</span>
+                <span class="ra-video-card__progress"></span>
+              </a>
+              <div class="ra-video-card__body">
+                <p class="ra-video-card__title">
+                  50 años de cooperación médica cubana en el mundo
+                </p>
+                <button class="ra-video-card__menu" aria-label="Más opciones">
+                  ⋮
+                </button>
+              </div>
+              <p class="ra-video-card__meta">
+                190 visualizaciones • Emitido hace 5 días
+              </p>
+            </article>
 
-        <article class="ra-video-card">
-          <a href="#" class="ra-video-card__thumb">
-            <img
-              src="imagenes/FOTOS FINALES/placeholder-video.svg"
-              alt="Charla con voluntarias de Mujeres Empoderadas" loading="lazy" decoding="async" />
-            <span class="ra-video-card__duration">37:40</span>
-            <span class="ra-video-card__progress"></span>
-          </a>
-          <div class="ra-video-card__body">
-            <p class="ra-video-card__title">
-              Mujeres que fortalecen mujeres: organizarse para resistir
-            </p>
-            <button class="ra-video-card__menu" aria-label="Más opciones">⋮</button>
-          </div>
-          <p class="ra-video-card__meta">260 visualizaciones • Emitido hace 2 semanas</p>
-        </article>
+            <article class="ra-video-card">
+              <a href="#" class="ra-video-card__thumb">
+                <img
+                  src="imagenes/FOTOS FINALES/placeholder-video.svg"
+                  alt="Charla con voluntarias de Mujeres Empoderadas"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span class="ra-video-card__duration">37:40</span>
+                <span class="ra-video-card__progress"></span>
+              </a>
+              <div class="ra-video-card__body">
+                <p class="ra-video-card__title">
+                  Mujeres que fortalecen mujeres: organizarse para resistir
+                </p>
+                <button class="ra-video-card__menu" aria-label="Más opciones">
+                  ⋮
+                </button>
+              </div>
+              <p class="ra-video-card__meta">
+                260 visualizaciones • Emitido hace 2 semanas
+              </p>
+            </article>
 
-        <article class="ra-video-card">
-          <a href="#" class="ra-video-card__thumb">
-            <img src="imagenes/FOTOS FINALES/placeholder-video.svg" alt="Charla sobre educación popular" loading="lazy" decoding="async" />
-            <span class="ra-video-card__duration">28:55</span>
-            <span class="ra-video-card__progress"></span>
-          </a>
-          <div class="ra-video-card__body">
-            <p class="ra-video-card__title">
-              Educación popular y trabajo territorial: balance y desafíos
-            </p>
-            <button class="ra-video-card__menu" aria-label="Más opciones">⋮</button>
+            <article class="ra-video-card">
+              <a href="#" class="ra-video-card__thumb">
+                <img
+                  src="imagenes/FOTOS FINALES/placeholder-video.svg"
+                  alt="Charla sobre educación popular"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span class="ra-video-card__duration">28:55</span>
+                <span class="ra-video-card__progress"></span>
+              </a>
+              <div class="ra-video-card__body">
+                <p class="ra-video-card__title">
+                  Educación popular y trabajo territorial: balance y desafíos
+                </p>
+                <button class="ra-video-card__menu" aria-label="Más opciones">
+                  ⋮
+                </button>
+              </div>
+              <p class="ra-video-card__meta">
+                150 visualizaciones • Emitido hace 1 mes
+              </p>
+            </article>
           </div>
-          <p class="ra-video-card__meta">150 visualizaciones • Emitido hace 1 mes</p>
-        </article>
-      </div>
-    </section>
+        </div>
+      </section>
+    </div>
+    <!-- fin .ra-filmstrip-zone -->
 
     <!-- ============ CONTAINER 5 — PODCAST ============ -->
-    <section class="RecursosAudiovisuales-container--5 ra-podcast-section" id="podcast">
+    <section
+      class="RecursosAudiovisuales-container--5 ra-podcast-section"
+      id="podcast"
+    >
       <h2 class="section-title">Podcast</h2>
       <!--
         Reproductor oficial embebido de Spotify: muestra siempre los
@@ -321,7 +403,9 @@
             <a href="https://www.facebook.com/ummep" aria-label="Facebook"
               ><i class="fab fa-facebook-f"></i
             ></a>
-            <a href="https://www.instagram.com/fundacionummep/" aria-label="Instagram"
+            <a
+              href="https://www.instagram.com/fundacionummep/"
+              aria-label="Instagram"
               ><i class="fab fa-instagram"></i
             ></a>
             <a href="https://x.com/FundacionUMMEP" aria-label="X (Twitter)"
@@ -330,7 +414,12 @@
           </div>
           <a href="/index.html#inicio">
             <div class="footer-logo">
-              <img src="imagenes/FOTOS FINALES/fundacion-ummep-h (1).png" alt="" loading="lazy" decoding="async" />
+              <img
+                src="imagenes/FOTOS FINALES/fundacion-ummep-h (1).png"
+                alt=""
+                loading="lazy"
+                decoding="async"
+              />
             </div>
           </a>
         </div>

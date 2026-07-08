@@ -796,39 +796,6 @@
       </div>
     </footer>
 
-    <script>
-      // Burger menú mobile
-      const burger = document.getElementById("nav-burger");
-      const navLinks = document.getElementById("nav-links");
-      burger.addEventListener("click", () => {
-        const open = navLinks.classList.toggle("is-open");
-        burger.classList.toggle("is-open", open);
-        burger.setAttribute("aria-expanded", String(open));
-      });
-      navLinks.querySelectorAll("a").forEach((a) => {
-        a.addEventListener("click", () => {
-          navLinks.classList.remove("is-open");
-          burger.classList.remove("is-open");
-          burger.setAttribute("aria-expanded", "false");
-        });
-      });
-
-      // Formulario footer
-      document
-        .getElementById("contact-form")
-        .addEventListener("submit", (e) => {
-          e.preventDefault();
-          e.target.reset();
-          let aviso = e.target.querySelector(".form-aviso");
-          if (!aviso) {
-            aviso = document.createElement("p");
-            aviso.className = "form-aviso";
-            aviso.style.cssText =
-              "color:#16234a;font-weight:700;margin-top:.5rem";
-            e.target.appendChild(aviso);
-          }
-          aviso.textContent = "¡Gracias! Te vamos a responder a la brevedad.";
-        });
-    </script>
+    <script src="script.js"></script>
   </body>
 </html>

@@ -29,6 +29,7 @@
   /* color */
   --color-navy: #16234a;
   --color-navy-soft: #2b3a66;
+  --color-blue: #2f5fa8;
   --color-salmon: #e3a191;
   --color-red: #df2c1f;
   --color-purple: #7c6bab;
@@ -85,6 +86,7 @@ body {
   background: var(--color-white);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 img {
@@ -758,11 +760,55 @@ textarea {
    9. Página — Recursos audiovisuales
    ========================================================= */
 
+/* --- 9.0 Zona con fondo de tiritas de video ---
+   Envuelve el título (container--1) y las 3 secciones de video
+   (entrevistas / documentales / charlas). El mosaico de tiritas se
+   desplaza con el scroll para crear un efecto de profundidad, y cada
+   sección se ve como una tarjeta blanca flotando encima (.ra-video-panel).
+   */
+.ra-filmstrip-zone {
+  --ra-film-offset: 0px;
+  position: relative;
+  background: var(--color-blue);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Mosaico de tiras de película (imagenes/FOTOS FINALES/Pagina 6 - Recursos
+   audiovisuales/tirasdevideo-sprite.png) de fondo. Ahora usamos capas reales
+   para que una tira quede fija y la otra se mueva con el scroll. */
+.ra-filmstrip-layer {
+  position: absolute;
+  inset: -20% 0;
+  background-image: url("imagenes/FOTOS FINALES/Pagina 6 - Recursos audiovisuales/tirasdevideo-sprite.png");
+  background-repeat: repeat;
+  background-size: calc(200px + 18px) 416px;
+  opacity: 1;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ra-filmstrip-layer--fixed {
+  background-position: 0 50%;
+}
+
+.ra-filmstrip-layer--moving {
+  position: absolute;
+  inset: -20% 0;
+  background-position: 100px 50%;
+  transform: translate3d(0, var(--ra-film-offset, 0px), 0);
+  will-change: transform, background-position;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ra-filmstrip-zone {
+    --ra-film-offset: 0px;
+  }
+}
+
 /* --- 9.1 Título --- */
 .RecursosAudiovisuales-container--1 {
-  background: var(--color-navy);
-  background-image: var(--squiggle-bg-light);
-  background-size: 480px;
+  position: relative;
   min-height: 140px;
   display: flex;
   align-items: center;
@@ -772,6 +818,8 @@ textarea {
 }
 
 .ra-page-title {
+  position: relative;
+  z-index: 2;
   font-family: var(--font-heading);
   font-weight: 700;
   letter-spacing: 0.18em;
@@ -780,19 +828,44 @@ textarea {
   color: var(--color-white);
 }
 
-/* --- 9.2 Secciones de video (entrevistas / documentales / charlas) --- */
-.ra-video-section {
+/* --- 9.2 Secciones de video (entrevistas / documentales / charlas) ---
+   Las 3 viven ahora DENTRO de una única tarjeta blanca (.ra-video-panel)
+   que flota sobre el mosaico de tiritas de .ra-filmstrip-zone. Al ser
+   una sola tarjeta continua, ya no queda espacio entre secciones; cada
+   una es un .ra-video-block separado apenas por un filete sutil. */
+.ra-video-panel {
   position: relative;
-  min-height: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: clamp(2rem, 5vw, 3rem);
-  padding: var(--section-pad-y) var(--section-pad-x);
+  z-index: 2;
+  width: calc(100% - 2 * var(--section-pad-x));
+  max-width: calc(var(--max-content) + 5rem);
+  margin: 0 auto var(--section-pad-y);
   background: var(--color-white);
   background-image: var(--squiggle-bg);
   background-size: 480px;
+  border-radius: 0;
+  box-shadow: 0 24px 60px rgba(10, 18, 40, 0.35);
   overflow: hidden;
+}
+
+/* En pantallas grandes angostamos un poco el panel para dejar ver más
+   tira de película a cada lado (si no, el panel casi tapa todo el ancho
+   y el efecto queda escondido en una rendija). */
+@media (min-width: 1300px) {
+  .ra-video-panel {
+    max-width: calc(var(--max-content) + 1rem);
+  }
+}
+
+.ra-video-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 2.5rem);
+  padding: clamp(2rem, 5vw, 3rem) clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.ra-video-block + .ra-video-block {
+  border-top: 1px solid var(--color-line);
 }
 
 .ra-video-grid {
@@ -1770,6 +1843,7 @@ textarea {
   .reveal,
   .reveal--left,
   .reveal--right,
+  .reveal--up,
   .reveal--zoom {
     opacity: 1 !important;
     transform: none !important;
@@ -1781,11 +1855,12 @@ textarea {
    12. Scroll reveal
    ========================================================= */
 
-/* Estado inicial: oculto y corrido. El JS agrega .is-visible
-   cuando el elemento entra en el viewport (IntersectionObserver). */
+/* Estado inicial: oculto y corrido desde el costado. El JS agrega
+   .is-visible cuando el elemento entra en el viewport
+   (IntersectionObserver). Por defecto entra desde la izquierda. */
 .reveal {
   opacity: 0;
-  transform: translateY(36px);
+  transform: translateX(-70px);
   transition:
     opacity 0.7s var(--ease),
     transform 0.7s var(--ease);
@@ -1794,26 +1869,33 @@ textarea {
 
 .reveal.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateX(0);
 }
 
-/* Variantes de dirección, por si se quiere variar manualmente */
+/* Variantes de dirección (el JS alterna izquierda/derecha automáticamente) */
 .reveal--left {
-  transform: translateX(-40px);
+  transform: translateX(-70px);
 }
 .reveal--left.is-visible {
   transform: translateX(0);
 }
 
 .reveal--right {
-  transform: translateX(40px);
+  transform: translateX(70px);
 }
 .reveal--right.is-visible {
   transform: translateX(0);
 }
 
+.reveal--up {
+  transform: translateY(40px);
+}
+.reveal--up.is-visible {
+  transform: translateY(0);
+}
+
 .reveal--zoom {
-  transform: scale(0.92);
+  transform: scale(0.85);
 }
 .reveal--zoom.is-visible {
   transform: scale(1);

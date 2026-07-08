@@ -130,16 +130,27 @@ function iniciarScrollReveal() {
     ".ra-podcast-section",
     ".equipo-grupo",
     ".footer-col",
+    // Contacto.html
+    ".contacto-main",
+    // Radio_la_chispa.html
+    ".chispa-about",
+    ".chispa-live",
+    ".chispa-programs",
+    // Novedad.html
+    ".novedad-article",
+    ".sidebar-block",
+    ".sidebar-donate",
   ].join(", ");
 
   // Contenedores que NO se deben tocar (hero rotativo de index, nav,
   // footer grande que ya tiene su propio formulario, etc.)
   const EXCLUIR = ["#inicio", ".hero-phase", ".site-nav", ".container--6"];
 
-  // Dentro de cada contenedor, sólo se anima texto y botones/links —
-  // nunca el contenedor en sí (así su fondo de color queda siempre
-  // visible, sin parpadear ni desaparecer).
-  const TEXTO_Y_BOTONES = [
+  // Dentro de cada contenedor, se animan los bloques de contenido de
+  // forma sutil: texto, botones, imágenes y media. El contenedor en sí
+  // no se mueve para que el fondo siga visible y el efecto se sienta más
+  // elegante que agresivo.
+  const ELEMENTOS_REVEAL = [
     "h1",
     "h2",
     "h3",
@@ -154,17 +165,70 @@ function iniciarScrollReveal() {
     "a.banner-btn",
     "button",
     ".btn",
+    "img",
+    "picture",
+    "figure",
+    "figcaption",
+    "iframe",
+    "video",
+    "audio",
+    ".ra-video-card",
+    ".ra-podcast-card",
+    ".card",
+    ".news-card",
+    ".equipo-card",
+    ".media",
   ].join(", ");
 
   // Evitar animar elementos que ya están dentro de otro elemento
   // animado (ej: un <a> dentro de un <li>), para no duplicar el efecto.
   function elementosAnimables(contenedor) {
     const encontrados = Array.from(
-      contenedor.querySelectorAll(TEXTO_Y_BOTONES),
+      contenedor.querySelectorAll(ELEMENTOS_REVEAL),
     );
     return encontrados.filter(
       (el) => !encontrados.some((otro) => otro !== el && otro.contains(el)),
     );
+  }
+
+  function aplicarRevealAElemento(el, index = 0) {
+    if (!el || el.classList.contains("reveal")) return;
+
+    // Títulos entran desde abajo; el resto alterna izquierda/derecha
+    // para que el efecto "desde el costado" se note bien.
+    const esTitulo = /^H[1-6]$/.test(el.tagName);
+    const direccion = esTitulo
+      ? "reveal--up"
+      : index % 2 === 0
+        ? "reveal--left"
+        : "reveal--right";
+
+    // Paso 1: aplicar el estado OCULTO sin transición (snap instantáneo),
+    // para forzar que el navegador lo pinte antes de animar. Si no se hace
+    // esto, a veces el navegador funde el estado oculto y el visible en el
+    // mismo frame y el elemento "aparece" sin deslizarse.
+    el.style.transition = "none";
+    el.classList.add("reveal", direccion);
+    void el.offsetWidth; // fuerza el reflow/pintado del estado oculto
+
+    // Paso 2: reactivar la transición y, en el siguiente frame, agregar
+    // is-visible para que la animación se vea de verdad.
+    const delay = Math.min(index * 0.08, 0.32);
+    requestAnimationFrame(() => {
+      el.style.transition = "";
+      el.style.transitionDelay = `${delay}s`;
+      requestAnimationFrame(() => el.classList.add("is-visible"));
+    });
+  }
+
+  function procesarContenedor(contenedor) {
+    if (!contenedor) return;
+    const hijos = elementosAnimables(contenedor);
+    if (hijos.length) {
+      hijos.forEach((el, i) => aplicarRevealAElemento(el, i));
+      return;
+    }
+    aplicarRevealAElemento(contenedor, 0);
   }
 
   const contenedores = new Set();
@@ -180,18 +244,7 @@ function iniciarScrollReveal() {
       entradas.forEach((entrada) => {
         if (!entrada.isIntersecting) return;
         const contenedor = entrada.target;
-        const hijos = elementosAnimables(contenedor);
-        hijos.forEach((el, i) => {
-          el.classList.add("reveal");
-          if (i > 0) {
-            const delay = Math.min(i * 0.08, 0.48);
-            el.style.transitionDelay = `${delay}s`;
-          }
-          // Forzar reflow antes de agregar is-visible para que la
-          // transición se dispare igual aunque el elemento se haya
-          // agregado y revelado en el mismo frame.
-          requestAnimationFrame(() => el.classList.add("is-visible"));
-        });
+        procesarContenedor(contenedor);
         observer.unobserve(contenedor);
       });
     },
@@ -201,7 +254,25 @@ function iniciarScrollReveal() {
     },
   );
 
+  const reactivarObserver = () => {
+    document.querySelectorAll(CONTENEDORES).forEach((el) => {
+      if (EXCLUIR.some((sel) => el.matches(sel) || el.closest(sel))) return;
+      if (!el.classList.contains("reveal")) {
+        observer.observe(el);
+      }
+    });
+  };
+
   contenedores.forEach((el) => observer.observe(el));
+  window.addEventListener("load", () => {
+    setTimeout(reactivarObserver, 300);
+    setTimeout(reactivarObserver, 900);
+  });
+
+  const mutacion = new MutationObserver(() => {
+    requestAnimationFrame(reactivarObserver);
+  });
+  mutacion.observe(document.body, { childList: true, subtree: true });
 }
 
 /* =======================================================
@@ -334,6 +405,58 @@ function iniciarParallaxOlas() {
    Cuando tengan un endpoint, reemplazar el contenido de este
    listener por el fetch/POST correspondiente.
    ======================================================= */
+function iniciarParallaxRecursosAudiovisuales() {
+  const zona = document.querySelector(".ra-filmstrip-zone");
+  const capa = document.querySelector(".ra-filmstrip-layer--moving");
+  if (!zona || !capa) return;
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  let rafId = null;
+  let offsetPersistente = 0;
+  const maxOffset = 220;
+
+  function actualizar() {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop || 0;
+    const maxScroll = Math.max(
+      1,
+      document.documentElement.scrollHeight - window.innerHeight,
+    );
+    const progreso = Math.min(Math.max(scrollTop / maxScroll, -0.3), 1.3);
+    const base = (progreso - 0.5) * maxOffset * 2;
+    const desplazamiento = base + offsetPersistente;
+    const valorFinal = desplazamiento;
+
+    offsetPersistente *= 0.92;
+    zona.style.setProperty("--ra-film-offset", `${valorFinal}px`);
+    capa.style.transform = `translate3d(0, ${valorFinal}px, 0)`;
+  }
+
+  function pedirActualizacion() {
+    if (rafId) return;
+    rafId = requestAnimationFrame(() => {
+      rafId = null;
+      actualizar();
+    });
+  }
+
+  window.addEventListener("scroll", pedirActualizacion, { passive: true });
+  window.addEventListener(
+    "wheel",
+    (evento) => {
+      offsetPersistente += evento.deltaY * 0.08;
+      offsetPersistente = Math.max(
+        -maxOffset,
+        Math.min(maxOffset, offsetPersistente),
+      );
+      pedirActualizacion();
+    },
+    { passive: true },
+  );
+  window.addEventListener("resize", pedirActualizacion);
+  pedirActualizacion();
+}
+
 function iniciarFormularioContacto() {
   const form = document.getElementById("contact-form");
   if (!form) return;
@@ -604,6 +727,7 @@ function iniciarNav() {
 document.addEventListener("DOMContentLoaded", () => {
   iniciarRotacionHero();
   iniciarParallaxOlas();
+  iniciarParallaxRecursosAudiovisuales();
   iniciarFormularioContacto();
   iniciarNav();
   iniciarScrollReveal();
