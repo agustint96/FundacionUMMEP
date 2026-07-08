@@ -5,13 +5,15 @@
 /**
  * Hero de tres fases:
  *
- *  FASE 1 — grid de 3 columnas. Las imágenes entran una a una con stagger.
- *  FASE 2 — grupo de 4 columnas. Las 4 entran con stagger corto (grupo).
- *  FASE 3 — 4 fotos "solo": una cubre toda la pantalla a la vez, 1 × 1.
+ *  FASE 1 — grid de 3 columnas. Las imágenes CAEN desde arriba, una a una.
+ *  FASE 2 — grupo de 4 columnas. Caen una a una, con stagger más corto.
+ *  FASE 3 — 4 fotos "solo": una cubre toda la pantalla a la vez, cae 1 × 1.
+ *
+ * Cada foto tarda 1 segundo en caer a su lugar (ver DROP_MS / CSS).
  *
  * Tiempos configurables:
- *   STAGGER_MS  → demora entre columnas al aparecer
- *   PHASE1_MS   → cuánto dura la fase 1 tras mostrarse la última columna
+ *   STAGGER_MS  → demora entre columnas al empezar a caer
+ *   PHASE1_MS   → cuánto dura la fase 1 tras caer la última columna
  *   PHASE2_MS   → cuánto dura la fase 2
  *   SOLO_MS     → cuánto dura cada foto individual en fase 3
  */
@@ -21,10 +23,10 @@ function iniciarRotacionHero() {
   const phase3 = document.getElementById("hero-phase-3");
   if (!phase1 || !phase2 || !phase3) return;
 
-  const STAGGER_MS = 300;
-  const PHASE1_MS = 2500;
-  const PHASE2_MS = 2000;
-  const SOLO_MS = 2800;
+  const STAGGER_MS = 220;
+  const PHASE1_MS = 1800;
+  const PHASE2_MS = 1400;
+  const SOLO_MS = 2000;
 
   // ── utilidades ─────────────────────────────────────────────────────────
 
@@ -32,18 +34,26 @@ function iniciarRotacionHero() {
     return new Promise((r) => setTimeout(r, ms));
   }
 
+  // La fase que se activa ahora pasa a estar "arriba" (z-index 2) y el
+  // resto vuelve a "abajo" (z-index 1). Son solo 2 valores fijos —nunca
+  // un contador que crezca— para que las fotos jamás puedan terminar
+  // por encima de las waves (que usan z-index bien más alto, ver CSS).
   function activarFase(phase) {
-    [phase1, phase2, phase3].forEach((p) => p.classList.remove("is-active"));
+    [phase1, phase2, phase3].forEach((p) => {
+      p.classList.remove("is-active");
+      p.style.zIndex = 1;
+    });
     phase.classList.add("is-active");
+    phase.style.zIndex = 2;
   }
 
   function ocultarColumnas(phase) {
     phase
       .querySelectorAll("img")
       .forEach((img) => img.classList.remove("is-visible"));
-    phase
-      .querySelectorAll(".hero-col")
-      .forEach((col) => col.classList.remove("is-solo-active"));
+    phase.querySelectorAll(".hero-col").forEach((col) => {
+      col.style.zIndex = "";
+    });
   }
 
   function revelarColumnas(phase, stagger) {
@@ -59,17 +69,24 @@ function iniciarRotacionHero() {
     });
   }
 
+  // FASE 3: cada foto CAE desde arriba, una por vez, y queda tapando a
+  // la anterior (que se queda quieta, abajo). z-index local que solo
+  // sube dentro de esta reproducción, para que el orden de apilamiento
+  // siempre respete el orden de entrada.
   function reproducirSolo(phase) {
     const cols = Array.from(phase.querySelectorAll(".hero-col"));
+    let zLocal = 1;
     let idx = 0;
     return new Promise((resolve) => {
       function siguiente() {
-        cols.forEach((c) => c.classList.remove("is-solo-active"));
         if (idx >= cols.length) {
           resolve();
           return;
         }
-        cols[idx].classList.add("is-solo-active");
+        const col = cols[idx];
+        col.style.zIndex = ++zLocal;
+        const img = col.querySelector("img");
+        if (img) img.classList.add("is-visible");
         idx++;
         if (idx < cols.length) setTimeout(siguiente, SOLO_MS);
         else setTimeout(resolve, SOLO_MS);
@@ -79,27 +96,32 @@ function iniciarRotacionHero() {
   }
 
   // ── bucle principal ────────────────────────────────────────────────────
+  //
+  // Por cada fase: 1) se resetea (mientras está tapada por la fase de
+  // arriba, así el reset nunca se ve), 2) pasa a ser la de arriba
+  // (z-index), 3) recién ahí se revelan sus fotos una por una. Como
+  // queda arriba de la fase anterior —que sigue ahí, sin tocarse—, lo
+  // que se ve mientras cada foto entra es siempre la otra foto, nunca
+  // un color de fondo.
 
   async function bucle() {
     while (true) {
-      // FASE 1
+      // FASE 1 — grid de 3, entran una a una
       ocultarColumnas(phase1);
       activarFase(phase1);
-      await esperar(200);
       await revelarColumnas(phase1, STAGGER_MS);
       await esperar(PHASE1_MS);
 
-      // FASE 2
+      // FASE 2 — grupo de 4
       ocultarColumnas(phase2);
       activarFase(phase2);
-      await esperar(200);
       await revelarColumnas(phase2, STAGGER_MS * 0.55);
       await esperar(PHASE2_MS);
 
-      // FASE 3
+      // FASE 3 — 4 fotos individuales, pantalla completa de a una
       ocultarColumnas(phase3);
       activarFase(phase3);
-      await esperar(200);
+      await esperar(80);
       await reproducirSolo(phase3);
       await esperar(600);
     }

@@ -190,7 +190,10 @@ textarea {
 .container--1 {
   height: 100vh;
   overflow: hidden;
-  background: #f8f4ee;
+  /* Crema de marca (el mismo tono que el resto de la página): así, el
+     instante inicial antes de que aparezca la primera foto se funde
+     con la página en vez de mostrar un bloque de color oscuro. */
+  background: var(--color-cream);
   isolation: isolate;
 }
 
@@ -205,7 +208,13 @@ textarea {
 
 /* ── Hero: fases ────────────────────────────────────────────── */
 
-/* Cada fase ocupa todo el hero y se superpone */
+/* Cada fase ocupa todo el hero y se superpone.
+   La fase en sí NO se desvanece (nada de "opacity" acá): lo que se ve
+   siempre detrás de una foto que todavía no apareció es directamente
+   la fase anterior (que sigue ahí, sin moverse), nunca un color de
+   fondo. El orden de apilamiento (qué fase queda arriba) lo maneja
+   script.js con z-index, así siempre hay una sola animándose "hacia
+   adentro" sobre la que ya estaba. */
 .hero-phase {
   position: absolute;
   /* 30px de sobra a cada lado (igual que .hero-wave) para que el
@@ -215,70 +224,67 @@ textarea {
   bottom: 0;
   left: -30px;
   display: flex;
-  opacity: 0;
   pointer-events: none;
-  will-change: transform;
-  /* transición de entrada/salida de la fase completa */
-  transition: opacity 1.2s var(--ease);
+  z-index: 1;
 }
 
-/* Fase activa */
 .hero-phase.is-active {
-  opacity: 1;
   pointer-events: auto;
 }
 
-/* Cada columna dentro de la fase */
+/* Cada columna dentro de la fase. Sin color de fondo propio, y con
+   overflow:hidden: mientras la foto todavía está "cayendo" (por
+   encima del recuadro, fuera de vista), lo que se ve es la fase
+   anterior por transparencia — nunca un bloque de color. */
 .hero-col {
   position: relative;
   flex: 1 1 0;
   height: 100%;
   overflow: hidden;
-  background: #f8f4ee;
+  background: transparent;
 }
 
-/* La imagen ocupa toda la columna */
+/* La imagen ocupa toda la columna y CAE desde arriba hacia abajo: es
+   un translate (no opacity) el que hace toda la animación, así que
+   se ve como una foto física que cae y se acomoda en su lugar — no
+   un fundido. Dura 1 segundo, con un ease-out suave al final (como si
+   frenara al llegar). El acercamiento (Ken Burns) es una propiedad
+   aparte ("scale"), mucho más lenta, para el rato que la foto queda
+   quieta en pantalla. */
 .hero-col img {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0;
-  transform: scale(1.04);
+  translate: 0 -100%;
+  scale: 1.04;
   transition:
-    opacity 1s var(--ease),
-    transform 7s var(--ease);
+    translate 1s cubic-bezier(0.16, 1, 0.3, 1),
+    scale 7s linear;
 }
 
-/* Imagen visible dentro de su columna */
+/* Imagen visible: ya cayó a su lugar */
 .hero-col img.is-visible {
-  opacity: 1;
-  transform: scale(1);
+  translate: 0 0;
+  scale: 1;
 }
 
-/* ── Fase 3: solo una columna visible a la vez ───────────────── */
-.hero-phase--solo {
-  /* las columnas se apilan y solo una se muestra */
-}
+/* ── Fase 3: solo una foto visible a la vez, pantalla completa ── */
 .hero-phase--solo .hero-col {
   position: absolute;
   inset: 0;
   flex: none;
   width: 100%;
-  opacity: 0;
-  transition: opacity 1.2s var(--ease);
+  z-index: 1;
 }
-.hero-phase--solo .hero-col.is-solo-active {
-  opacity: 1;
-}
-/* la imagen dentro de la fase solo siempre visible (la col maneja la opacidad) */
-.hero-phase--solo .hero-col img {
-  opacity: 1;
-  transform: scale(1);
-}
+/* la foto que está entrando queda arriba (z-index lo asigna script.js,
+   incremental, para respetar el orden 1-2-3-4 dentro de esta fase) */
 
-/* decorative waves — dos capas (haikei), ancladas al fondo del hero */
+/* decorative waves — dos capas (haikei), ancladas al fondo del hero.
+   z-index bien por encima de las fases de fotos (que usan 1 y 2, fijo)
+   para que las waves queden SIEMPRE al frente, pase lo que pase con
+   la rotación de fotos. */
 .hero-wave {
   position: absolute;
   /* ancho de sobra (60px de cada lado) para que el parallax horizontal
@@ -302,21 +308,21 @@ textarea {
 
 /* ola más lejana: navy semitransparente, la más alta y más atrás */
 .hero-wave--far {
-  z-index: 1;
+  z-index: 10;
   height: clamp(240px, 70vh, 820px);
   opacity: 0.5;
 }
 
 /* ola trasera: más alta, detrás */
 .hero-wave--back {
-  z-index: 2;
+  z-index: 11;
   opacity: 0.85;
   height: clamp(208px, 67vh, 720px);
 }
 
 /* ola delantera: más baja, al frente */
 .hero-wave--front {
-  z-index: 3;
+  z-index: 12;
   height: clamp(208px, 67vh, 616px);
 }
 
@@ -332,7 +338,7 @@ textarea {
 .hero-wave--lines {
   left: 0;
   width: 100%;
-  z-index: 4;
+  z-index: 13;
   height: clamp(180px, 42vh, 380px);
   object-fit: fill;
   opacity: 0.9;
@@ -350,7 +356,7 @@ textarea {
   left: 50%;
   bottom: clamp(18px, 3vh, 28px);
   transform: translateX(-50%);
-  z-index: 5;
+  z-index: 14;
   width: clamp(230px, 14vw, 200px);
   filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.25));
 }
@@ -1837,8 +1843,10 @@ textarea {
   .hero-col img,
   .hero-phase,
   .hero-col {
-    transition: opacity 0.3s linear !important;
+    transition: none !important;
     transform: none !important;
+    translate: 0 !important;
+    scale: 1 !important;
   }
   .btn,
   .social-icons a {
