@@ -122,7 +122,14 @@
         transform: rotateY(var(--rotatey)) translateZ(var(--tz));
       }
       .chispa-logo-carrousel__item5 {
-        background-size: contain;
+        background-size: 65% auto; /* Ancho fijo, altura automática */
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+      .chispa-logo-carrousel__item6 {
+        background-size: 65% auto; /* Ancho fijo, altura automática */
+        background-repeat: no-repeat;
+        background-position: center;
       }
 
       @media (min-width: 761px) {
@@ -547,7 +554,7 @@
                   "
                 ></div>
                 <div
-                  class="chispa-logo-carrousel__item"
+                  class="chispa-logo-carrousel__item chispa-logo-carrousel__item6"
                   style="
                     background-image: url(&quot;imagenes/FOTOS FINALES/Pagina 7 - Radio la chispa/Carrousel/6.jpg&quot;);
                   "
