@@ -455,13 +455,32 @@ textarea {
   background: var(--color-navy);
   color: var(--color-white);
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.2rem;
+  min-height: 140px;
+  overflow-x: hidden;
+}
+
+.impacto__intro {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: clamp(0.85rem, 0.75rem + 0.4vw, 1.05rem);
+  color: var(--color-white);
+  margin: 0.2rem;
+}
+
+.impacto__stats {
+  display: flex;
   flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
   gap: clamp(1rem, 4vw, 5rem);
-  padding: 0.2rem;
-  min-height: 140px;
-  overflow-x: hidden;
+  width: 100%;
 }
 
 .stat {
@@ -1335,10 +1354,13 @@ textarea {
 
   /* Container 3 (stats bar): nowrap, sin scroll */
   .container--3 {
-    flex-wrap: nowrap;
-    gap: clamp(0.75rem, 2vw, 1.5rem);
     padding: 0.5rem var(--section-pad-x);
     overflow-x: hidden;
+  }
+
+  .impacto__stats {
+    flex-wrap: nowrap;
+    gap: clamp(0.75rem, 2vw, 1.5rem);
   }
 
   .stat {
@@ -1545,12 +1567,15 @@ textarea {
   /* Container 3 (stats bar): en mobile chico, space-around; si no
      entran, caen a una segunda fila en vez de achicarse demasiado */
   .container--3 {
+    padding: 0.75rem var(--section-pad-x);
+    overflow-x: visible;
+  }
+
+  .impacto__stats {
     flex-wrap: wrap;
     justify-content: space-around;
     row-gap: 1rem;
     column-gap: clamp(0.75rem, 4vw, 2rem);
-    padding: 0.75rem var(--section-pad-x);
-    overflow-x: visible;
   }
 
   .stat {
