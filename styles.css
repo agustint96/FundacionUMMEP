@@ -567,7 +567,7 @@ textarea {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.2rem;
+  padding: 1em;
   min-height: 140px;
   overflow-x: hidden;
 }
