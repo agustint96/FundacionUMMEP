@@ -436,30 +436,56 @@ function iniciarParallaxRecursosAudiovisuales() {
 
   let rafId = null;
   let offsetPersistente = 0;
+  // Valor que realmente se aplica a la tira. Nunca salta directo al
+  // valor objetivo: lo persigue de a poco cada frame (suavizado/lerp),
+  // así un salto brusco de scroll (p.ej. el rebote elástico del
+  // overscroll arriba de todo) se ve como un deslizamiento suave y no
+  // como un tirón.
+  let offsetActual = 0;
   const maxOffset = 220;
+  const suavizado = 0.12; // 0-1: más chico = más suave (y más lento)
 
-  function actualizar() {
+  function calcularObjetivo() {
     const scrollTop = window.scrollY || document.documentElement.scrollTop || 0;
     const maxScroll = Math.max(
       1,
       document.documentElement.scrollHeight - window.innerHeight,
     );
-    const progreso = Math.min(Math.max(scrollTop / maxScroll, -0.3), 1.3);
+    // Dejamos un rango un poco más amplio que 0-1 (antes era -0.3 a 1.3)
+    // para que el movimiento en el overscroll se siga notando —si no,
+    // casi no se ve nada al estar arriba/abajo del todo—, pero más
+    // acotado que el original para no exagerarlo. Como el valor final
+    // se aplica con suavizado (más abajo), aunque este objetivo salte
+    // de golpe durante el rebote, lo que se ve en pantalla es siempre
+    // un deslizamiento parejo, nunca un tirón.
+    const progreso = Math.min(Math.max(scrollTop / maxScroll, -0.15), 1.15);
     const base = (progreso - 0.5) * maxOffset * 2;
-    const desplazamiento = base + offsetPersistente;
-    const valorFinal = desplazamiento;
+    return base + offsetPersistente;
+  }
 
+  function actualizar() {
+    const objetivo = calcularObjetivo();
+    offsetActual += (objetivo - offsetActual) * suavizado;
     offsetPersistente *= 0.92;
-    zona.style.setProperty("--ra-film-offset", `${valorFinal}px`);
-    capa.style.transform = `translate3d(0, ${valorFinal}px, 0)`;
+
+    zona.style.setProperty("--ra-film-offset", `${offsetActual}px`);
+    capa.style.transform = `translate3d(0, ${offsetActual}px, 0)`;
+
+    // Seguimos animando mientras falte "alcanzar" al objetivo o quede
+    // envión del wheel, aunque no haya nuevos eventos de scroll (si no,
+    // el suavizado se cortaría a mitad de camino).
+    const faltaLlegar = Math.abs(objetivo - offsetActual) > 0.05;
+    const quedaEnvion = Math.abs(offsetPersistente) > 0.05;
+    if (faltaLlegar || quedaEnvion) {
+      rafId = requestAnimationFrame(actualizar);
+    } else {
+      rafId = null;
+    }
   }
 
   function pedirActualizacion() {
     if (rafId) return;
-    rafId = requestAnimationFrame(() => {
-      rafId = null;
-      actualizar();
-    });
+    rafId = requestAnimationFrame(actualizar);
   }
 
   window.addEventListener("scroll", pedirActualizacion, { passive: true });
