@@ -11,8 +11,6 @@
       /* Header banner */
       .chispa-header {
         background: var(--color-navy);
-        background-image: var(--squiggle-bg-light);
-        background-size: 480px;
         padding: clamp(1.5rem, 4vw, 2.5rem) var(--section-pad-x);
         text-align: center;
         min-height: 140px;
@@ -310,11 +308,16 @@
         max-width: var(--max-content);
       }
 
-      /* ── Banner de participación ── */
+      /* ── Banner de participación ──
+         El fondo (navy + patrón de olas + animación) ya lo pone
+         .ra-donate-banner (styles.css) — acá solo van las propiedades
+         de layout propias de esta página. Antes este bloque también
+         redeclaraba background/background-image/background-size con un
+         tamaño distinto (600px vs. 480px), lo que pisaba el de
+         .ra-donate-banner y hacía que el patrón de olas quedara
+         descentrado verticalmente comparado con el resto de los
+         banners del sitio. */
       .chispa-cta {
-        background: var(--color-navy);
-        background-image: var(--squiggle-bg-light);
-        background-size: 600px;
         padding: clamp(1.75rem, 4vw, 2.75rem) var(--section-pad-x);
         display: flex;
         flex-wrap: wrap;

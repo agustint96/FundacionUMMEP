@@ -1338,16 +1338,22 @@ textarea {
   background-image: var(--squiggle-bg-light);
   background-repeat: repeat;
   background-size: 480px;
+  /* centrado vertical: así el patrón de olas queda a la misma altura
+     relativa (a mitad del banner) sin importar cuánto mida el banner
+     de alto en cada página — antes quedaba anclado siempre arriba
+     (posición Y en 0), por eso en banners más altos o más bajos que el
+     resto (como el de Radio La Chispa) se veía descentrado. */
+  background-position: 0 center;
   animation: ra-wave-scroll 22s linear infinite;
   overflow: hidden;
 }
 
 @keyframes ra-wave-scroll {
   from {
-    background-position: 0 0;
+    background-position: 0 center;
   }
   to {
-    background-position: -480px 0;
+    background-position: -480px center;
   }
 }
 
