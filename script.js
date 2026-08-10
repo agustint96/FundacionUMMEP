@@ -34,6 +34,41 @@ function iniciarRotacionHero() {
     return new Promise((r) => setTimeout(r, ms));
   }
 
+  // La animación de "aparece en blanco y negro y se va coloreando" (ver
+  // CSS: @keyframes heroPhotoReveal) corre por tiempo apenas se agrega
+  // la clase "is-visible" — no espera a que la foto esté realmente
+  // pintada en pantalla. Como son fotos pesadas y algunas tienen
+  // loading="lazy", si agregáramos la clase por reloj (setTimeout) nomás,
+  // podía pasar que para cuando la imagen recién terminaba de bajar/
+  // decodificar, la animación ya había terminado "de fondo" — y la foto
+  // aparecía directamente a color, sin blanco y negro visible. Por eso
+  // esta función espera a que la imagen esté lista (decode() o el
+  // evento "load") antes de agregar la clase, así el efecto siempre
+  // arranca justo cuando la foto se empieza a ver.
+  function revelarImagen(img) {
+    if (!img) return Promise.resolve();
+    const activar = () => img.classList.add("is-visible");
+
+    if (img.complete && img.naturalWidth > 0) {
+      activar();
+      return Promise.resolve();
+    }
+    if (typeof img.decode === "function") {
+      return img
+        .decode()
+        .catch(() => {})
+        .then(activar);
+    }
+    return new Promise((resolve) => {
+      const onReady = () => {
+        activar();
+        resolve();
+      };
+      img.addEventListener("load", onReady, { once: true });
+      img.addEventListener("error", onReady, { once: true });
+    });
+  }
+
   // La fase que se activa ahora pasa a estar "arriba" (z-index 2) y el
   // resto vuelve a "abajo" (z-index 1). Son solo 2 valores fijos —nunca
   // un contador que crezca— para que las fotos jamás puedan terminar
@@ -62,7 +97,7 @@ function iniciarRotacionHero() {
       cols.forEach((col, i) => {
         setTimeout(() => {
           const img = col.querySelector("img");
-          if (img) img.classList.add("is-visible");
+          revelarImagen(img);
           if (i === cols.length - 1) resolve();
         }, i * stagger);
       });
@@ -86,7 +121,7 @@ function iniciarRotacionHero() {
         const col = cols[idx];
         col.style.zIndex = ++zLocal;
         const img = col.querySelector("img");
-        if (img) img.classList.add("is-visible");
+        revelarImagen(img);
         idx++;
         if (idx < cols.length) setTimeout(siguiente, SOLO_MS);
         else setTimeout(resolve, SOLO_MS);

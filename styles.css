@@ -244,30 +244,45 @@ textarea {
   background: transparent;
 }
 
-/* La imagen ocupa toda la columna y CAE desde arriba hacia abajo: es
-   un translate (no opacity) el que hace toda la animación, así que
-   se ve como una foto física que cae y se acomoda en su lugar — no
-   un fundido. Dura 1 segundo, con un ease-out suave al final (como si
-   frenara al llegar). El acercamiento (Ken Burns) es una propiedad
-   aparte ("scale"), mucho más lenta, para el rato que la foto queda
-   quieta en pantalla. */
+/* La imagen aparece rápido, ya en blanco y negro, y recién ahí — con
+   un fundido más lento — el color va apareciendo. Usamos una
+   animación por keyframes (en vez de transition) para que el efecto
+   sea siempre determinístico: no depende de que el navegador llegue
+   a "pintar" el estado inicial antes de animar. El acercamiento (Ken
+   Burns) sigue siendo aparte ("scale", vía transition), mucho más
+   lento, para el rato que la foto queda quieta en pantalla. */
+@keyframes heroPhotoReveal {
+  0% {
+    opacity: 0;
+    filter: grayscale(100%);
+  }
+  15% {
+    opacity: 1;
+    filter: grayscale(100%);
+  }
+  100% {
+    opacity: 1;
+    filter: grayscale(0%);
+  }
+}
+
 .hero-col img {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  translate: 0 -100%;
-  scale: 1.04;
-  transition:
-    translate 1s cubic-bezier(0.16, 1, 0.3, 1),
-    scale 7s linear;
+  opacity: 0;
+  scale: 1.06;
+  filter: grayscale(100%);
+  transition: scale 7s linear;
 }
 
-/* Imagen visible: ya cayó a su lugar */
+/* Imagen visible: dispara la animación (aparece rápido en B&N y se va
+   coloreando) y arranca el zoom lento. */
 .hero-col img.is-visible {
-  translate: 0 0;
   scale: 1;
+  animation: heroPhotoReveal 1.6s ease-in-out forwards;
 }
 
 /* ── Fase 3: solo una foto visible a la vez, pantalla completa ── */
@@ -1897,9 +1912,12 @@ textarea {
   .hero-phase,
   .hero-col {
     transition: none !important;
+    animation: none !important;
     transform: none !important;
     translate: 0 !important;
     scale: 1 !important;
+    opacity: 1 !important;
+    filter: none !important;
   }
   .btn,
   .social-icons a {
