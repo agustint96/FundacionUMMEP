@@ -207,57 +207,73 @@
           </div>
         </div>
 
-        <!-- olas decorativas (haikei) — dos capas superpuestas -->
+        <!-- olas decorativas (haikei) — cada una entra por separado, en
+             secuencia: primero la blanca (arriba de todo), después la
+             salmón/roja (al medio), y por último la azul navy (abajo de
+             todo). Cada ola tiene su propio "wrapper" (.hero-wave-rise)
+             que es el que sube desde abajo al cargar la página — así el
+             transform de la animación de entrada nunca toca el elemento
+             de la ola en sí, que sigue moviéndose con el parallax de
+             script.js sin pisarse con esta animación. -->
 
-        <!-- ola más lejana: azul navy, la más alta de las tres -->
-        <svg
-          class="hero-wave hero-wave--far"
-          viewBox="0 0 900 600"
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          <path
-            d="M0 210L22 224C44 238 88 266 132 272C176 278 220 262 264 255C308 248 352 250 396 265C440 280 484 308 528 318C572 328 616 320 660 305C704 290 748 268 792 262C836 256 858 266 879 271L900 276L900 601L879 601C858 601 836 601 792 601C748 601 704 601 660 601C616 601 572 601 528 601C484 601 440 601 396 601C352 601 308 601 264 601C220 601 176 601 132 601C88 601 44 601 22 601L0 601Z"
-            fill="rgba(22, 35, 74)"
-          />
-        </svg>
+        <!-- 3ra en aparecer: ola azul navy, más lejana -->
+        <div class="hero-wave-rise hero-wave-rise--far">
+          <svg
+            class="hero-wave hero-wave--far"
+            viewBox="0 0 900 600"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M0 210L22 224C44 238 88 266 132 272C176 278 220 262 264 255C308 248 352 250 396 265C440 280 484 308 528 318C572 328 616 320 660 305C704 290 748 268 792 262C836 256 858 266 879 271L900 276L900 601L879 601C858 601 836 601 792 601C748 601 704 601 660 601C616 601 572 601 528 601C484 601 440 601 396 601C352 601 308 601 264 601C220 601 176 601 132 601C88 601 44 601 22 601L0 601Z"
+              fill="rgba(22, 35, 74)"
+            />
+          </svg>
+        </div>
 
-        <!-- ola trasera: tono salmon/rosa, más alta -->
-        <svg
-          class="hero-wave hero-wave--back"
-          viewBox="0 0 900 600"
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          <path
-            d="M0 301L25 310.3C50 319.7 100 338.3 150 336C200 333.7 250 310.3 300 305.3C350 300.3 400 313.7 450 326.8C500 340 550 353 600 378.8C650 404.7 700 443.3 750 447.2C800 451 850 420 875 404.5L900 389L900 601L875 601C850 601 800 601 750 601C700 601 650 601 600 601C550 601 500 601 450 601C400 601 350 601 300 601C250 601 200 601 150 601C100 601 50 601 25 601L0 601Z"
-            fill="#b4777f"
-          />
-        </svg>
+        <!-- 2da en aparecer: ola salmón/rosa (roja), al medio -->
+        <div class="hero-wave-rise hero-wave-rise--back">
+          <svg
+            class="hero-wave hero-wave--back"
+            viewBox="0 0 900 600"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M0 301L25 310.3C50 319.7 100 338.3 150 336C200 333.7 250 310.3 300 305.3C350 300.3 400 313.7 450 326.8C500 340 550 353 600 378.8C650 404.7 700 443.3 750 447.2C800 451 850 420 875 404.5L900 389L900 601L875 601C850 601 800 601 750 601C700 601 650 601 600 601C550 601 500 601 450 601C400 601 350 601 300 601C250 601 200 601 150 601C100 601 50 601 25 601L0 601Z"
+              fill="#b4777f"
+            />
+          </svg>
+        </div>
 
-        <!-- ola delantera: rojo de la marca, más baja -->
-        <svg
-          class="hero-wave hero-wave--front"
-          viewBox="0 0 900 600"
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          <path
-            d="M0 473L21.5 463.5C43 454 86 435 128.8 432C171.7 429 214.3 442 257.2 442.2C300 442.3 343 429.7 385.8 437.3C428.7 445 471.3 473 514.2 470.3C557 467.7 600 434.3 642.8 432.8C685.7 431.3 728.3 461.7 771.2 473.7C814 485.7 857 479.3 878.5 476.2L900 473L900 601L878.5 601C857 601 814 601 771.2 601C728.3 601 685.7 601 642.8 601C600 601 557 601 514.2 601C471.3 601 428.7 601 385.8 601C343 601 300 601 257.2 601C214.3 601 171.7 601 128.8 601C86 601 43 601 21.5 601L0 601Z"
-            fill="#f8f4ee"
-          />
-        </svg>
+        <!-- 1ra en aparecer: ola blanca/crema, arriba de todo -->
+        <div class="hero-wave-rise hero-wave-rise--front">
+          <svg
+            class="hero-wave hero-wave--front"
+            viewBox="0 0 900 600"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M0 473L21.5 463.5C43 454 86 435 128.8 432C171.7 429 214.3 442 257.2 442.2C300 442.3 343 429.7 385.8 437.3C428.7 445 471.3 473 514.2 470.3C557 467.7 600 434.3 642.8 432.8C685.7 431.3 728.3 461.7 771.2 473.7C814 485.7 857 479.3 878.5 476.2L900 473L900 601L878.5 601C857 601 814 601 771.2 601C728.3 601 685.7 601 642.8 601C600 601 557 601 514.2 601C471.3 601 428.7 601 385.8 601C343 601 300 601 257.2 601C214.3 601 171.7 601 128.8 601C86 601 43 601 21.5 601L0 601Z"
+              fill="#f8f4ee"
+            />
+          </svg>
+        </div>
 
         <!-- líneas topográficas decorativas: van por encima de las
-             fotos y de las tres olas, ancladas al mismo borde inferior -->
-        <img
-          class="hero-wave hero-wave--lines"
-          src="imagenes/FOTOS FINALES/imagen_ondas_parallax.png"
-          alt=""
-          aria-hidden="true"
-          loading="lazy"
-          decoding="async"
-        />
+             fotos y de las tres olas, ancladas al mismo borde inferior.
+             Aparecen al final, cuando las tres olas ya están arriba. -->
+        <div class="hero-wave-rise hero-wave-rise--lines">
+          <img
+            class="hero-wave hero-wave--lines"
+            src="imagenes/FOTOS FINALES/imagen_ondas_parallax.png"
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
       </div>
 
       <div class="hero-logo">

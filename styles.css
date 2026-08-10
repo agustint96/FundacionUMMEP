@@ -296,6 +296,84 @@ textarea {
 /* la foto que está entrando queda arriba (z-index lo asigna script.js,
    incremental, para respetar el orden 1-2-3-4 dentro de esta fase) */
 
+/* Wrapper de entrada de CADA ola por separado (uno para la blanca, uno
+   para la salmón/roja, uno para la azul navy, y uno para las líneas).
+   Cada wrapper es el que sube desde abajo al cargar la página — nunca
+   la ola en sí — así el transform de esta animación no interfiere con
+   el parallax de scroll/mouse que script.js sigue aplicando a cada ola
+   por separado (son transforms de elementos distintos).
+
+   El z-index queda en el wrapper (no alcanza con el de la ola de
+   adentro) porque, al tener "transform" por la animación, cada wrapper
+   arma su propio contexto de apilamiento — y tiene que quedar por
+   encima de las fotos del hero (.hero-phase usa z-index 1 o 2).
+
+   Orden de aparición pedido: primero la blanca (arriba de todo),
+   después la salmón/roja (al medio), y por último la azul navy (abajo
+   de todo) — con las líneas topográficas cerrando la secuencia.
+
+   Para que se sienta fluido (una ola "empujando" a la siguiente) en vez
+   de robótico, los arranques están MUY cerca entre sí (apenas 130-160ms)
+   así cada ola todavía se está terminando de acomodar cuando ya empezó
+   a subir la de atrás — nunca hay un hueco de silencio entre una y otra.
+   El transform va acompañado de un fade breve (opacity) para que el
+   "aterrizaje" sea suave y no un golpe seco. */
+.hero-wave-rise {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  animation: heroWaveRise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes heroWaveRise {
+  0% {
+    transform: translateY(65%);
+    opacity: 0;
+  }
+  45% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* 1ra: blanca/crema — arriba de todo */
+.hero-wave-rise--front {
+  z-index: 12;
+  animation-delay: 0.25s;
+}
+
+/* 2da: salmón/rosa (roja) — al medio */
+.hero-wave-rise--back {
+  z-index: 11;
+  animation-delay: 0.4s;
+}
+
+/* 3ra: azul navy — abajo de todo */
+.hero-wave-rise--far {
+  z-index: 10;
+  animation-delay: 0.53s;
+}
+
+/* 4ta: líneas topográficas — solo un fade suave (sin subir), para que
+   no se sienta como una cuarta "ola" repitiendo el mismo movimiento */
+.hero-wave-rise--lines {
+  z-index: 13;
+  animation: heroLinesFadeIn 0.5s ease-out both;
+  animation-delay: 0.75s;
+}
+
+@keyframes heroLinesFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 /* decorative waves — dos capas (haikei), ancladas al fondo del hero.
    z-index bien por encima de las fases de fotos (que usan 1 y 2, fijo)
    para que las waves queden SIEMPRE al frente, pase lo que pase con
@@ -374,6 +452,21 @@ textarea {
   z-index: 14;
   width: clamp(230px, 14vw, 200px);
   filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.25));
+  /* Fade in de transparente a nítido: arranca cuando ya terminó toda
+     la secuencia de olas (blanca → roja → azul → líneas), así el logo
+     es lo último en aparecer. */
+  opacity: 0;
+  animation: heroLogoFadeIn 0.9s ease-out both;
+  animation-delay: 1.15s;
+}
+
+@keyframes heroLogoFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* =========================================================
@@ -1910,7 +2003,8 @@ textarea {
   }
   .hero-col img,
   .hero-phase,
-  .hero-col {
+  .hero-col,
+  .hero-wave-rise {
     transition: none !important;
     animation: none !important;
     transform: none !important;
@@ -1918,6 +2012,12 @@ textarea {
     scale: 1 !important;
     opacity: 1 !important;
     filter: none !important;
+  }
+  /* El logo sí necesita conservar su transform (translateX(-50%) lo
+     centra horizontalmente): solo le apagamos la animación de fade-in. */
+  .hero-logo {
+    animation: none !important;
+    opacity: 1 !important;
   }
   .btn,
   .social-icons a {
