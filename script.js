@@ -333,126 +333,44 @@ function iniciarScrollReveal() {
 }
 
 /* =======================================================
-   Parallax del hero (index.html)
+   "Efecto billetera" del hero (index.html)
    =======================================================
-   Varias capas: las fotos de fondo, las tres olas de color
-   (.hero-wave--far / --back / --front) y, por encima de todo,
-   la imagen de líneas topográficas decorativas
-   (.hero-wave--lines).
-     · Vertical (scroll): a distinta velocidad según la capa;
-       la más lejana se mueve poco, la trasera un poco más.
-       Las fotos y las capas "de piso" (ola delantera y líneas)
-       casi no se mueven para no perder el anclaje ni revelar
-       el borde de la imagen.
-     · Horizontal (mouse): SOLO se mueven las tres olas de
-       color. Las fotos quedan fijas (velocidadX en 0) para que
-       el efecto de profundidad se sienta en las olas y no
-       "tiemble" la imagen de fondo. Las líneas también quedan
-       fijas en X: ese dibujo llega hasta el borde real del
-       archivo, sin margen — cualquier desplazamiento
-       horizontal, por chico que fuera, terminaba mostrando un
-       corte de un lado. Las olas sí tienen ancho de sobra en
-       CSS (.hero-wave) para que ese movimiento nunca deje ver
-       un borde vacío.
-   Solo corre en index.html (donde existe #inicio con las
-   olas), el eje X solo con mouse real (no en touch), y todo
-   se desactiva si el usuario prefiere menos animaciones.
+   La ola azul y la roja quedan FIJAS (sin parallax de mouse
+   ni de scroll) en la posición y rotación que ya define
+   styles.css (.hero-wave-card--far / --back). El único
+   movimiento es al pasar el mouse por encima de cada una:
+     · Hover en la azul: la roja se corre para abajo y se
+       esconde un poco más, dejando ver más azul — pero la
+       azul sigue SIEMPRE por detrás de la roja (nunca cambia
+       el orden de apilamiento).
+     · Hover en la roja: solo se acomoda un poco hacia arriba,
+       pero nunca pasa por delante de la blanca.
+   Se desactiva si el usuario prefiere menos animaciones.
    ======================================================= */
-function iniciarParallaxOlas() {
-  const hero = document.getElementById("inicio");
-  if (!hero) return;
+function iniciarHoverOlas() {
+  const navy = document.getElementById("hero-wave-navy");
+  const red = document.getElementById("hero-wave-red");
+  if (!navy || !red) return;
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-  const capas = [
-    {
-      els: Array.from(hero.querySelectorAll(".hero-phase")),
-      velocidadY: 0,
-      velocidadX: 0,
-    },
-    {
-      els: [hero.querySelector(".hero-wave--far")],
-      velocidadY: 0.12,
-      velocidadX: 10,
-    },
-    {
-      els: [hero.querySelector(".hero-wave--back")],
-      velocidadY: 0.22,
-      velocidadX: 20,
-    },
-    {
-      els: [hero.querySelector(".hero-wave--front")],
-      velocidadY: 0.03,
-      velocidadX: 32,
-    },
-    {
-      els: [hero.querySelector(".hero-wave--lines")],
-      velocidadY: 0.05,
-      velocidadX: 0,
-    },
-  ]
-    .map((capa) => ({ ...capa, els: capa.els.filter(Boolean) }))
-    .filter((capa) => capa.els.length);
+  const BASE_NAVY = "rotate(-3deg) translateX(-14px)";
+  const BASE_RED = "rotate(2.5deg) translateX(10px)";
 
-  if (!capas.length) return;
+  navy.addEventListener("mouseenter", () => {
+    navy.style.transform = `${BASE_NAVY} translateY(-6px)`;
+    red.style.transform = `${BASE_RED} translateY(28px)`;
+  });
+  navy.addEventListener("mouseleave", () => {
+    navy.style.transform = `${BASE_NAVY} translateY(0)`;
+    red.style.transform = `${BASE_RED} translateY(0)`;
+  });
 
-  let progresoScroll = 0; // 0→1, cuánto salió el hero de pantalla
-  let ratioMouseX = 0; // -1→1, posición del cursor respecto al centro
-  let renderPendiente = false;
-
-  function render() {
-    renderPendiente = false;
-    const alturaHero = hero.offsetHeight || window.innerHeight;
-
-    capas.forEach(({ els, velocidadY, velocidadX }) => {
-      const y = progresoScroll * alturaHero * velocidadY;
-      const x = ratioMouseX * velocidadX;
-      const transform = `translate3d(${x}px, ${y}px, 0)`;
-      els.forEach((el) => {
-        el.style.transform = transform;
-      });
-    });
-  }
-
-  function pedirRender() {
-    if (renderPendiente) return;
-    renderPendiente = true;
-    requestAnimationFrame(render);
-  }
-
-  function onScroll() {
-    const alturaHero = hero.offsetHeight || window.innerHeight;
-    progresoScroll = Math.min(Math.max(window.scrollY / alturaHero, 0), 1);
-    pedirRender();
-  }
-
-  window.addEventListener("scroll", onScroll, { passive: true });
-  window.addEventListener("resize", onScroll, { passive: true });
-
-  // ── movimiento horizontal con el mouse (solo dispositivos con puntero fino) ──
-  const tieneMouse = window.matchMedia("(pointer: fine)").matches;
-
-  if (tieneMouse) {
-    function onMouseMove(e) {
-      const rect = hero.getBoundingClientRect();
-      const centroX = rect.left + rect.width / 2;
-      // normalizado entre -1 (borde izquierdo) y 1 (borde derecho)
-      ratioMouseX = Math.min(
-        Math.max((e.clientX - centroX) / (rect.width / 2), -1),
-        1,
-      );
-      pedirRender();
-    }
-
-    function onMouseLeave() {
-      ratioMouseX = 0;
-      pedirRender();
-    }
-
-    hero.addEventListener("mousemove", onMouseMove);
-    hero.addEventListener("mouseleave", onMouseLeave);
-  }
-
-  onScroll();
+  red.addEventListener("mouseenter", () => {
+    red.style.transform = `${BASE_RED} translateY(-6px)`;
+  });
+  red.addEventListener("mouseleave", () => {
+    red.style.transform = `${BASE_RED} translateY(0)`;
+  });
 }
 
 /* =======================================================
@@ -820,7 +738,7 @@ function iniciarNav() {
 
 document.addEventListener("DOMContentLoaded", () => {
   iniciarRotacionHero();
-  iniciarParallaxOlas();
+  iniciarHoverOlas();
   iniciarParallaxRecursosAudiovisuales();
   iniciarFormularioContacto();
   iniciarNav();
