@@ -65,6 +65,39 @@
         display: block;
       }
 
+      /* Efecto "foto de collage": al hacer hover, el logo rota
+         bruscamente hacia un lado y hacia el otro, como si fuera una
+         fotografía tirada sobre un collage, y queda asentado con un
+         leve giro + zoom. */
+      .chispa-about__logo-frame {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+      }
+
+      .chispa-about__logo-frame img {
+        transform-origin: center;
+      }
+
+      .chispa-about__logo-frame:hover img {
+        animation: chispaLogoTilt 0.6s cubic-bezier(0.34, 1.8, 0.5, 1) both;
+      }
+
+      @keyframes chispaLogoTilt {
+        0% {
+          transform: rotate(0deg) scale(1);
+        }
+        30% {
+          transform: rotate(-7deg) scale(1.04);
+        }
+        60% {
+          transform: rotate(5deg) scale(1.04);
+        }
+        100% {
+          transform: rotate(-2deg) scale(1.03);
+        }
+      }
+
       /* Fila de abajo: carrusel + redes, centrado horizontalmente */
       .chispa-about__sidebar {
         z-index: 1;
@@ -484,12 +517,14 @@
       <div class="chispa-about__inner">
         <div class="chispa-about__top">
           <aside class="chispa-about__logo">
-            <img
-              src="imagenes/FOTOS FINALES/Pagina 7 - Radio la chispa/1 PNG Principal.png"
-              alt="Logo Radio La Chispa"
-              loading="lazy"
-              decoding="async"
-            />
+            <div class="chispa-about__logo-frame">
+              <img
+                src="imagenes/FOTOS FINALES/Pagina 7 - Radio la chispa/1 PNG Principal.png"
+                alt="Logo Radio La Chispa"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
           </aside>
 
           <div class="chispa-about__text">

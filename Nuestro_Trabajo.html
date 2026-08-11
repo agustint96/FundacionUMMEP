@@ -287,6 +287,22 @@
         border-color: transparent var(--color-white) transparent transparent;
       }
 
+      .nt-whatsapp-bubble__link {
+        color: var(--color-navy);
+        text-decoration: underline;
+        text-decoration-color: transparent;
+        text-underline-offset: 2px;
+        transition:
+          color 0.2s ease,
+          text-decoration-color 0.2s ease;
+      }
+
+      .nt-whatsapp-bubble__link:hover,
+      .nt-whatsapp-bubble__link:focus-visible {
+        color: var(--color-red);
+        text-decoration-color: currentColor;
+      }
+
       @keyframes nt-whatsapp-heartbeat {
         0%,
         100% {
@@ -317,7 +333,7 @@
       }
 
       /* En celulares: más chico, esquina inferior derecha, con el
-         cartelito ubicado en diagonal arriba-izquierda del ícono */
+         cartelito al costado izquierdo del ícono, en color sand */
       @media (max-width: 768px) {
         .nt-whatsapp-float {
           left: auto;
@@ -344,7 +360,34 @@
         }
 
         .nt-whatsapp-bubble {
-          display: none;
+          position: absolute;
+          right: calc(2.4rem + 0.6rem);
+          top: 50%;
+          bottom: auto;
+          transform: translateY(-50%);
+          background: var(--color-white);
+          font-size: 0.72rem;
+          padding: 0.45rem 0.8rem;
+          transition:
+            opacity 0.35s ease,
+            transform 0.35s ease;
+        }
+
+        .nt-whatsapp-bubble::after {
+          top: 50%;
+          left: auto;
+          right: -6px;
+          transform: translateY(-50%);
+          border-width: 6px 0 6px 8px;
+          border-color: transparent transparent transparent var(--color-white);
+        }
+
+        /* Se agrega por JS 2 segundos después de aparecer, para dejar
+           solo el ícono de WhatsApp visible */
+        .nt-whatsapp-bubble.nt-bubble-hide {
+          opacity: 0;
+          transform: translateY(-50%) translateX(6px);
+          pointer-events: none;
         }
       }
     </style>
@@ -502,7 +545,16 @@
       >
         <i class="fab fa-whatsapp" aria-hidden="true"></i>
       </a>
-      <div class="nt-whatsapp-bubble">Comunicate con el Centro</div>
+      <div class="nt-whatsapp-bubble">
+        Comunicate con el
+        <a
+          href="https://api.whatsapp.com/send/?phone=5493513719143&text&type=phone_number&app_absent=0"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="nt-whatsapp-bubble__link"
+          >Centro Oftalmológico</a
+        >
+      </div>
     </div>
 
     <!-- ======================================================
@@ -659,11 +711,16 @@
       // WhatsApp flotante: aparece con scroll reveal mientras la sección
       // de la foto ("Nuestro Trabajo") está en pantalla, y se retira por
       // el costado izquierdo (o hacia abajo en celulares) al continuar
-      // scrolleando.
+      // scrolleando. En celulares, el globito con el mensaje se ve solo
+      // 2 segundos y después desaparece, dejando solo el ícono.
       (function () {
         const photo = document.querySelector(".nt-photo");
         const widget = document.getElementById("nt-whatsapp");
         if (!photo || !widget) return;
+
+        const bubble = widget.querySelector(".nt-whatsapp-bubble");
+        const isMobile = () => window.matchMedia("(max-width: 768px)").matches;
+        let bubbleTimer = null;
 
         if (!("IntersectionObserver" in window)) {
           // Fallback simple: mostrarlo siempre si no hay soporte.
@@ -675,6 +732,19 @@
           (entries) => {
             entries.forEach((entry) => {
               widget.classList.toggle("is-visible", entry.isIntersecting);
+
+              if (entry.isIntersecting) {
+                if (bubble && isMobile()) {
+                  bubble.classList.remove("nt-bubble-hide");
+                  clearTimeout(bubbleTimer);
+                  bubbleTimer = setTimeout(() => {
+                    bubble.classList.add("nt-bubble-hide");
+                  }, 2000);
+                }
+              } else {
+                clearTimeout(bubbleTimer);
+                if (bubble) bubble.classList.remove("nt-bubble-hide");
+              }
             });
           },
           {
