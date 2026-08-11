@@ -1,7 +1,1 @@
-<svg width="640" height="360" viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder de video">
-  <rect width="640" height="360" rx="24" fill="#0f2344"/>
-  <rect x="34" y="34" width="572" height="292" rx="18" fill="#173861"/>
-  <circle cx="320" cy="180" r="90" fill="#f8f4ee" opacity="0.95"/>
-  <path d="M292 132l96 48-96 48z" fill="#0f2344"/>
-  <rect x="84" y="286" width="472" height="12" rx="6" fill="#4a7ab4" opacity="0.7"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360"><rect width="640" height="360" fill="#0f2344" rx="24"/><rect width="572" height="292" x="34" y="34" fill="#173861" rx="18"/><circle cx="320" cy="180" r="90" fill="#f8f4ee" opacity=".95"/><path fill="#0f2344" d="m292 132 96 48-96 48z"/><rect width="472" height="12" x="84" y="286" fill="#4a7ab4" opacity=".7" rx="6"/></svg>
