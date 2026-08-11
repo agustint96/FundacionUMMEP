@@ -246,6 +246,15 @@ textarea {
   height: 100%;
   overflow: hidden;
   background: transparent;
+  /* El brillo se aplica sobre la columna (no sobre la img), así no
+     pisa el filter:grayscale que la animación de aparición controla
+     sobre la imagen. */
+  transition: filter 0.3s ease;
+}
+
+/* Hover: la foto se ve un poco más brillante */
+.hero-col:hover {
+  filter: brightness(1.12);
 }
 
 /* La imagen aparece rápido, ya en blanco y negro, y recién ahí — con
