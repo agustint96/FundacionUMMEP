@@ -450,7 +450,7 @@ textarea {
   bottom: clamp(18px, 3vh, 28px);
   transform: translateX(-50%);
   z-index: 14;
-  width: clamp(230px, 14vw, 200px);
+  width: clamp(280px, 20vw, 400px);
   filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.25));
   /* Fade in de transparente a nítido: arranca cuando ya terminó toda
      la secuencia de olas (blanca → roja → azul → líneas), así el logo
@@ -460,12 +460,73 @@ textarea {
   animation-delay: 1.15s;
 }
 
+/* El logo se compone de tres piezas: brand (fija), tagline (parpadea)
+   y mundo (gira) */
+.hero-logo {
+  overflow: visible;
+}
+
+.hero-logo img:not(.hero-logo__mundo):not(.hero-logo__tagline) {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.hero-logo__brand,
+.hero-logo__tagline,
+.hero-logo__mundo,
+.hero-logo__full {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* El mundo (aro de personas + mapa, todo junto) se superpone exacto
+   sobre el brand (mismo lienzo 380×145) y gira PLANO, de frente al
+   visitante, como una rueda de volante — no en 3D ni de costado. */
+.hero-logo__mundo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: 17.6% 55%;
+  /* La animación está siempre "puesta" pero pausada: al sacar el mouse
+     se congela en el ángulo actual en vez de resetear a 0°. */
+  animation: heroWorldSpin 48s linear infinite;
+  animation-play-state: paused;
+  cursor: pointer;
+}
+
+.hero-logo:hover .hero-logo__mundo,
+.hero-logo:focus-within .hero-logo__mundo {
+  animation-play-state: running;
+}
+
+/* El tagline ("un mundo mejor es posible") se superpone exacto también.
+   Antes parpadeaba junto con el giro del mundo al hacer hover; ahora
+   queda siempre fijo y visible. */
+.hero-logo__tagline {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
 @keyframes heroLogoFadeIn {
   from {
     opacity: 0;
   }
   to {
     opacity: 1;
+  }
+}
+
+@keyframes heroWorldSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
   }
 }
 
@@ -1685,7 +1746,7 @@ textarea {
 
   /* Logo del hero: en mobile se posiciona fuera del hero con fondo crema */
   .hero-logo {
-    width: clamp(140px, 36vw, 180px);
+    width: clamp(190px, 56vw, 230px);
     position: relative;
     left: auto;
     bottom: auto;
@@ -1700,13 +1761,27 @@ textarea {
     filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.12));
   }
 
+  /* inset:0 se ancla al borde del padding (no del contenido), así que
+     sin este ajuste el mundo y el tagline quedan más altos que el brand
+     por el padding vertical de arriba (1rem) y abajo (1.25rem) → se ve
+     estirado. Usando top/bottom en vez de inset, el alto se calcula
+     exactamente entre esos dos bordes, igual que el brand. */
+  .hero-logo__mundo,
+  .hero-logo__tagline {
+    top: 1rem;
+    bottom: 1.25rem;
+    left: 0;
+    right: 0;
+    height: auto;
+  }
+
   /* Reducir min-height de las secciones en mobile */
   .section,
   .container--3,
   .container--5,
   .container--6 {
     min-height: auto;
-    padding-top: 3rem;
+    padding-top: 1rem;
     padding-bottom: 3rem;
   }
 
@@ -1959,9 +2034,9 @@ textarea {
     height: 28px;
   }
 
-  /* Hero logo más pequeño */
+  /* Hero logo: bien grande también en celulares chicos */
   .hero-logo {
-    width: clamp(90px, 28vw, 130px);
+    width: clamp(190px, 58vw, 230px);
   }
 
   /* Stats: aún más pequeño */
@@ -2026,6 +2101,15 @@ textarea {
   /* El logo sí necesita conservar su transform (translateX(-50%) lo
      centra horizontalmente): solo le apagamos la animación de fade-in. */
   .hero-logo {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+  .hero-logo__color {
+    animation: none !important;
+    clip-path: inset(0 0 0 0) !important;
+  }
+  .hero-logo__mundo,
+  .hero-logo__tagline {
     animation: none !important;
     opacity: 1 !important;
   }
