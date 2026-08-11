@@ -340,8 +340,8 @@
           right: 1rem;
           bottom: 1rem;
           display: block;
-          width: 2.4rem;
-          height: 2.4rem;
+          width: 4.2rem;
+          height: 4.2rem;
           transform: translateY(160%);
         }
 
@@ -353,19 +353,22 @@
           position: absolute;
           right: 0;
           bottom: 0;
-          width: 2.4rem;
-          height: 2.4rem;
-          font-size: 1.2rem;
+          width: 4.2rem;
+          height: 4.2rem;
+          font-size: 2.1rem;
           box-shadow: 0 3px 10px rgba(0, 0, 0, 0.28);
         }
 
         .nt-whatsapp-bubble {
           position: absolute;
-          right: calc(2.4rem + 0.6rem);
+          right: calc(4.2rem + 0.6rem);
           top: 50%;
           bottom: auto;
           transform: translateY(-50%);
-          background: var(--color-white);
+          background: rgba(255, 255, 255, 0.85);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
+          box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
           font-size: 0.72rem;
           padding: 0.45rem 0.8rem;
           transition:
@@ -379,7 +382,8 @@
           right: -6px;
           transform: translateY(-50%);
           border-width: 6px 0 6px 8px;
-          border-color: transparent transparent transparent var(--color-white);
+          border-color: transparent transparent transparent
+            rgba(255, 255, 255, 0.85);
         }
 
         /* Se agrega por JS 2 segundos después de aparecer, para dejar

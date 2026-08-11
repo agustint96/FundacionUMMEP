@@ -710,6 +710,11 @@ function iniciarNav() {
 
   const EXPANDED_THRESHOLD = 40; // px desde el tope para considerar "arriba del todo"
 
+  // En mobile no existe la hoverZone (no hay mouse), así que el nav
+  // necesita otra forma de aparecer al scrollear hacia arriba en
+  // cualquier punto de la página, no solo en el overscroll del tope.
+  const esMobileNav = () => window.matchMedia("(max-width: 1320px)").matches;
+
   const onScroll = () => {
     const actual = window.scrollY;
     nav.classList.toggle("is-scrolled", actual > 10);
@@ -720,6 +725,12 @@ function iniciarNav() {
 
     if (bajando && pasoDel90 && !hero90Cruzado) {
       hero90Cruzado = true;
+      cancelarFlash();
+      mostrarNav();
+      flashTimeoutId = setTimeout(ocultarNav, FLASH_MS);
+    } else if (!bajando && pasoDel90 && esMobileNav()) {
+      // Mobile: al scrollear hacia arriba, el nav aparece brevemente
+      // y se vuelve a ocultar (equivalente móvil de la hoverZone).
       cancelarFlash();
       mostrarNav();
       flashTimeoutId = setTimeout(ocultarNav, FLASH_MS);
