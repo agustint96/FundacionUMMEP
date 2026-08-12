@@ -1944,6 +1944,10 @@ textarea {
     /* arranca en B&N; la animación se encarga de ir y volver a color */
     filter: grayscale(100%);
     animation: heroGridSwap 6s ease-in-out infinite;
+    /* le avisamos al navegador que filter va a cambiar, para que intente
+       resolverlo en la capa de composición en vez de repintar en el
+       hilo principal en cada frame */
+    will-change: filter;
   }
 
   /* tablero de ajedrez: el grupo "b" arranca medio ciclo desfasado del
@@ -1953,10 +1957,19 @@ textarea {
     animation-delay: 3s;
   }
 
+  /* Pausa la animación cuando la cuadrícula sale del viewport (scroll)
+     o cuando la pestaña pasa a segundo plano. La clase la agrega
+     script.js con un IntersectionObserver + Page Visibility API, para
+     no gastar batería/CPU animando algo que nadie está viendo. */
+  .hero-mobile-grid.is-paused .hero-mobile-grid__cell img {
+    animation-play-state: paused;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .hero-mobile-grid__cell img {
       animation: none;
       filter: grayscale(100%);
+      will-change: auto;
     }
     .hero-mobile-grid__cell--b img {
       filter: grayscale(0%);

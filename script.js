@@ -736,6 +736,45 @@ function iniciarNav() {
   nav.addEventListener("mouseleave", reocultarSiCorresponde);
 }
 
+/* =========================================================================
+   CUADRÍCULA HERO MOBILE — pausar animación cuando no se ve
+   ---------------------------------------------------------------------
+   La cuadrícula de 36 fotos anima filter:grayscale de forma infinita.
+   Eso tiene un costo de CPU/batería constante mientras esté animando,
+   así que la pausamos en dos casos:
+     1. Cuando el usuario scrollea y la cuadrícula sale de pantalla
+        (IntersectionObserver).
+     2. Cuando la pestaña pasa a segundo plano (Page Visibility API).
+   Vuelve a animarse sola apenas la cuadrícula reaparece en pantalla o
+   la pestaña vuelve a estar activa.
+   ========================================================================= */
+function iniciarPausaHeroGrid() {
+  const grid = document.getElementById("hero-mobile-grid");
+  if (!grid) return;
+
+  let enPantalla = true;
+
+  function actualizarEstado() {
+    const debePausar = !enPantalla || document.hidden;
+    grid.classList.toggle("is-paused", debePausar);
+  }
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          enPantalla = entry.isIntersecting;
+          actualizarEstado();
+        });
+      },
+      { threshold: 0 }
+    );
+    observer.observe(grid);
+  }
+
+  document.addEventListener("visibilitychange", actualizarEstado);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   iniciarRotacionHero();
   iniciarHoverOlas();
@@ -743,4 +782,5 @@ document.addEventListener("DOMContentLoaded", () => {
   iniciarFormularioContacto();
   iniciarNav();
   iniciarScrollReveal();
+  iniciarPausaHeroGrid();
 });
