@@ -20,7 +20,9 @@
    poder revisar el resultado visualmente podría romper esos layouts.
    ======================================================= */
 
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Mulish:wght@400;500;600;700&display=swap");
+/* La fuente se movió al <head> del HTML (con preconnect + link) para que el
+   navegador la descubra apenas empieza a parsear la página, en vez de recién
+   descubrirla después de bajar y parsear todo este CSS. Ver index.html. */
 
 /* -------------------------------------------------------
    1. Tokens

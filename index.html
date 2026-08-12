@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fundación UMMEP - Un mundo mejor es posible</title>
     <link rel="stylesheet" href="styles.css" />
+    <!-- Preconnect a Google Fonts: el navegador abre la conexión (DNS+TLS)
+         en paralelo apenas lee el <head>, en vez de recién enterarse de que
+         necesita esa fuente cuando ya bajó y parseó todo el CSS (@import). -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Mulish:wght@400;500;600;700&display=swap"
+    />
     <!-- Font Awesome: se pide la conexión antes (preconnect) y se carga
          sin bloquear el render. El truco media="print" + onload hace que
          el navegador la baje en paralelo con baja prioridad y recién la
@@ -324,7 +333,7 @@
       <div class="hero-mobile-grid" id="hero-mobile-grid" aria-hidden="true">
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--a">
           <img
-            src="imagenes/FOTOS FINALES/1/Izq.webp"
+            src="imagenes/thumbs/Izq.webp" width="300" height="300"
             fetchpriority="high"
             alt=""
             loading="eager"
@@ -333,7 +342,7 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--b">
           <img
-            src="imagenes/FOTOS FINALES/1/Medio.webp"
+            src="imagenes/thumbs/Medio.webp" width="300" height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -341,7 +350,7 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--a">
           <img
-            src="imagenes/FOTOS FINALES/1/Der.webp"
+            src="imagenes/thumbs/Der.webp" width="300" height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -349,7 +358,7 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--b">
           <img
-            src="imagenes/FOTOS FINALES/Pagina 1 - Principal/2/Izq 1.webp"
+            src="imagenes/thumbs/Izq_1.webp" width="300" height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -357,7 +366,7 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--a">
           <img
-            src="imagenes/FOTOS FINALES/Pagina 1 - Principal/2/Izq 2.webp"
+            src="imagenes/thumbs/Izq_2.webp" width="300" height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -365,7 +374,7 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--b">
           <img
-            src="imagenes/FOTOS FINALES/Pagina 1 - Principal/2/Der 2.webp"
+            src="imagenes/thumbs/Der_2.webp" width="300" height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -373,7 +382,7 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--b">
           <img
-            src="imagenes/FOTOS FINALES/Pagina 1 - Principal/2/Der 1 .webp"
+            src="imagenes/thumbs/Der_1_.webp" width="300" height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -381,7 +390,7 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--a">
           <img
-            src="imagenes/FOTOS FINALES/Pagina 1 - Principal/DSC00774.webp"
+            src="imagenes/thumbs/DSC00774.webp" width="300" height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -389,7 +398,7 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--b">
           <img
-            src="imagenes/FOTOS FINALES/Pagina 1 - Principal/IMG_20251024_095757.webp"
+            src="imagenes/thumbs/IMG_20251024_095757.webp" width="300" height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -397,7 +406,7 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--a">
           <img
-            src="imagenes/FOTOS FINALES/Pagina 1 - Principal/IMG_2179.webp"
+            src="imagenes/thumbs/IMG_2179.webp" width="300" height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -405,7 +414,7 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--b">
           <img
-            src="imagenes/FOTOS FINALES/Pagina 1 - Principal/IMG_2414.webp"
+            src="imagenes/thumbs/IMG_2414.webp" width="300" height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -413,7 +422,7 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--a">
           <img
-            src="imagenes/FOTOS FINALES/1/Izq.webp"
+            src="imagenes/thumbs/Izq.webp" width="300" height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -421,7 +430,7 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--a">
           <img
-            src="imagenes/FOTOS FINALES/1/Medio.webp"
+            src="imagenes/thumbs/Medio.webp" width="300" height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -429,7 +438,7 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--b">
           <img
-            src="imagenes/FOTOS FINALES/1/Der.webp"
+            src="imagenes/thumbs/Der.webp" width="300" height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -437,7 +446,7 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--a">
           <img
-            src="imagenes/FOTOS FINALES/Pagina 1 - Principal/2/Izq 1.webp"
+            src="imagenes/thumbs/Izq_1.webp" width="300" height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -445,7 +454,7 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--b">
           <img
-            src="imagenes/FOTOS FINALES/Pagina 1 - Principal/2/Izq 2.webp"
+            src="imagenes/thumbs/Izq_2.webp" width="300" height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -453,7 +462,7 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--a">
           <img
-            src="imagenes/FOTOS FINALES/Pagina 1 - Principal/2/Der 2.webp"
+            src="imagenes/thumbs/Der_2.webp" width="300" height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -461,7 +470,7 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--b">
           <img
-            src="imagenes/FOTOS FINALES/Pagina 1 - Principal/2/Der 1 .webp"
+            src="imagenes/thumbs/Der_1_.webp" width="300" height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -469,7 +478,7 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--b">
           <img
-            src="imagenes/FOTOS FINALES/Pagina 1 - Principal/DSC00774.webp"
+            src="imagenes/thumbs/DSC00774.webp" width="300" height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -477,7 +486,7 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--a">
           <img
-            src="imagenes/FOTOS FINALES/Pagina 1 - Principal/IMG_20251024_095757.webp"
+            src="imagenes/thumbs/IMG_20251024_095757.webp" width="300" height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -485,7 +494,7 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--b">
           <img
-            src="imagenes/FOTOS FINALES/Pagina 1 - Principal/IMG_2179.webp"
+            src="imagenes/thumbs/IMG_2179.webp" width="300" height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -493,7 +502,7 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--a">
           <img
-            src="imagenes/FOTOS FINALES/Pagina 1 - Principal/IMG_2414.webp"
+            src="imagenes/thumbs/IMG_2414.webp" width="300" height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -501,7 +510,7 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--b">
           <img
-            src="imagenes/FOTOS FINALES/1/Izq.webp"
+            src="imagenes/thumbs/Izq.webp" width="300" height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -509,7 +518,7 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--a">
           <img
-            src="imagenes/FOTOS FINALES/1/Medio.webp"
+            src="imagenes/thumbs/Medio.webp" width="300" height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -517,7 +526,7 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--a">
           <img
-            src="imagenes/FOTOS FINALES/1/Der.webp"
+            src="imagenes/thumbs/Der.webp" width="300" height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -525,7 +534,7 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--b">
           <img
-            src="imagenes/FOTOS FINALES/Pagina 1 - Principal/2/Izq 1.webp"
+            src="imagenes/thumbs/Izq_1.webp" width="300" height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -533,7 +542,7 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--a">
           <img
-            src="imagenes/FOTOS FINALES/Pagina 1 - Principal/2/Izq 2.webp"
+            src="imagenes/thumbs/Izq_2.webp" width="300" height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -541,7 +550,7 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--b">
           <img
-            src="imagenes/FOTOS FINALES/Pagina 1 - Principal/2/Der 2.webp"
+            src="imagenes/thumbs/Der_2.webp" width="300" height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -549,7 +558,7 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--a">
           <img
-            src="imagenes/FOTOS FINALES/Pagina 1 - Principal/2/Der 1 .webp"
+            src="imagenes/thumbs/Der_1_.webp" width="300" height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -557,7 +566,7 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--b">
           <img
-            src="imagenes/FOTOS FINALES/Pagina 1 - Principal/DSC00774.webp"
+            src="imagenes/thumbs/DSC00774.webp" width="300" height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -565,7 +574,7 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--b">
           <img
-            src="imagenes/FOTOS FINALES/Pagina 1 - Principal/IMG_20251024_095757.webp"
+            src="imagenes/thumbs/IMG_20251024_095757.webp" width="300" height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -573,7 +582,7 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--a">
           <img
-            src="imagenes/FOTOS FINALES/Pagina 1 - Principal/IMG_2179.webp"
+            src="imagenes/thumbs/IMG_2179.webp" width="300" height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -581,7 +590,7 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--b">
           <img
-            src="imagenes/FOTOS FINALES/Pagina 1 - Principal/IMG_2414.webp"
+            src="imagenes/thumbs/IMG_2414.webp" width="300" height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -589,7 +598,7 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--a">
           <img
-            src="imagenes/FOTOS FINALES/1/Izq.webp"
+            src="imagenes/thumbs/Izq.webp" width="300" height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -597,7 +606,7 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--b">
           <img
-            src="imagenes/FOTOS FINALES/1/Medio.webp"
+            src="imagenes/thumbs/Medio.webp" width="300" height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -605,7 +614,7 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--a">
           <img
-            src="imagenes/FOTOS FINALES/1/Der.webp"
+            src="imagenes/thumbs/Der.webp" width="300" height="300"
             alt=""
             loading="eager"
             decoding="async"
