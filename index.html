@@ -306,7 +306,24 @@
             preserveAspectRatio="none"
             aria-hidden="true"
           >
-            <path d="M0 0L900 0L900 601L0 601Z" fill="#f8f4ee" />
+            <defs>
+              <pattern
+                id="hero-wave-front-texture"
+                patternUnits="userSpaceOnUse"
+                width="900"
+                height="600"
+              >
+                <image
+                  href="imagenes/FOTOS FINALES/posterstock.png"
+                  x="0"
+                  y="0"
+                  width="900"
+                  height="600"
+                  preserveAspectRatio="xMidYMid slice"
+                />
+              </pattern>
+            </defs>
+            <path d="M0 0L900 0L900 601L0 601Z" fill="url(#hero-wave-front-texture)" />
           </svg>
         </div>
 
