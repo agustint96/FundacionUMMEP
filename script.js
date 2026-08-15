@@ -776,164 +776,16 @@ function iniciarPausaHeroGrid() {
 }
 
 /* =========================================================================
-   FOOTER — mini cuadrícula de fotitos (efecto decorativo)
+   FOOTER
    ---------------------------------------------------------------------
-   El footer tiene 3 columnas (Redes / Contacto / Formulario) pero la
-   fila mide lo que mide la columna del formulario, que es la más alta.
-   Eso deja un espacio en blanco abajo del logo (columna 1) y abajo del
-   texto de contacto (columna 2, justo a la izquierda del botón Enviar).
-   En mobile el formulario se oculta y esas columnas quedan angostas,
-   así que sobra espacio a la derecha en vez de abajo.
-
-   Esta función arma esa mini cuadrícula "a mano" con JS (usando las
-   mismas fotos del hero mobile) y la inserta en esas dos columnas. Al
-   no tocar el HTML de cada página, aparece sola en el footer de TODAS
-   las páginas del sitio con solo este archivo. El posicionamiento
-   (abajo en desktop, a la derecha en mobile) se resuelve en CSS.
-
-   La animación (iniciarCicloMosaicos, más abajo) va revelando las
-   fotitos de a una, en orden random, hasta cubrir toda la cuadrícula;
-   ahí se queda un instante y las esconde todas juntas para volver a
-   arrancar con otro orden random.
+   El footer tenia 3 columnas (Redes / Contacto / Formulario) donde la
+   fila media lo que mide la columna del formulario, que es la mas
+   alta, dejando un hueco en blanco abajo del logo y del texto de
+   contacto. Antes se tapaba ese hueco con un mosaico de fotos armado
+   por JS; ahora se resuelve solo con CSS centrando verticalmente el
+   contenido de esas dos columnas dentro de su fila (ver
+   .footer-col--social / .footer-col--contact en styles.css).
    ========================================================================= */
-function iniciarFooterMosaico() {
-  const FOTOS = [
-    "imagenes/thumbs/Izq.webp",
-    "imagenes/thumbs/Medio.webp",
-    "imagenes/thumbs/Der.webp",
-    "imagenes/thumbs/Izq_1.webp",
-    "imagenes/thumbs/Izq_2.webp",
-    "imagenes/thumbs/Der_2.webp",
-    "imagenes/thumbs/Der_1_.webp",
-    "imagenes/thumbs/DSC00774.webp",
-    "imagenes/thumbs/IMG_20251024_095757.webp",
-    "imagenes/thumbs/IMG_2179.webp",
-    "imagenes/thumbs/IMG_2414.webp",
-  ];
-
-  function construirMosaico(offset, cantidad) {
-    const mosaico = document.createElement("div");
-    mosaico.className = "footer-photo-mosaic";
-    mosaico.setAttribute("aria-hidden", "true");
-
-    for (let i = 0; i < cantidad; i++) {
-      // Arrancamos en un índice distinto por columna (offset) para que
-      // las dos cuadrículas del footer no muestren siempre las mismas
-      // fotos en el mismo orden.
-      const foto = FOTOS[(offset + i) % FOTOS.length];
-      const celda = document.createElement("div");
-      celda.className = "footer-photo-mosaic__cell";
-
-      const img = document.createElement("img");
-      img.src = foto;
-      img.alt = "";
-      img.loading = "lazy";
-      img.decoding = "async";
-
-      celda.appendChild(img);
-      mosaico.appendChild(celda);
-    }
-    return mosaico;
-  }
-
-  const mosaicos = [];
-  const columnaRedes = document.querySelector(".footer-col--social");
-  const columnaContacto = document.querySelector(".footer-col--contact");
-
-  if (columnaRedes && !columnaRedes.querySelector(".footer-photo-mosaic")) {
-    mosaicos.push(columnaRedes.appendChild(construirMosaico(0, 10)));
-  }
-  if (
-    columnaContacto &&
-    !columnaContacto.querySelector(".footer-photo-mosaic")
-  ) {
-    mosaicos.push(columnaContacto.appendChild(construirMosaico(5, 10)));
-  }
-
-  if (mosaicos.length) iniciarCicloMosaicos(mosaicos);
-}
-
-/* Maneja el "ciclo de vida" de cada mini cuadrícula: revela las
-   fotitos de a una (orden random, tiempos random entre una y otra
-   para que se vea desprolijo) hasta cubrir todo, espera un instante
-   con todo cubierto, y las apaga todas juntas para volver a arrancar.
-
-   También frena el ciclo (sin gastar CPU/batería) cuando el footer no
-   está en pantalla (scroll) o la pestaña pasa a segundo plano — mismo
-   criterio que iniciarPausaHeroGrid() — y respeta
-   prefers-reduced-motion dejando las fotitos quietas (ver CSS). */
-function iniciarCicloMosaicos(mosaicos) {
-  const prefiereMenosMovimiento =
-    window.matchMedia &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (prefiereMenosMovimiento) return;
-
-  const enPantalla = new Map();
-  mosaicos.forEach((m) => enPantalla.set(m, true));
-
-  if ("IntersectionObserver" in window) {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          enPantalla.set(entry.target, entry.isIntersecting);
-        });
-      },
-      { threshold: 0 },
-    );
-    mosaicos.forEach((m) => observer.observe(m));
-  }
-
-  function estaActivo(mosaico) {
-    return enPantalla.get(mosaico) && !document.hidden;
-  }
-
-  function ordenRandom(celdas) {
-    const copia = celdas.slice();
-    for (let i = copia.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [copia[i], copia[j]] = [copia[j], copia[i]];
-    }
-    return copia;
-  }
-
-  function cicloMosaico(mosaico) {
-    const celdas = Array.from(
-      mosaico.querySelectorAll(".footer-photo-mosaic__cell"),
-    );
-
-    function paso() {
-      // Si el footer no se ve o la pestaña está en segundo plano,
-      // reintenta más tarde en vez de seguir animando de fondo.
-      if (!estaActivo(mosaico)) {
-        setTimeout(paso, 800);
-        return;
-      }
-
-      // 1) Revelar de a una, en orden random y con tiempos entre
-      //    140–360ms entre cada una, hasta cubrir toda la cuadrícula.
-      const orden = ordenRandom(celdas);
-      let acumulado = 0;
-      orden.forEach((celda) => {
-        acumulado += 140 + Math.random() * 220;
-        setTimeout(() => celda.classList.add("is-visible"), acumulado);
-      });
-
-      // 2) Quedarse un instante con todo cubierto.
-      const tiempoOcultar = acumulado + 1400;
-      setTimeout(() => {
-        celdas.forEach((c) => c.classList.remove("is-visible"));
-      }, tiempoOcultar);
-
-      // 3) Pausa breve con todo apagado, y arranca de nuevo (otro
-      //    orden random).
-      setTimeout(paso, tiempoOcultar + 650);
-    }
-
-    paso();
-  }
-
-  mosaicos.forEach(cicloMosaico);
-}
 
 document.addEventListener("DOMContentLoaded", () => {
   iniciarRotacionHero();
@@ -943,5 +795,4 @@ document.addEventListener("DOMContentLoaded", () => {
   iniciarNav();
   iniciarScrollReveal();
   iniciarPausaHeroGrid();
-  iniciarFooterMosaico();
 });

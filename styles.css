@@ -925,6 +925,7 @@ textarea {
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem;
+  margin-bottom: 1.5rem;
 }
 
 .social-icons a {
@@ -1044,109 +1045,23 @@ textarea {
 }
 
 /* =========================================================
-   Footer — mini cuadrícula de fotitos (decorativo)
+   Footer — columnas cortas (Redes / Contacto)
    ---------------------------------------------------------
-   El HTML de estas celdas lo arma iniciarFooterMosaico() en
-   script.js (ver ese archivo) e inyecta un .footer-photo-mosaic
-   adentro de .footer-col--social (abajo del logo) y de
-   .footer-col--contact (abajo de la dirección). Acá solo se
-   define la posición/tamaño (desktop: pegado abajo, aprovechando
-   que esas columnas son más bajas que la del formulario).
-
-   La animación en sí (ir revelando las fotitos de a una hasta
-   cubrir toda la cuadrícula, y después ocultarlas todas juntas
-   para volver a arrancar) la maneja script.js agregando/sacando
-   la clase .is-visible en cada celda — acá solo definimos la
-   transición suave de esa aparición/desaparición.
+   En desktop las 3 columnas del footer están en la misma fila
+   de grid, y esa fila mide lo que mide la más alta (el
+   formulario). Antes se tapaba el hueco resultante debajo de
+   Redes y Contacto con un mosaico de fotos inyectado por JS;
+   ahora en cambio centramos verticalmente el contenido de esas
+   dos columnas dentro de su fila, así el espacio libre se
+   reparte arriba/abajo de forma pareja en vez de quedar como
+   un bloque vacío abajo. Solución CSS pura, sin JS ni imágenes
+   extra que mantener.
    ========================================================= */
 .footer-col--social,
 .footer-col--contact {
-  position: relative;
-}
-
-.footer-photo-mosaic {
-  position: absolute;
-  left: 2px;
-  bottom: 2px;
-  display: grid;
-  grid-template-columns: repeat(5, 26px);
-  grid-auto-rows: 26px;
-  gap: 6px;
-  pointer-events: none;
-}
-
-.footer-photo-mosaic__cell {
-  position: relative;
-  width: 26px;
-  height: 26px;
-  border-radius: 5px;
-  overflow: hidden;
-  opacity: 0;
-  transform: scale(0.75);
-  box-shadow: 0 2px 6px rgba(22, 35, 74, 0.2);
-  transition:
-    opacity 0.45s ease,
-    transform 0.45s ease;
-}
-
-.footer-photo-mosaic__cell.is-visible {
-  opacity: 1;
-}
-
-.footer-photo-mosaic__cell img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Desprolijo a propósito: cada fotito se corre y rota un poco distinto,
-   para que no se vea como una grilla prolija sino como fotos "tiradas".
-   Se combina con el scale(0.75)→scale(1) de arriba al aparecer. */
-.footer-photo-mosaic__cell:nth-child(1) {
-  --tf: translateY(-3px) rotate(-4deg);
-}
-.footer-photo-mosaic__cell:nth-child(2) {
-  --tf: translateY(4px) rotate(3deg);
-}
-.footer-photo-mosaic__cell:nth-child(3) {
-  --tf: translateY(-6px) rotate(2deg);
-}
-.footer-photo-mosaic__cell:nth-child(4) {
-  --tf: translateY(2px) rotate(-3deg);
-}
-.footer-photo-mosaic__cell:nth-child(5) {
-  --tf: translateY(-2px) rotate(5deg);
-}
-.footer-photo-mosaic__cell:nth-child(6) {
-  --tf: translateY(5px) rotate(-2deg);
-}
-.footer-photo-mosaic__cell:nth-child(7) {
-  --tf: translateY(-4px) rotate(4deg);
-}
-.footer-photo-mosaic__cell:nth-child(8) {
-  --tf: translateY(3px) rotate(-5deg);
-}
-.footer-photo-mosaic__cell:nth-child(9) {
-  --tf: translateY(-5px) rotate(1deg);
-}
-.footer-photo-mosaic__cell:nth-child(10) {
-  --tf: translateY(1px) rotate(-1deg);
-}
-
-.footer-photo-mosaic__cell {
-  transform: var(--tf, none) scale(0.75);
-}
-.footer-photo-mosaic__cell.is-visible {
-  transform: var(--tf, none) scale(1);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .footer-photo-mosaic__cell {
-    transition: none;
-    opacity: 0.3;
-    transform: var(--tf, none) scale(1);
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 /* =========================================================
@@ -2278,29 +2193,6 @@ textarea {
 
   .footer-logo {
     padding-top: 0.25rem;
-  }
-
-  /* Footer: mini cuadrícula de fotitos → en mobile se oculta el
-     formulario y estas dos columnas quedan angostas (el contenido no
-     llega a usar todo el ancho), así que el espacio libre pasa a estar
-     a la derecha en vez de abajo. Reposicionamos ahí y la achicamos. */
-  .footer-photo-mosaic {
-    left: auto;
-    right: 4px;
-    bottom: auto;
-    top: 2rem;
-    grid-template-columns: repeat(4, 20px);
-    grid-auto-rows: 20px;
-    gap: 4px;
-  }
-
-  .footer-photo-mosaic__cell {
-    width: 20px;
-    height: 20px;
-  }
-
-  .footer-col--contact .footer-photo-mosaic {
-    top: 2.4rem;
   }
 
   /* Chispa programs: 1 columna */
