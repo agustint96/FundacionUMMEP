@@ -25,7 +25,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
       media="print"
-      onload="this.media='all'"
+      onload="this.media = 'all'"
     />
     <noscript>
       <link
@@ -240,62 +240,36 @@
              de la ola en sí, que sigue moviéndose con el parallax de
              script.js sin pisarse con esta animación. -->
 
-        <!-- 3ra en aparecer: ola azul navy, más lejana.
-             "Efecto billetera": queda fija (sin parallax de mouse/scroll),
-             rotada y corrida hacia la izquierda, siempre POR DETRÁS de la
-             roja (nunca cambia ese orden). Al pasar el mouse por acá, la
-             roja se corre para abajo y se esconde un poco más — ver
-             iniciarHoverOlas() en script.js. -->
+        <!-- 3ra en aparecer: ola azul navy, más lejana -->
         <div class="hero-wave-rise hero-wave-rise--far">
-          <a href="/FundacionUMMEP/Programas_internacionales.html">
-            <div class="hero-wave-enter hero-wave-enter--far">
-              <div
-                class="hero-wave-card hero-wave-card--far"
-                id="hero-wave-navy"
-              >
-                <svg
-                  class="hero-wave hero-wave--far"
-                  viewBox="0 0 900 600"
-                  preserveAspectRatio="none"
-                  aria-hidden="true"
-                >
-                  <path d="M0 0L900 0L900 601L0 601Z" fill="rgba(22, 35, 74)" />
-                </svg>
-                <span class="hero-wave-card__label"
-                  >Programas <br />
-                  Internacionalistas</span
-                >
-              </div>
-            </div>
-          </a>
+          <svg
+            class="hero-wave hero-wave--far"
+            viewBox="0 0 900 600"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M0 210L22 224C44 238 88 266 132 272C176 278 220 262 264 255C308 248 352 250 396 265C440 280 484 308 528 318C572 328 616 320 660 305C704 290 748 268 792 262C836 256 858 266 879 271L900 276L900 601L879 601C858 601 836 601 792 601C748 601 704 601 660 601C616 601 572 601 528 601C484 601 440 601 396 601C352 601 308 601 264 601C220 601 176 601 132 601C88 601 44 601 22 601L0 601Z"
+              fill="rgba(22, 35, 74)"
+            />
+          </svg>
         </div>
 
         <!-- 2da en aparecer: ola roja, al medio. Siempre por delante de la
              azul y siempre por detrás de la blanca (el orden de las tres
              nunca cambia, ni en hover). -->
         <div class="hero-wave-rise hero-wave-rise--back">
-          <a
-            href="/FundacionUMMEP/Proyectos_de_coooperacion_al_desarrollo.html"
+          <svg
+            class="hero-wave hero-wave--back"
+            viewBox="0 0 900 600"
+            preserveAspectRatio="none"
+            aria-hidden="true"
           >
-            <div class="hero-wave-enter hero-wave-enter--back">
-              <div
-                class="hero-wave-card hero-wave-card--back"
-                id="hero-wave-red"
-              >
-                <svg
-                  class="hero-wave hero-wave--back"
-                  viewBox="0 0 900 600"
-                  preserveAspectRatio="none"
-                  aria-hidden="true"
-                >
-                  <path d="M0 0L900 0L900 601L0 601Z" fill="#df2c1f" />
-                </svg>
-                <span class="hero-wave-card__label"
-                  >Proyectos de <br />Cooperación</span
-                >
-              </div>
-            </div>
-          </a>
+            <path
+              d="M0 301L25 310.3C50 319.7 100 338.3 150 336C200 333.7 250 310.3 300 305.3C350 300.3 400 313.7 450 326.8C500 340 550 353 600 378.8C650 404.7 700 443.3 750 447.2C800 451 850 420 875 404.5L900 389L900 601L875 601C850 601 800 601 750 601C700 601 650 601 600 601C550 601 500 601 450 601C400 601 350 601 300 601C250 601 200 601 150 601C100 601 50 601 25 601L0 601Z"
+              fill="#b4777f"
+            />
+          </svg>
         </div>
 
         <!-- 1ra en aparecer: ola blanca/crema, arriba de todo -->
@@ -306,24 +280,10 @@
             preserveAspectRatio="none"
             aria-hidden="true"
           >
-            <defs>
-              <pattern
-                id="hero-wave-front-texture"
-                patternUnits="userSpaceOnUse"
-                width="900"
-                height="600"
-              >
-                <image
-                  href="imagenes/FOTOS FINALES/posterstock.png"
-                  x="0"
-                  y="0"
-                  width="900"
-                  height="600"
-                  preserveAspectRatio="xMidYMid slice"
-                />
-              </pattern>
-            </defs>
-            <path d="M0 0L900 0L900 601L0 601Z" fill="url(#hero-wave-front-texture)" />
+            <path
+              d="M0 473L21.5 463.5C43 454 86 435 128.8 432C171.7 429 214.3 442 257.2 442.2C300 442.3 343 429.7 385.8 437.3C428.7 445 471.3 473 514.2 470.3C557 467.7 600 434.3 642.8 432.8C685.7 431.3 728.3 461.7 771.2 473.7C814 485.7 857 479.3 878.5 476.2L900 473L900 601L878.5 601C857 601 814 601 771.2 601C728.3 601 685.7 601 642.8 601C600 601 557 601 514.2 601C471.3 601 428.7 601 385.8 601C343 601 300 601 257.2 601C214.3 601 171.7 601 128.8 601C86 601 43 601 21.5 601L0 601Z"
+              fill="#f8f4ee"
+            />
           </svg>
         </div>
 
@@ -350,7 +310,9 @@
       <div class="hero-mobile-grid" id="hero-mobile-grid" aria-hidden="true">
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--a">
           <img
-            src="imagenes/thumbs/Izq.webp" width="300" height="300"
+            src="imagenes/thumbs/Izq.webp"
+            width="300"
+            height="300"
             fetchpriority="high"
             alt=""
             loading="eager"
@@ -359,7 +321,9 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--b">
           <img
-            src="imagenes/thumbs/Medio.webp" width="300" height="300"
+            src="imagenes/thumbs/Medio.webp"
+            width="300"
+            height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -367,7 +331,9 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--a">
           <img
-            src="imagenes/thumbs/Der.webp" width="300" height="300"
+            src="imagenes/thumbs/Der.webp"
+            width="300"
+            height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -375,7 +341,9 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--b">
           <img
-            src="imagenes/thumbs/Izq_1.webp" width="300" height="300"
+            src="imagenes/thumbs/Izq_1.webp"
+            width="300"
+            height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -383,7 +351,9 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--a">
           <img
-            src="imagenes/thumbs/Izq_2.webp" width="300" height="300"
+            src="imagenes/thumbs/Izq_2.webp"
+            width="300"
+            height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -391,7 +361,9 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--b">
           <img
-            src="imagenes/thumbs/Der_2.webp" width="300" height="300"
+            src="imagenes/thumbs/Der_2.webp"
+            width="300"
+            height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -399,7 +371,9 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--b">
           <img
-            src="imagenes/thumbs/Der_1_.webp" width="300" height="300"
+            src="imagenes/thumbs/Der_1_.webp"
+            width="300"
+            height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -407,7 +381,9 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--a">
           <img
-            src="imagenes/thumbs/DSC00774.webp" width="300" height="300"
+            src="imagenes/thumbs/DSC00774.webp"
+            width="300"
+            height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -415,7 +391,9 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--b">
           <img
-            src="imagenes/thumbs/IMG_20251024_095757.webp" width="300" height="300"
+            src="imagenes/thumbs/IMG_20251024_095757.webp"
+            width="300"
+            height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -423,7 +401,9 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--a">
           <img
-            src="imagenes/thumbs/IMG_2179.webp" width="300" height="300"
+            src="imagenes/thumbs/IMG_2179.webp"
+            width="300"
+            height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -431,7 +411,9 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--b">
           <img
-            src="imagenes/thumbs/IMG_2414.webp" width="300" height="300"
+            src="imagenes/thumbs/IMG_2414.webp"
+            width="300"
+            height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -439,7 +421,9 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--a">
           <img
-            src="imagenes/thumbs/Izq.webp" width="300" height="300"
+            src="imagenes/thumbs/Izq.webp"
+            width="300"
+            height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -447,7 +431,9 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--a">
           <img
-            src="imagenes/thumbs/Medio.webp" width="300" height="300"
+            src="imagenes/thumbs/Medio.webp"
+            width="300"
+            height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -455,7 +441,9 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--b">
           <img
-            src="imagenes/thumbs/Der.webp" width="300" height="300"
+            src="imagenes/thumbs/Der.webp"
+            width="300"
+            height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -463,7 +451,9 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--a">
           <img
-            src="imagenes/thumbs/Izq_1.webp" width="300" height="300"
+            src="imagenes/thumbs/Izq_1.webp"
+            width="300"
+            height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -471,7 +461,9 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--b">
           <img
-            src="imagenes/thumbs/Izq_2.webp" width="300" height="300"
+            src="imagenes/thumbs/Izq_2.webp"
+            width="300"
+            height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -479,7 +471,9 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--a">
           <img
-            src="imagenes/thumbs/Der_2.webp" width="300" height="300"
+            src="imagenes/thumbs/Der_2.webp"
+            width="300"
+            height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -487,7 +481,9 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--b">
           <img
-            src="imagenes/thumbs/Der_1_.webp" width="300" height="300"
+            src="imagenes/thumbs/Der_1_.webp"
+            width="300"
+            height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -495,7 +491,9 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--b">
           <img
-            src="imagenes/thumbs/DSC00774.webp" width="300" height="300"
+            src="imagenes/thumbs/DSC00774.webp"
+            width="300"
+            height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -503,7 +501,9 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--a">
           <img
-            src="imagenes/thumbs/IMG_20251024_095757.webp" width="300" height="300"
+            src="imagenes/thumbs/IMG_20251024_095757.webp"
+            width="300"
+            height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -511,7 +511,9 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--b">
           <img
-            src="imagenes/thumbs/IMG_2179.webp" width="300" height="300"
+            src="imagenes/thumbs/IMG_2179.webp"
+            width="300"
+            height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -519,7 +521,9 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--a">
           <img
-            src="imagenes/thumbs/IMG_2414.webp" width="300" height="300"
+            src="imagenes/thumbs/IMG_2414.webp"
+            width="300"
+            height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -527,7 +531,9 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--b">
           <img
-            src="imagenes/thumbs/Izq.webp" width="300" height="300"
+            src="imagenes/thumbs/Izq.webp"
+            width="300"
+            height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -535,7 +541,9 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--a">
           <img
-            src="imagenes/thumbs/Medio.webp" width="300" height="300"
+            src="imagenes/thumbs/Medio.webp"
+            width="300"
+            height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -543,7 +551,9 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--a">
           <img
-            src="imagenes/thumbs/Der.webp" width="300" height="300"
+            src="imagenes/thumbs/Der.webp"
+            width="300"
+            height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -551,7 +561,9 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--b">
           <img
-            src="imagenes/thumbs/Izq_1.webp" width="300" height="300"
+            src="imagenes/thumbs/Izq_1.webp"
+            width="300"
+            height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -559,7 +571,9 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--a">
           <img
-            src="imagenes/thumbs/Izq_2.webp" width="300" height="300"
+            src="imagenes/thumbs/Izq_2.webp"
+            width="300"
+            height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -567,7 +581,9 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--b">
           <img
-            src="imagenes/thumbs/Der_2.webp" width="300" height="300"
+            src="imagenes/thumbs/Der_2.webp"
+            width="300"
+            height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -575,7 +591,9 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--a">
           <img
-            src="imagenes/thumbs/Der_1_.webp" width="300" height="300"
+            src="imagenes/thumbs/Der_1_.webp"
+            width="300"
+            height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -583,7 +601,9 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--b">
           <img
-            src="imagenes/thumbs/DSC00774.webp" width="300" height="300"
+            src="imagenes/thumbs/DSC00774.webp"
+            width="300"
+            height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -591,7 +611,9 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--b">
           <img
-            src="imagenes/thumbs/IMG_20251024_095757.webp" width="300" height="300"
+            src="imagenes/thumbs/IMG_20251024_095757.webp"
+            width="300"
+            height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -599,7 +621,9 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--a">
           <img
-            src="imagenes/thumbs/IMG_2179.webp" width="300" height="300"
+            src="imagenes/thumbs/IMG_2179.webp"
+            width="300"
+            height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -607,7 +631,9 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--b">
           <img
-            src="imagenes/thumbs/IMG_2414.webp" width="300" height="300"
+            src="imagenes/thumbs/IMG_2414.webp"
+            width="300"
+            height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -615,7 +641,9 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--a">
           <img
-            src="imagenes/thumbs/Izq.webp" width="300" height="300"
+            src="imagenes/thumbs/Izq.webp"
+            width="300"
+            height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -623,7 +651,9 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--b">
           <img
-            src="imagenes/thumbs/Medio.webp" width="300" height="300"
+            src="imagenes/thumbs/Medio.webp"
+            width="300"
+            height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -631,7 +661,9 @@
         </div>
         <div class="hero-mobile-grid__cell hero-mobile-grid__cell--a">
           <img
-            src="imagenes/thumbs/Der.webp" width="300" height="300"
+            src="imagenes/thumbs/Der.webp"
+            width="300"
+            height="300"
             alt=""
             loading="eager"
             decoding="async"
@@ -830,7 +862,7 @@
       <div class="program-cards">
         <div class="program-card">
           <img
-            src="imagenes/FOTOS FINALES/Pagina 5 - Proyectos de cooperación/Gemini_Generated_Image_jab6qgjab6qgjab6-removebg-preview.png"
+            src="imagenes/FOTOS FINALES/logo-mujeres-que-fortalecen.png"
             alt="Logo Mujeres que Fortalecen Mujeres"
             class="program-card__logo program-card__logo--circle"
             loading="lazy"
@@ -845,7 +877,7 @@
         </div>
         <div class="program-card">
           <img
-            src="imagenes/FOTOS FINALES/Pagina 5 - Proyectos de cooperación/Gemini_Generated_Image_ng825qng825qng82-removebg-preview.png"
+            src="imagenes/FOTOS FINALES/mujeres-que-fortalecen-mujeres-2.png"
             alt="Logo Mujeres que Fortalecen Mujeres II"
             class="program-card__logo program-card__logo--circle"
             loading="lazy"
@@ -860,7 +892,7 @@
         </div>
         <div class="program-card">
           <img
-            src="imagenes/FOTOS FINALES/Pagina 5 - Proyectos de cooperación/logo_final-removebg-preview.png"
+            src="imagenes/FOTOS FINALES/logo-mujeres-empoderadas.png"
             alt="Logo Mujeres Empoderadas"
             class="program-card__logo program-card__logo--circle"
             loading="lazy"
