@@ -350,6 +350,15 @@
         max-width: var(--max-content);
       }
 
+      /* Al entrar por el link "Últimos programas" del dropdown
+         (#chispa-programs), el navegador saltaba directo al borde de
+         la sección y el nav fijo tapaba el título "Últimos programas".
+         scroll-margin-top empuja el punto de destino hacia abajo para
+         dejarle lugar al nav. */
+      .chispa-programs {
+        scroll-margin-top: calc(var(--nav-h) + 1rem);
+      }
+
       /* ── Banner de participación ──
          El fondo (navy + patrón de olas + animación) ya lo pone
          .ra-donate-banner (styles.css) — acá solo van las propiedades
@@ -427,7 +436,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
       media="print"
-      onload="this.media='all'"
+      onload="this.media = 'all'"
     />
     <noscript>
       <link
@@ -483,15 +492,9 @@
             aria-label="Mostrar opciones de Radio La Chispa"
             aria-expanded="false"
           >
-            <svg viewBox="0 0 10 6" fill="none" aria-hidden="true">
-              <path
-                d="M1 1L5 5L9 1"
-                stroke="currentColor"
-                stroke-width="1.6"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
+            <span class="site-nav__dropdown-toggle-arrow" aria-hidden="true"
+              >↗</span
+            >
           </button>
           <ul class="site-nav__dropdown">
             <li>
@@ -501,8 +504,16 @@
                 rel="noopener noreferrer"
                 class="site-nav__dropdown-link"
               >
-                <span class="site-nav__live-dot" aria-hidden="true"></span>
-                En vivo
+                <span class="site-nav__live-dot" aria-hidden="true"></span>En
+                vivo
+              </a>
+            </li>
+            <li>
+              <a
+                href="Radio_la_chispa.html#chispa-programs"
+                class="site-nav__dropdown-link"
+              >
+                Últimos programas
               </a>
             </li>
           </ul>
@@ -748,7 +759,7 @@
     <!-- ══════════════════════════════════════════
        ÚLTIMOS PROGRAMAS
   ══════════════════════════════════════════ -->
-    <section class="chispa-programs">
+    <section class="chispa-programs" id="chispa-programs">
       <h2 class="section-title">Últimos programas</h2>
 
       <div class="chispa-programs__grid">
@@ -981,7 +992,10 @@
     <footer class="container--6" id="contacto">
       <div class="footer-grid">
         <div class="footer-col footer-col--social">
-          <a href="/FundacionUMMEP/index.html#inicio" aria-label="Inicio — Fundación UMMEP">
+          <a
+            href="/FundacionUMMEP/index.html#inicio"
+            aria-label="Inicio — Fundación UMMEP"
+          >
             <div class="footer-logo">
               <img
                 src="imagenes/FOTOS FINALES/fundacion-ummep-h (1).png"

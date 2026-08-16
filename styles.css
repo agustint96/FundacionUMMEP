@@ -2581,8 +2581,10 @@ textarea {
 
   /* -- Dropdown "Radio La Chispa" → Escuchanos en vivo --
      El submenu queda oculto por defecto. Al lado de "Radio La Chispa"
-     aparece un botón con flechita (azul oscuro, como el resto de los
-     links) que al hacer tap/hover se pone rojo y despliega el submenu. */
+     aparece un botón con la MISMA flechita diagonal que usan todos los
+     links del nav (↗) — nada de ícono de flechita "v" separado. En
+     estado cerrado apunta arriba a la derecha; al abrir el submenu,
+     gira 180° y apunta para el lado opuesto (abajo a la izquierda). */
   .site-nav__item--dropdown {
     display: flex;
     flex-wrap: wrap;
@@ -2604,29 +2606,26 @@ textarea {
     padding: 0;
     background: none;
     border: none;
-    color: var(--color-navy);
     cursor: pointer;
+  }
+
+  .site-nav__dropdown-toggle-arrow {
+    display: inline-block;
+    font-size: 0.95rem;
+    line-height: 1;
+    color: var(--color-navy);
     transition:
       color 0.2s var(--ease),
       transform 0.25s var(--ease);
   }
 
-  .site-nav__dropdown-toggle svg {
-    width: 11px;
-    height: 7px;
-    transition: transform 0.25s var(--ease);
-  }
-
-  .site-nav__dropdown-toggle:hover,
-  .site-nav__dropdown-toggle:focus-visible {
+  .site-nav__dropdown-toggle:hover .site-nav__dropdown-toggle-arrow,
+  .site-nav__dropdown-toggle:focus-visible .site-nav__dropdown-toggle-arrow {
     color: var(--color-red);
   }
 
-  .site-nav__item--dropdown.is-open .site-nav__dropdown-toggle {
+  .site-nav__item--dropdown.is-open .site-nav__dropdown-toggle-arrow {
     color: var(--color-red);
-  }
-
-  .site-nav__item--dropdown.is-open .site-nav__dropdown-toggle svg {
     transform: rotate(180deg);
   }
 
@@ -2651,12 +2650,13 @@ textarea {
       visibility 0.2s;
   }
 
-  .site-nav__dropdown::before {
+  .site-nav__dropdown::before,
+  .site-nav__dropdown::after {
     content: none;
   }
 
   .site-nav__item--dropdown.is-open .site-nav__dropdown {
-    max-height: 120px;
+    max-height: 180px;
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
@@ -2670,6 +2670,23 @@ textarea {
     font-size: 0.78rem !important;
     padding: 0.5rem !important;
     color: var(--color-navy-soft);
+  }
+
+  /* Los sublinks (En vivo / Últimos programas) NO llevan la flechita
+     roja en diagonal que sí tienen los links normales del nav. */
+  .site-nav__dropdown-link::after {
+    content: none !important;
+  }
+
+  /* En mobile/tablet "Radio La Chispa" queda como un link normal, sin
+     botón de flechita ni submenu desplegable (En vivo / Últimos
+     programas). Al tocarlo se va directo a Radio_la_chispa.html. */
+  .site-nav__dropdown-toggle {
+    display: none;
+  }
+
+  .site-nav__dropdown {
+    display: none !important;
   }
 }
 
@@ -2699,63 +2716,139 @@ textarea {
   position: relative;
 }
 
-/* Desktop: el submenu tiene el mismo ancho que el link "Radio La
-   Chispa" (100% del li, que es su contenedor posicionado). */
+/* Reglas compartidas (mobile Y desktop): sin bullets de lista, sin
+   margen de la <ul>, y estructura flex base para cada link. Van acá,
+   SIN media query, para que apliquen siempre sin importar el ancho de
+   pantalla — así no dependemos del orden de cascada entre los bloques
+   mobile/desktop de más arriba/abajo. */
 .site-nav__dropdown {
-  box-sizing: border-box;
   list-style: none;
   margin: 0;
-  padding: 0.3rem;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  min-width: 100%;
-  background: var(--color-white);
-
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transform: translateY(-6px);
-  transition:
-    opacity 1.2s var(--ease),
-    transform 0.2s var(--ease),
-    visibility 0.2s;
-  z-index: 50;
-}
-
-/* Pequeño "puente" invisible para que el mouse pueda viajar del link
-   al submenu sin que el hover se pierda en el medio. */
-.site-nav__dropdown::before {
-  content: "";
-  position: absolute;
-  top: -8px;
-  left: 0;
-  right: 0;
-  height: 8px;
-}
-
-.site-nav__item--dropdown:hover .site-nav__dropdown,
-.site-nav__item--dropdown:focus-within .site-nav__dropdown {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-  transform: translateY(0);
 }
 
 .site-nav__dropdown-link {
   display: flex !important;
-  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  gap: 0.3rem;
-  padding: 0.4rem 0.3rem !important;
-  white-space: normal;
-  text-align: center;
-  line-height: 1.25;
-  font-size: 0.58rem !important;
-  letter-spacing: 0.04em;
-  border-radius: 4px;
+  gap: 0.32rem;
+  border-radius: 6px;
+  text-decoration: none;
+  transition:
+    opacity 0.1s ease-out,
+    color 0.1s ease-out,
+    background 0.1s ease-out;
+}
+
+/* Los sublinks (En vivo / Últimos programas) nunca llevan la flechita
+   roja en diagonal que sí tienen los links normales del nav. */
+.site-nav__dropdown-link::after {
+  content: none !important;
+}
+
+/* Todo lo de acá abajo es SOLO para desktop/tablet grande (mismo punto
+   de corte que el menú hamburguesa, 1320px). Va en un media query
+   propio a propósito: si quedara "suelto" (sin media query) más abajo
+   en el archivo, sus reglas pisarían por orden de cascada a las reglas
+   mobile de arriba (aunque el mobile sea más específico en la intención),
+   porque tienen la misma especificidad y este bloque aparece después
+   en el archivo. Ya pasó una vez y rompió el dropdown en celulares. */
+@media (min-width: 1321px) {
+  /* "Cartelito" plano (sin pico de globito) — se centra debajo del
+     link, con el logo de La Chispa en grande como marca de agua de
+     fondo, y aparece/desaparece al toque (hover instantáneo). */
+  .site-nav__dropdown {
+    box-sizing: border-box;
+    padding: 0.35rem;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: max-content;
+    min-width: 148px;
+    max-width: 220px;
+    overflow: hidden;
+    background: var(--color-white);
+    border-radius: 10px;
+    box-shadow: 0 10px 28px rgba(20, 30, 50, 0.18);
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translate(-50%, 0);
+    transition:
+      opacity 0.06s linear,
+      visibility 0.06s;
+    z-index: 50;
+  }
+
+  /* Logo de La Chispa como marca de agua: grande, girado hacia la
+     derecha, detrás del texto. */
+  .site-nav__dropdown::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 55%;
+    width: 270%;
+    height: 270%;
+    background: url("imagenes/FOTOS FINALES/Pagina 7 - Radio la chispa/1 PNG Principal.png")
+      center / contain no-repeat;
+    transform: translate(-50%, -50%) rotate(-26deg);
+    opacity: 0.1;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  /* Pequeño "puente" invisible para que el mouse pueda viajar del link
+     al submenu sin que el hover se pierda en el medio. Más alto que el
+     gap real para que el trayecto se sienta tolerante. */
+  .site-nav__dropdown::before {
+    content: "";
+    position: absolute;
+    top: -12px;
+    left: -20px;
+    right: -20px;
+    height: 12px;
+  }
+
+  .site-nav__item--dropdown:hover .site-nav__dropdown,
+  .site-nav__item--dropdown:focus-within .site-nav__dropdown {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition:
+      opacity 0.04s linear,
+      visibility 0.04s;
+  }
+
+  /* Mismo estilo tipográfico que el link padre (.site-nav__links a)
+     pero arrancando más transparente; al hacer hover recupera el
+     color pleno. */
+  .site-nav__dropdown-link {
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 0.5rem 0.65rem !important;
+    white-space: nowrap;
+    text-align: left;
+    font-family: var(--font-heading);
+    font-size: 0.66rem !important;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    line-height: 1.25;
+    color: var(--color-navy-soft);
+    opacity: 0.6;
+  }
+
+  .site-nav__dropdown-link:hover,
+  .site-nav__dropdown-link:focus-visible {
+    opacity: 1;
+    color: var(--color-navy);
+    background: rgba(22, 35, 74, 0.06);
+  }
+
+  /* Botón flechita — no existe en desktop, solo en mobile/tablet
+     chico (ahí lo muestra el @media max-width: 1320px de más arriba). */
+  .site-nav__dropdown-toggle {
+    display: none;
+  }
 }
 
 /* Punto rojo tipo "señal en vivo" */
@@ -2776,12 +2869,4 @@ textarea {
   50% {
     opacity: 0.12;
   }
-}
-
-/* Botón flechita — solo visible en mobile/tablet.
-   Las reglas responsive de este dropdown (mostrar el botón, desplegar
-   el submenu, etc.) viven en el @media (max-width: 1320px) unificado
-   más arriba, junto con el resto de las reglas mobile del nav. */
-.site-nav__dropdown-toggle {
-  display: none;
 }
